@@ -1,0 +1,6 @@
+[{
+  "origin": ["https://tournament-7e3bf.firebaseapp.com", "http://localhost:5000"],
+  "responseHeader": ["*"],
+  "method": ["GET"],
+  "maxAgeSeconds": 86400
+}]

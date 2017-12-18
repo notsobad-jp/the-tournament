@@ -1,0 +1,486 @@
+.bracket {
+  font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  min-height: 220px;
+}
+.block {
+  display: flex;
+}
+.round {
+  display: flex;
+  flex-direction: column;
+}
+
+.match {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  cursor: pointer;
+  overflow: visible;
+}
+.right.block .match { flex-direction: row-reverse; }
+
+.teamContainer {
+  position: relative;
+  margin: auto 0;
+  padding: 7px 0;
+}
+.team {
+  display: flex;
+  align-items: center;
+  background-color: #EEE;
+  position: relative;
+}
+.team:first-child {
+  margin-bottom: 1px;
+}
+.team:last-child {
+  margin-top: 1px;
+}
+.match:not(.final):not(.consolation) .team.loser:not(.highlight) {
+  opacity: 0.5;
+}
+
+.name {
+  width: 100px;
+  padding-left: 5px;
+  word-break: break-all;
+}
+.score {
+  width: 40px;
+  text-align: center;
+  background-color: rgba(255,255,255,0.4);
+}
+.name, .score {
+  height: 25px;
+  overflow: hidden;
+  line-height: 25px;
+}
+
+/* Profile Image */
+.profileImages .name, .profileImages .score {
+  height: 50px;
+  line-height: 50px;
+}
+.profileImage {
+  display: inline-block;
+  background-repeat: no-repeat;
+  width:50px;
+  height:50px;
+}
+/* シードと勝ち上がり未定のところは画像なし */
+.profileImages .match.bye .team.loser .profileImage,
+.profileImages .profileImage.ico_ {
+  background-image: none;
+}
+
+/* bye */
+/* .match.bye .team.loser { display: none; }
+.bracket:not(.profileImages) .match.bye .team.winner {
+  margin-top: 12.5px;
+  margin-bottom: 12.5px;
+}
+.bracket.profileImages .match.bye .team.winner {
+  margin-top: 25px;
+  margin-bottom: 25px;
+} */
+
+.team.winner .score { color: #060; }
+.team.loser .score { color: #900; }
+
+
+/* z-index */
+.match.highlightSecond { z-index: 100; }
+.match.highlightFirst  { z-index: 101; }
+.match.highlight   { z-index: 102; }
+.match:hover { z-index: 103; }
+
+
+/* 勝ち上がり線 */
+.lineContainer {
+  display: flex;
+  flex-direction: column;
+
+}
+.lineContainer > div {
+  display: flex;
+  flex-grow: 1;
+}
+.lineContainer > div > div {
+  width: 20px;
+  border-color: #999;
+}
+.left.block .final.round .lineContainer { display: none; }
+
+/* 左山 */
+/* 奇数試合 */
+.left.block .match:nth-child(odd) .lineContainer > div:last-child > div:first-child {
+  border-top: 2px solid #999;
+}
+.left.block .match:nth-child(odd) .lineContainer > div:last-child > div:first-child {
+  border-right: 2px solid #999;
+}
+.left.block .match:nth-child(odd) .lineContainer > div:last-child > div:last-child {
+  border-bottom: 1px solid #999;
+}
+
+/* 偶数試合 */
+.left.block .match:nth-child(even) .lineContainer > div:first-child > div:first-child {
+  border-bottom: 2px solid #999;
+}
+.left.block .match:nth-child(even) .lineContainer > div:first-child > div:first-child {
+  border-right: 2px solid #999;
+}
+.left.block .match:nth-child(even) .lineContainer > div:first-child > div:last-child {
+  border-top: 1px solid #999;
+}
+
+/*  右山 */
+/* 奇数試合 */
+.right.block .match:nth-child(odd) .lineContainer > div:last-child > div:last-child {
+  border-top: 2px solid #999;
+}
+.right.block .match:nth-child(odd) .lineContainer > div:last-child > div:first-child {
+  border-right: 2px solid #999;
+}
+.right.block .match:nth-child(odd) .lineContainer > div:last-child > div:first-child {
+  border-bottom: 1px solid #999;
+}
+
+/* 偶数試合 */
+.right.block .match:nth-child(even) .lineContainer > div:first-child > div:last-child {
+  border-bottom: 2px solid #999;
+}
+.right.block .match:nth-child(even) .lineContainer > div:first-child > div:first-child {
+  border-right: 2px solid #999;
+}
+.right.block .match:nth-child(even) .lineContainer > div:first-child > div:first-child {
+  border-top: 1px solid #999;
+}
+
+/* 中山 */
+/* 奇数試合 */
+.left.block .round:last-child .match:nth-child(odd) .lineContainer > div:first-child > div,
+.right.block .round:first-child .match:nth-child(odd) .lineContainer > div:first-child > div {
+  border-bottom: 2px solid #999;
+}
+.left.block .round:last-child .match:nth-child(odd) .lineContainer > div:last-child > div,
+.right.block .round:first-child .match:nth-child(odd) .lineContainer > div:last-child > div {
+  border: none;
+}
+.center.block .lineContainer {height: 50px; }
+.center.block .lineContainer > div > div { width: 50%; }
+.center.block .lineContainer { visibility: hidden; }
+
+.right.block .round:first-child:not(.final) .match .lineContainer,
+.left.block .round:last-child:not(.final) .match .lineContainer {
+  display: none;
+}
+.left.block .round:last-child:not(.final) .match:before,
+.right.block .round:first-child:not(.final) .match:before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: calc(50% - 1px);
+  width: calc(50% + 1px);
+  height: 50px;
+  border-bottom: 2px solid #999;
+}
+.left.block .round:last-child:not(.final) .match:before {
+  right: calc(-50% - 1px);
+  border-right: 2px solid #999;
+}
+.right.block .round:first-child:not(.final) .match:before {
+  left: calc(-50% - 1px);
+  border-left: 2px solid #999;
+}
+
+
+/* 優勝/準優勝 */
+.match.highlightFirst .team.winner, .final.round .final.match .team.winner { background-color: #DA0; }
+.match.highlightSecond .team.winner, .final.round .final.match .team.loser { background-color: #CCC; }
+
+.right.block .round:first-child:not(.final) .match.highlightFirst:before,
+.left.block .round:last-child:not(.final) .match.highlightFirst:before,
+.right.block .match:nth-child(n).highlightFirst .lineContainer > div > div:nth-child(n),
+.left.block .match:nth-child(n).highlightFirst .lineContainer > div > div:nth-child(n) {
+  border-color: #DA0;
+  border-width: 2px;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+.right.block .round:first-child:not(.final) .match.highlightSecond:before,
+.left.block .round:last-child:not(.final) .match.highlightSecond:before,
+.right.block .match:nth-child(n).highlightSecond .lineContainer > div > div:nth-child(n),
+.left.block .match:nth-child(n).highlightSecond .lineContainer > div > div:nth-child(n) {
+  border-color: #CCC;
+  border-width: 2px;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.final.round { margin: auto 0; }
+.final.match { flex-grow: unset; }
+
+
+/* 両山対応 */
+.center.block {
+  z-index: 150;
+}
+.center.block .final.round { margin: 0; }
+.center.block .match .teamContainer {
+  margin: 0;
+  padding: 0;
+}
+.center.block .final.match {
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: -2px;
+}
+.center.block .consolation.match {
+  position: relative;
+  top: inherit;
+  margin-top: inherit;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+
+/* 順位表示 */
+.final.match .team.winner:before, .final.match .team.loser:before,
+.consolation.match .team.winner:before, .consolation.match .team.loser:before {
+  content: '';
+  position: absolute;
+  top: calc(50% - 5px);
+  right: -5px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 0;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right-color: #DA0;
+}
+.final.match .team.winner:after, .final.match .team.loser:after,
+.consolation.match .team.winner:after, .consolation.match .team.loser:after {
+  display: block;
+  position: absolute;
+  top: calc(50% - 11px);
+  right: -35px;
+  width: 30px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  font-size: 11px;
+}
+
+/* 優勝 */
+.final.match .team.winner:after {
+  content: '1st';
+  background-color: #DA0;
+  color: #960;
+}
+.final.match .team.winner:before { border-right-color: #DA0; }
+
+/* 準優勝 */
+.final.match .team.loser:after {
+  content: '2nd';
+  background-color: #CCC;
+  color: #333;
+}
+.final.match .team.loser:before { border-right-color: #CCC; }
+
+/* ３位 */
+.consolation.match .team.winner:after {
+  content: '3rd';
+  background-color: #963;
+  color: #D95;
+}
+.consolation.match .team.winner:before { border-right-color: #963; }
+
+/* 4位 */
+.consolation.match .team.loser:after {
+  content: '4th';
+  background-color: #678;
+  color: #CCD;
+}
+.consolation.match .team.loser:before { border-right-color: #678; }
+
+
+/* チームハイライト */
+.team.highlight { background-color: #3C0 !important; }
+.match.highlight .lineContainer > div > div, .match.highlight:before {
+   border-color: #3C0 !important;
+ }
+
+
+/* ポップアップ表示 */
+.match.selected { z-index: 300; }
+.match.selected:after {
+  display: block;
+  content: '';
+  background-color: rgba(255,255,255,0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  cursor: default;
+}
+
+.popupContainer {
+  display: none;
+  z-index: 1;
+  max-height: 90vh;
+  cursor: default;
+}
+.bracket:not(.embed) .match.selected .popupContainer { display: flex; }
+.bracket.embed       .match.selected .popupContainer { display: block; }
+
+/* 埋め込みじゃないときは画面中央に表示 */
+.bracket:not(.embed) .popupContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+/* 埋め込み時は選択したmatchの近くに表示 */
+.bracket.embed .popupContainer {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  width: 400px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.popupContent {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.9);
+  padding: 25px 0;
+  color: #fff;
+ }
+.bracket:not(.embed) .popupContent {
+  width: 90vw;
+  max-width: 450px;
+}
+
+.popupContainer h3 {
+  font-size: 14px;
+  font-weight: lighter;
+  text-align: center;
+  margin-top: 0;
+}
+.popupContainer .popupTeamContainer {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin: 35px 5%;
+}
+.popupName, .popupScore {
+  padding: 10px;
+}
+.popupName .profile {
+  width: 100px;
+  max-width: 90%;
+  height: 100px;
+  margin: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 15px;
+}
+.popupTeamContainer .popupTeam {
+  width: 45%;
+  border: 1px solid #EFEFEF;
+  padding: 20px 0;
+  position: relative;
+}
+.popupTeam.winner {
+  border: 2px solid #DA0;
+  background-color: rgba(221,170,0,0.3);
+}
+.popupTeam.loser {
+  border: 2px solid #CCC;
+  background-color: rgba(204,204,204,0.3);
+}
+.popupComment {
+  margin: 0 5%;
+  word-break: break-all;
+}
+.popupSpacer {
+  display: flex;
+  align-items: center;
+}
+
+.popupTeam:before {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+.popupTeam.winner:before {
+  content: 'WIN';
+  color: #DA0;
+}
+.popupTeam.loser:before {
+  content: 'LOSE';
+  color: #AAA;
+}
+
+
+/* ３位決定戦 */
+.skipConsolation .consolation { visibility: hidden; }
+
+.consolation.match {
+  position: absolute;
+  top: 51%;
+  margin-top: 40px;
+}
+
+
+/* スコアレス */
+.bracket.scoreLess .score { display: none; }
+
+
+/* シード表示 */
+.bracket:not(.showBye) { min-height: unset; }
+.bracket:not(.showBye) .round .match.skip { display: none; }
+.bracket:not(.showBye) .round:not(:first-child) .match.bye .teamContainer { display: none; }
+.bracket:not(.showBye) .round:not(:first-child) .match.bye .lineContainer { width: 100%; }
+.bracket:not(.showBye) .round:not(:first-child) .match.bye .lineContainer div div:first-child { width: calc(100% - 20px); }
+
+/* next-bye: 次の試合もbyeのときは、lineをまっすぐ次に伸ばす  */
+.bracket:not(.showBye) .match.next-bye:nth-child(even) { margin-top: 0px; }
+.bracket:not(.showBye) .left.block .match.next-bye .lineContainer > div > div {
+  border-right: none !important;
+}
+.bracket:not(.showBye) .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:last-child {
+  border-bottom: none;
+  border-top-style: solid;
+  border-top-width: 2px;
+}
+.bracket:not(.showBye) .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:last-child {
+  border-top: none;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+}
+
+/* 空白試合を表示 */
+.bracket.showBye .match {
+  flex: 1 1 auto !important;
+}
+.bracket.showBye .teamContainer { top: unset !important; }
+.bracket.showBye .lineContainer div { flex-grow: 1 !important; }

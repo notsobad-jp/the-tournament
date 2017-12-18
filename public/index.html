@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>【アルファ版】THE TOURNAMENT | 簡単・便利な無料のトーナメント表作成サービス</title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/lafeber/world-flags-sprite/9a8b5ea6/stylesheets/flags16.css">
+  <link rel="stylesheet" type="text/css" href="/css/tournament.css">
+</head>
+<body>
+  <mixin></mixin>
+  <header></header>
+  <div class="ui fluid container" style="margin-left:0!important;margin-right:0!important;position:relative;min-height:calc(100vh - 232px);">
+    <flash></flash>
+    <content></content>
+    <dimmer></dimmer>
+  </div>
+  <footer></footer>
+
+
+  <script src="/tags/mixin.tag" type="riot/tag"></script>
+  <script src="/tags/header.tag" type="riot/tag"></script>
+  <script src="/tags/footer.tag" type="riot/tag"></script>
+  <script src="/tags/flash.tag" type="riot/tag"></script>
+  <script src="/tags/dimmer.tag" type="riot/tag"></script>
+  <script src="/tags/top.tag" type="riot/tag"></script>
+  <script src="/tags/auth.tag" type="riot/tag"></script>
+  <script src="/tags/mypage.tag" type="riot/tag"></script>
+  <script src="/tags/search.tag" type="riot/tag"></script>
+  <script src="/tags/show/show-tournament.tag" type="riot/tag"></script>
+  <script src="/tags/edit/edit-tournament.tag" type="riot/tag"></script>
+  <script src="/tags/edit/menu.tag" type="riot/tag"></script>
+  <script src="/tags/edit/settings.tag" type="riot/tag"></script>
+  <script src="/tags/edit/teams.tag" type="riot/tag"></script>
+  <script src="/tags/edit/country-select.tag" type="riot/tag"></script>
+  <script src="/tags/edit/share.tag" type="riot/tag"></script>
+  <script src="/tags/shared/bracket.tag" type="riot/tag"></script>
+  <script src="/tags/shared/results.tag" type="riot/tag"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-firestore.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.0.0/riot+compiler.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/riot-route/3.0.1/route.min.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBpJ93PBOR6cr-PeM74vYiylQcq1QpcWFI",
+      authDomain: "tournament-7e3b7.firebaseapp.com",
+      databaseURL: "https://tournament-7e3b7.firebaseio.com",
+      projectId: "tournament-7e3b7",
+      storageBucket: "tournament-7e3b7.appspot.com",
+      messagingSenderId: "670551703759"
+    };
+    firebase.initializeApp(config);
+    var db = firebase.firestore();
+    var obs = riot.observable()
+
+
+    route.base('/')
+    riot.mount('mixin')
+    riot.mount('header')
+    riot.mount('footer')
+    riot.mount('flash')
+    riot.mount('dimmer')
+
+    route('/', function() {
+      riot.mount('content', 'top')
+    })
+    route('/signin', function(){
+      riot.mount('content', 'auth', {type: 'signin'})
+    })
+    route('/signup', function(){
+      riot.mount('content', 'auth', {type: 'signup'})
+    })
+    route('/mypage', function(){
+      riot.mount('content', 'mypage')
+    })
+    route('/tournaments/*', function(id){
+      riot.mount('content', 'show-tournament', {id: id})
+    })
+    route('/tournaments/*/edit', function(id){
+      riot.mount('content', 'edit-tournament', {id: id})
+    })
+    route('/search..', function() {
+      var q = route.query()
+      riot.mount('content', 'search', {q: q})
+    })
+    route('/auth..', function(){
+      obs.trigger("dimmerChanged", 'active')
+      var q = route.query()
+      if(q.mode == 'resetPassword') {
+        firebase.auth().verifyPasswordResetCode(q.oobCode).then(function(email) {
+          var newPassword = Math.random().toString(36).slice(-12)
+          firebase.auth().confirmPasswordReset(q.oobCode, newPassword).then(function(){
+            firebase.auth().signInWithEmailAndPassword(email, newPassword)
+            obs.trigger("flashChanged", {type:'success',text:'ログインしました'})
+          })
+        }).catch(function(error){
+          obs.trigger("flashChanged", {type:'error',text:'ログインに失敗しました..'})
+        }).then(function(){
+          obs.trigger("dimmerChanged", '')
+          route('/')
+        })
+      }
+    })
+
+    route.start(true)
+  </script>
+</body>
+</html>

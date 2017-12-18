@@ -1,0 +1,10 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "dependencies": {
+    "firebase-admin": "5.5.1",
+    "firebase-functions": "0.7.3",
+    "riot": "3.7.4"
+  },
+  "private": true
+}
