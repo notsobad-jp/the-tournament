@@ -5,6 +5,7 @@
 .LSOverride
 firebase-debug.log
 node_modules
+cert.json
 
 # Icon must ends with two \r.
 Icon
