@@ -1,163 +1,105 @@
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>【アルファ版】THE TOURNAMENT | 簡単・便利な無料のトーナメント表作成サービス</title>
-
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/lafeber/world-flags-sprite/9a8b5ea6/stylesheets/flags16.css">
-  <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/the-tournament/tournament.css">
-</head>
-<body>
-  <virtual if={ editable }>
-    <div class="ui transparent fluid icon input">
-      <input id="nameInput" type="text" name="title" placeholder="トーナメント名" value={ tournament.title } onchange={ updateTournament }>
-      <i class="icon write"></i>
-    </div>
-    <div class="ui divider"></div>
-    <div class="ui two column grid">
-      <div class="ui left aligned column">
-        <div class="ui icon mini primary buttons">
-          <div class="ui icon button { disabled: Object.keys(tournament.teams).length >= 128 }" onclick={ addRound }>
-            <i class="icon plus"></i>
-          </div>
-          <div class="ui icon button { disabled: Object.keys(tournament.teams).length <= 4 }" onclick={ removeRound }>
-            <i class="icon minus"></i>
-          </div>
-        </div>
+<body id="embed">
+  <div id='emb-container'>
+    <div id='emb-header'>
+      <h1>
+        <a href='https://tournament-7e3b7.firebaseapp.com/tournaments/{ id }' target='_blank'>
+          { tournament.title }
+        </a>
         <small>
-          参加者数
-          <span class="ui circular mini label">
-            { Object.keys(tournament.teams).length }
-          </span>
+          powered by
+          <a href='https://tournament-7e3b7.firebaseapp.com/' target='_blank'>THE TOURNAMENT</a>
         </small>
-      </div>
-      <div class="ui right aligned column">
-        <div class="ui mini basic button { primary: !showBye }" onclick={ toggleShowBye }>
-            <i class="icon { unhide: !showBye, hide: showBye }"></i>
-            { (!showBye) ? '空白試合を表示' : '空白試合を隠す' }
-        </div>
-      </div>
+      </h1>
     </div>
-    <br><br>
-  </virtual>
+    <div id='emb-body'>
 
-  <div class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
-    <div class="block left">
-      <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
-        <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected')" style="flex: { matchFlex(roundIndex, matchIndex) }">
-          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
-            <virtual each={ i in [0,1] }>
-              <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
-                <div class="winnerSelect" if={ editable }>
-                  <input type="radio" name="match_{roundIndex}_{matchIndex}" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match['bye'] }>
-                </div>
-                <div class="name" style="width:{tournament.nameWidth}px;">
-                  <div if={ editable } class="ui transparent fluid input">
-                    <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
-                      <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
-                    </span>
-                    <input type="text" data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName }>
-                  </div>
-                  <span if={ !editable }>
-                    <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
-                      <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
-                    </span>
-                    { teamName(teamIndex) }
-                  </span>
-                </div>
-
-                <div class="score" style="width:{tournament.scoreWidth}px;">
-                  <div if={ editable } class="ui transparent fluid input">
-                    <input type="text" data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore }>
-                  </div>
-                  <span if={ !editable }>{ match.score[i] }</span>
-                </div>
-                <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
-              </div>
-            </virtual>
-          </div>
-
-          <div class="lineContainer">
-            <div style="flex-grow:{ lineFlex(roundIndex, matchIndex)[0] }">
-              <div></div>
-              <div></div>
-            </div>
-            <div style="flex-grow:{ lineFlex(roundIndex, matchIndex)[1] }">
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-
-          <div class="popupContainer" if={ !editable && !match['bye'] }>
-            <div class="popupContent" onclick="event.stopPropagation();">
-              <h3 class="popupTitle">
-                { (roundIndex == Object.keys(tournament.results).length-1) ? '' : roundName(Number(roundIndex)) }
-                { matchName(Number(roundIndex), Number(matchIndex)) }
-              </h3>
-              <div class="popupTeamContainer">
+      <div class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
+        <div class="block left">
+          <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
+            <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected')" style="flex: { matchFlex(roundIndex, matchIndex) }">
+              <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
                 <virtual each={ i in [0,1] }>
-                  <div class="popupTeam { teamClass(match, i) }" each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
-                    <div class="popupName">
-                      { teamName(teamIndex) }
+                  <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
+                    <div class="winnerSelect" if={ editable }>
+                      <input type="radio" name="match_{roundIndex}_{matchIndex}" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match['bye'] }>
                     </div>
-                    <div class="popupScore">
-                      { match.score[i] }
+                    <div class="name" style="width:{tournament.nameWidth}px;">
+                      <div if={ editable } class="ui transparent fluid input">
+                        <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
+                          <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
+                        </span>
+                        <input type="text" data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName }>
+                      </div>
+                      <span if={ !editable }>
+                        <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
+                          <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
+                        </span>
+                        { teamName(teamIndex) }
+                      </span>
                     </div>
-                  </div>
-                  <div class="popupSpacer" if={ i == 0 }>
-                    -
+
+                    <div class="score" style="width:{tournament.scoreWidth}px;">
+                      <div if={ editable } class="ui transparent fluid input">
+                        <input type="text" data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore }>
+                      </div>
+                      <span if={ !editable }>{ match.score[i] }</span>
+                    </div>
+                    <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
                   </div>
                 </virtual>
               </div>
-              <div class="popupComment">
-                { match.comment }
+
+              <div class="lineContainer">
+                <div style="flex-grow:{ lineFlex(roundIndex, matchIndex)[0] }">
+                  <div></div>
+                  <div></div>
+                </div>
+                <div style="flex-grow:{ lineFlex(roundIndex, matchIndex)[1] }">
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="popupContainer" if={ !editable && !match['bye'] }>
+                <div class="popupContent" onclick="event.stopPropagation();">
+                  <h3 class="popupTitle">
+                    { (roundIndex == Object.keys(tournament.results).length-1) ? '' : roundName(Number(roundIndex)) }
+                    { matchName(Number(roundIndex), Number(matchIndex)) }
+                  </h3>
+                  <div class="popupTeamContainer">
+                    <virtual each={ i in [0,1] }>
+                      <div class="popupTeam { teamClass(match, i) }" each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
+                        <div class="popupName">
+                          { teamName(teamIndex) }
+                        </div>
+                        <div class="popupScore">
+                          { match.score[i] }
+                        </div>
+                      </div>
+                      <div class="popupSpacer" if={ i == 0 }>
+                        -
+                      </div>
+                    </virtual>
+                  </div>
+                  <div class="popupComment">
+                    { match.comment }
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
-
-
-  <style>
-    /* 編集用レイアウト */
-    .name input, .score input { height: 25px; }
-    .score input { text-align: center !important; }
-    .winnerSelect {
-      height: 25px;
-      width: 25px;
-      line-height: 25px;
-      background: rgba(255,255,255,0.4);
-      padding: 0 5px;
-    }
-    .editable.bracket .match.selected:after { display: none; }
-    .editable.bracket .match { cursor: default; }
-
-    /* team削除ボタン */
-    .icon.link.remove.circle {
-      color: #999;
-      position: absolute;
-      right: -20px;
-    }
-
-    /* 敗者うすくしない */
-    .match:not(.final):not(.consolation) .team.loser:not(.highlight) {
-      opacity: 1;
-    }
-
-    /* その他 */
-    small { margin-left: 10px; }
-  </style>
 
 
   <script>
     var that = this
     that.tournament = opts.tournament
     that.editable = opts.editable
+    that.id = opts.id  //TODO: added for embed
     that.showBye = false
 
     isFinalRound(roundIndex) {
@@ -462,4 +404,3 @@
     }
   </script>
 </body>
-</html>
