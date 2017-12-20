@@ -60,5 +60,4 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     gzip: true
   });
   process.on('unhandledRejection', console.dir);
-  response.send("Hello from Firebase!");
 });
