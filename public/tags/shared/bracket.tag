@@ -35,21 +35,12 @@
   <div class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
-        <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected')" style="flex: { matchFlex(roundIndex, matchIndex) }">
-          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
+        <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected');" style="flex: { matchFlex(roundIndex, matchIndex) }">
+          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;" onclick={ selectMatch.bind(this, Number(roundIndex), Number(matchIndex)) }>
             <virtual each={ i in [0,1] }>
               <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
-                <div class="winnerSelect" if={ editable }>
-                  <input type="radio" name="match_{roundIndex}_{matchIndex}" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match['bye'] }>
-                </div>
                 <div class="name" style="width:{tournament.nameWidth}px;">
-                  <div if={ editable } class="ui transparent fluid input">
-                    <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
-                      <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
-                    </span>
-                    <input type="text" data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName }>
-                  </div>
-                  <span if={ !editable }>
+                  <span>
                     <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
                       <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
                     </span>
@@ -58,10 +49,7 @@
                 </div>
 
                 <div class="score" style="width:{tournament.scoreWidth}px;">
-                  <div if={ editable } class="ui transparent fluid input">
-                    <input type="text" data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore }>
-                  </div>
-                  <span if={ !editable }>{ match.score[i] }</span>
+                  <span>{ match.score[i] }</span>
                 </div>
                 <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
               </div>
@@ -108,6 +96,8 @@
         </div>
       </div>
     </div>
+
+    <match-modal tournament={ tournament } match={ matchSelected } if={ matchSelected }></match-modal>
   </div>
 
 
@@ -147,6 +137,7 @@
     that.tournament = opts.tournament
     that.editable = opts.editable
     that.showBye = false
+    that.matchSelected = null
     that.mixin('tournamentMixin')
 
     isFinalRound(roundIndex) {
@@ -424,7 +415,14 @@
       if(pairResult['bye'] && pairResult['winner']==null) {
         matchClass += ' next-bye'
       }
+    }
 
+    selectMatch(roundIndex, matchIndex) {
+      that.matchSelected = {
+        roundIndex: roundIndex,
+        matchIndex: matchIndex,
+        result: that.tournament.results[roundIndex][matchIndex]
+      }
     }
   </script>
 </bracket>

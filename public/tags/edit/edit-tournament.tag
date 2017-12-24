@@ -13,7 +13,7 @@
         </div>
         <div class="ui basic segment tab" data-tab="results">
           <h3 class="ui tiny header">試合結果の登録</h3>
-          <results tournament={ tournament } editable={ true }></results>
+          <!--<results tournament={ tournament } editable={ true }></results>-->
         </div>
         <div class="ui basic segment tab" data-tab="share">
           <share tournament={ tournament }></share>
