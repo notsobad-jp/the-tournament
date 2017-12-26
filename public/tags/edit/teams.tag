@@ -30,6 +30,7 @@
     </div>
 
     <div class="ui tab" data-tab="detailInput">
+      <!--
       <div class="ui segments">
         <div class="ui segment" each={ team, teamIndex in tournament.teams }>
           <div class="ui small top attached bottom pointing label">#{ teamIndex + 1 }</div>
@@ -61,6 +62,7 @@
         </div>
         <country-select ref="country_select" tournament={ tournament }></coutry-select>
       </div>
+      -->
     </div>
   </div>
 
