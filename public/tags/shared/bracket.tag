@@ -96,8 +96,6 @@
         </div>
       </div>
     </div>
-
-    <match-modal tournament={ tournament } match={ matchSelected } if={ matchSelected }></match-modal>
   </div>
 
 
@@ -137,7 +135,6 @@
     that.tournament = opts.tournament
     that.editable = opts.editable
     that.showBye = false
-    that.matchSelected = null
     that.mixin('tournamentMixin')
 
     isFinalRound(roundIndex) {
@@ -418,11 +415,11 @@
     }
 
     selectMatch(roundIndex, matchIndex) {
-      that.matchSelected = {
+      var matchSelected = {
         roundIndex: roundIndex,
-        matchIndex: matchIndex,
-        result: that.tournament.results[roundIndex][matchIndex]
+        matchIndex: matchIndex
       }
+      obs.trigger("modalMatch", matchSelected)
     }
   </script>
 </bracket>

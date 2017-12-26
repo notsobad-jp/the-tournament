@@ -24,6 +24,7 @@
     <div class="ui ten wide column">
       <div class="ui basic segment">
         <bracket tournament={ tournament } editable={ true }></bracket>
+        <match-modal tournament={ tournament }></match-modal>
       </div>
       <br><br>
     </div>
