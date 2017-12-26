@@ -276,6 +276,10 @@
       top: 10vh;
       height: 80vh;
       overflow: scroll;
+      z-index: 2001;
+    }
+    .ui.page.dimmer {
+      z-index: 2000;
     }
 
     .column {
@@ -296,12 +300,9 @@
   <script>
     var that = this
     that.visibility = false
-    that.tournament = opts.tournament
-    that.teamIndex = null
 
-    showModal(teamIndex) {
+    showModal() {
       that.visibility = true
-      that.teamIndex = teamIndex
       that.update()
     }
 
@@ -312,8 +313,7 @@
 
     updateCountry(e) {
       var country = e.currentTarget.getAttribute('data-country')
-      that.tournament.teams[that.teamIndex].country = country
-      obs.trigger("tournamentChanged", that.tournament)
+      obs.trigger("countrySelected", country)
       that.hideModal()
     }
   </script>

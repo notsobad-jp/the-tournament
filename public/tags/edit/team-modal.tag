@@ -46,6 +46,7 @@
         </div>
       </div>
     </div>
+    <country-select ref="country_select" tournament={ tournament }></coutry-select>
   </virtual>
 
 
@@ -79,6 +80,11 @@
       that.update()
     })
 
+    obs.on("countrySelected", function(country) {
+      that.team.country = country
+      that.update()
+    })
+
 
     /***********************************************
     * Functions
@@ -100,6 +106,11 @@
       }
       that.team = null
       obs.trigger("tournamentChanged", that.tournament)
+    }
+
+    selectCountry(e) {
+      var countrySelect = that.refs.country_select
+      countrySelect.showModal()
     }
 
     updateTeam(e) {

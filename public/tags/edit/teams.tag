@@ -35,65 +35,41 @@
           <i class="flag { team.country }" if={ team.country }></i>
           { team.name || '--' }
           <span if={ team.group }>（{ team.group }）</span>
-          <i class="icon link" if={ team.url }></i>
+          <a href={ team.url } target="_blank" if={ team.url && team.url != '' }>
+            <i class="icon external"></i>
+          </a>
 
           <button class="ui mini primary right floated icon button" data-teamid={ teamIndex } onclick={ showTeamModal }>
             <i class="icon setting"></i>
           </button>
         </div>
       </div>
-      <!--
-      <div class="ui segments">
-        <div class="ui segment" each={ team, teamIndex in tournament.teams }>
-          <div class="ui small top attached bottom pointing label">#{ teamIndex + 1 }</div>
-            <div class="ui teamEdit grid">
-              <div class="sixteen wide column">
-                <input name="name" type="text" class="ui fluid small input" value={ team.name } placeholder="参加者名" onchange={ updateTeam } data-teamid={ teamIndex }>
-              </div>
-
-              <div class="nine wide column" if={ team.name!='' }>
-                <input name="group" type="text" class="ui fluid input" value={ team.group } placeholder="所属など" onchange={ updateTeam } data-teamid={ teamIndex } disabled={ team.name=='' }>
-              </div>
-
-              <div class="seven wide column" if={ team.name!='' }>
-                <div class="ui icon button { disabled: team.name=='' }" onclick={ selectCountry } data-teamid={ teamIndex }>
-                  <i class="icon globe" ></i>
-                </div>
-                <span if={ team.country }>
-                  <i class="flag { team.country }" if={ team.country }></i>
-                  ({ team.country })
-                </span>
-                <small if={ !team.country }>国旗を選択</small>
-              </div>
-
-              <div class="sixteen wide column" if={ team.name!='' }>
-                <input name="url" type="url" class="ui fluid input" value={ team.url } placeholder="URL" onchange={ updateTeam } data-teamid={ teamIndex } disabled={ team.name=='' }>
-              </div>
-            </div>
-          </div>
-        </div>
-        <country-select ref="country_select" tournament={ tournament }></coutry-select>
-      </div>
-      -->
     </div>
   </div>
 
 
   <style>
     small { margin-left: 10px; }
-
-    .teamEdit .column {
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-    }
   </style>
 
 
   <script>
+    /***********************************************
+    * Variables
+    ***********************************************/
     var that = this
     that.tournament = opts.tournament
     that.mixin('tournamentMixin')
 
+
+    /***********************************************
+    * Observables
+    ***********************************************/
+
+
+    /***********************************************
+    * Functions
+    ***********************************************/
     /* 通常設定 */
     updateTeams(e) {
       teams = e.target.value.trim().split('\n')
