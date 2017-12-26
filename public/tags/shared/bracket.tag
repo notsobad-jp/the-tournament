@@ -36,7 +36,7 @@
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected');" style="flex: { matchFlex(roundIndex, matchIndex) }">
-          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;" onclick={ selectMatch.bind(this, Number(roundIndex), Number(matchIndex)) }>
+          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;" onclick={ showMatchModal.bind(this, Number(roundIndex), Number(matchIndex)) }>
             <virtual each={ i in [0,1] }>
               <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
                 <div class="name" style="width:{tournament.nameWidth}px;">
@@ -131,12 +131,24 @@
 
 
   <script>
+    /***********************************************
+    * Variables
+    ***********************************************/
     var that = this
     that.tournament = opts.tournament
     that.editable = opts.editable
     that.showBye = false
     that.mixin('tournamentMixin')
 
+
+    /***********************************************
+    * Observables
+    ***********************************************/
+
+
+    /***********************************************
+    * Functions
+    ***********************************************/
     isFinalRound(roundIndex) {
       return roundIndex == Object.keys(that.tournament.results).length - 1
     }
@@ -145,28 +157,6 @@
       attribute = e.target.name
       value = (e.target.type != 'checkbox') ? e.target.value : e.target.checked
       that.tournament[attribute] = value
-      obs.trigger("tournamentChanged", that.tournament)
-    }
-
-    updateTeamName(e) {
-      var teamIndex = Number(e.currentTarget.getAttribute('data-teamid'))
-      that.tournament.teams[teamIndex]['name'] = e.currentTarget.value
-
-      /* byeにするときは国とか他の属性も削除 */
-      if(e.currentTarget.value=='') {
-        that.tournament.teams[teamIndex] = {name: e.currentTarget.value}
-      }
-
-      that.updateByeGames(that.tournament)
-      obs.trigger("tournamentChanged", that.tournament)
-    }
-
-    updateScore(e) {
-      var roundIndex = Number(e.currentTarget.getAttribute('data-round-index'))
-      var matchIndex = Number(e.currentTarget.getAttribute('data-match-index'))
-      var teamOrder = Number(e.currentTarget.getAttribute('data-team-order'))
-
-      that.tournament.results[roundIndex][matchIndex]['score'][teamOrder] = e.currentTarget.value
       obs.trigger("tournamentChanged", that.tournament)
     }
 
@@ -401,20 +391,7 @@
       obs.trigger("tournamentChanged", that.tournament)
     }
 
-    /* return "upper" or "lower" for next by match */
-    getNonNextByeParent(roundIndex, matchIndex) {
-      // 決勝ラウンドなら返す
-      if(roundIndex==Object.keys(that.tournament.results).length-1) { return }
-
-      var parent = that.tournament.results[roundIndex+1][Math.floor(matchIndex/2)]
-      var pairMatchIndex = (matchIndex%2==0) ? matchIndex + 1 : matchIndex - 1
-      var pairResult = that.tournament.results[roundIndex][pairMatchIndex]
-      if(pairResult['bye'] && pairResult['winner']==null) {
-        matchClass += ' next-bye'
-      }
-    }
-
-    selectMatch(roundIndex, matchIndex) {
+    showMatchModal(roundIndex, matchIndex) {
       var matchSelected = {
         roundIndex: roundIndex,
         matchIndex: matchIndex
