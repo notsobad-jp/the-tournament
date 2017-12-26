@@ -38,8 +38,7 @@
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected');" style="flex: { matchFlex(roundIndex, matchIndex) }">
           <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
             <virtual each={ i in [0,1] }>
-              <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
-                <i class="icon link blue write user-edit" if={ editable && roundIndex==0 } onclick={ showTeamModal } data-teamid={ teamIndex }></i>
+              <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] } onclick={ showTeamModal }>
                 <div class="name" style="width:{tournament.nameWidth}px;">
                   <span>
                     <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
@@ -115,7 +114,7 @@
     }
     .editable.bracket .match.selected:after { display: none; }
     .editable.bracket .match { cursor: default; }
-    /*.editable.bracket .teamContainer { cursor: pointer; }*/
+    .editable.bracket .team { cursor: pointer; }
 
     /* match編集ボタン */
     .ui.mini.match-edit.button {
@@ -123,19 +122,6 @@
       right: -15px;
       top: calc(50% - 10px);
       padding: 0.5em;
-    }
-    /* team編集ボタン */
-    .round:first-child .teamContainer { margin-left: 20px; }
-    .icon.link.user-edit {
-      position: absolute;
-      left: -20px;
-    }
-
-    /* team削除ボタン */
-    .icon.link.remove.circle {
-      color: #999;
-      position: absolute;
-      right: -20px;
     }
 
     /* 敗者うすくしない */
