@@ -30,6 +30,18 @@
     </div>
 
     <div class="ui tab" data-tab="detailInput">
+      <div class="ui segments">
+        <div class="ui clearing segment" each={ team, teamIndex in tournament.teams }>
+          <i class="flag { team.country }" if={ team.country }></i>
+          { team.name || '--' }
+          <span if={ team.group }>（{ team.group }）</span>
+          <i class="icon link" if={ team.url }></i>
+
+          <button class="ui mini primary right floated icon button" data-teamid={ teamIndex } onclick={ showTeamModal }>
+            <i class="icon setting"></i>
+          </button>
+        </div>
+      </div>
       <!--
       <div class="ui segments">
         <div class="ui segment" each={ team, teamIndex in tournament.teams }>
@@ -147,6 +159,12 @@
     removeRound() {
       that.removeTeams(that.tournament, 1, true)
       obs.trigger("tournamentChanged", that.tournament)
+    }
+
+    showTeamModal(e) {
+      e.preventDefault()
+      var teamIndex = e.currentTarget.getAttribute('data-teamid')
+      obs.trigger("teamModalChanged", teamIndex)
     }
 
     $(function(){

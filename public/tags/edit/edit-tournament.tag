@@ -25,6 +25,7 @@
       <div class="ui basic segment">
         <bracket tournament={ tournament } editable={ true }></bracket>
         <match-modal tournament={ tournament }></match-modal>
+        <team-modal tournament={ tournament }></team-modal>
       </div>
       <br><br>
     </div>

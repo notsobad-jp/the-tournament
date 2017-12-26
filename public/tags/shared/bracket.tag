@@ -396,7 +396,7 @@
         roundIndex: roundIndex,
         matchIndex: matchIndex
       }
-      obs.trigger("modalMatch", matchSelected)
+      obs.trigger("matchModalChanged", matchSelected)
     }
   </script>
 </bracket>
