@@ -36,9 +36,10 @@
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected');" style="flex: { matchFlex(roundIndex, matchIndex) }">
-          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;" onclick={ showMatchModal.bind(this, Number(roundIndex), Number(matchIndex)) }>
+          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
             <virtual each={ i in [0,1] }>
               <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
+                <i class="icon link blue write user-edit" if={ editable && roundIndex==0 } onclick={ showTeamModal } data-teamid={ teamIndex }></i>
                 <div class="name" style="width:{tournament.nameWidth}px;">
                   <span>
                     <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
@@ -51,9 +52,11 @@
                 <div class="score" style="width:{tournament.scoreWidth}px;">
                   <span>{ match.score[i] }</span>
                 </div>
-                <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
               </div>
             </virtual>
+            <div class="ui primary mini match-edit icon button" if={ editable && !match['bye'] } onclick={ showMatchModal.bind(this, Number(roundIndex), Number(matchIndex)) }>
+              <i class="icon setting"></i>
+            </div>
           </div>
 
           <div class="lineContainer">
@@ -112,6 +115,21 @@
     }
     .editable.bracket .match.selected:after { display: none; }
     .editable.bracket .match { cursor: default; }
+    /*.editable.bracket .teamContainer { cursor: pointer; }*/
+
+    /* match編集ボタン */
+    .ui.mini.match-edit.button {
+      position: absolute;
+      right: -15px;
+      top: calc(50% - 10px);
+      padding: 0.5em;
+    }
+    /* team編集ボタン */
+    .round:first-child .teamContainer { margin-left: 20px; }
+    .icon.link.user-edit {
+      position: absolute;
+      left: -20px;
+    }
 
     /* team削除ボタン */
     .icon.link.remove.circle {
@@ -371,6 +389,7 @@
     }
 
     removeTeam(e) {
+      e.stopPropagation()
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
       that.tournament.teams[teamIndex]['name'] = ''
       that.tournament = that.updateByeGames(that.tournament)
@@ -397,6 +416,13 @@
         matchIndex: matchIndex
       }
       obs.trigger("matchModalChanged", matchSelected)
+    }
+
+    showTeamModal(e) {
+      e.stopPropagation()
+      var teamIndex = e.currentTarget.getAttribute('data-teamid')
+      console.log(teamIndex)
+      obs.trigger("teamModalChanged", teamIndex)
     }
   </script>
 </bracket>
