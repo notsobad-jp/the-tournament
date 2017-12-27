@@ -8,13 +8,17 @@
       <i class="users icon"></i>
       <small>参加者</small>
     </a>
+    <a class="item" data-tab="results">
+      <i class="table icon"></i>
+      <small>試合結果</small>
+    </a>
     <a class="item" data-tab="share">
       <i class="share alternate icon"></i>
       <small>共有</small>
     </a>
   </div>
 
-  <div class="ui fluid four item attached dark inverted labeled icon tiny pointing tabular menu" if={ opts.device == 'mobile' }>
+  <div class="ui fluid five item attached dark inverted labeled icon tiny pointing tabular menu" if={ opts.device == 'mobile' }>
     <a class="item" onclick={ toggleMenu }>
       <i class="content icon"></i>
       <small>メニュー</small>
@@ -26,6 +30,10 @@
     <a class="item" data-tab="teams">
       <i class="users icon"></i>
       <small>参加者</small>
+    </a>
+    <a class="item" data-tab="results">
+      <i class="table icon"></i>
+      <small>試合結果</small>
     </a>
     <a class="item" data-tab="share">
       <i class="share alternate icon"></i>
