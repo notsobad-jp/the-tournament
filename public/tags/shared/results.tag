@@ -2,11 +2,11 @@
   <div>
     <virtual each={ round, roundIndex in tournament.results }>
       <div class="ui segments">
-        <div class="ui attached warning visible message" onclick={ toggleSegment }>
+        <div class="ui attached warning visible message" onclick={ toggleSegment.bind(this, roundIndex) }>
           { roundName(Number(roundIndex)) }
-          <i class="counterclockwise dropdown icon"></i>
+          <i class="counterclockwise dropdown icon { rotated: !segmentVisible[roundIndex] }"></i>
         </div>
-          <div class="ui attached segment" each={ match, matchIndex in round }>
+          <div class="ui attached segment" each={ match, matchIndex in round } if={ segmentVisible[roundIndex] }>
             <div class="ui tiny center aligned header">
               【{ matchName(Number(roundIndex), Number(matchIndex)) }】
             </div>
@@ -72,6 +72,11 @@
     var that = this
     that.tournament = opts.tournament
     that.editable = opts.editable
+    that.segmentVisible = []
+    for(var i = 0; i < Object.keys(that.tournament.results).length; i++) {
+      that.segmentVisible.push(true)
+    }
+
     that.mixin('tournamentMixin')
 
 
@@ -110,9 +115,9 @@
       return (teamIndex==null) ? '--' : that.tournament.teams[teamIndex]['name']
     }
 
-    toggleSegment(e) {
-      $(e.target).parent('.segments').children('.segment').toggle()
-      $(e.target).children('i').toggleClass('rotated')
+    toggleSegment(roundIndex) {
+      that.segmentVisible[roundIndex] = !that.segmentVisible[roundIndex]
+      that.update()
     }
 
     updateWinner(e) {
