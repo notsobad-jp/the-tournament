@@ -1,27 +1,26 @@
 <edit-tournament>
   <div class="ui stackable centered padded grid" if={ tournament }>
-    <div class="ui one wide computer only dark column" data-is="menu" device="computer"></div>
-    <div class="ui one wide tablet mobile only dark column" data-is="menu" device="mobile"></div>
+    <div class="ui one wide dark column" data-is="menu"></div>
 
-    <div class="ui five wide secondary column">
+    <div class="ui five wide secondary column" if={ selectedTab }>
       <form class="ui form">
-        <div class="ui basic segment active tab" data-tab="settings">
+        <div class="ui basic segment tab { active: tabSelected('settings') }" data-tab="settings">
           <settings tournament={ tournament }></settings>
         </div>
-        <div class="ui basic segment tab" data-tab="teams">
+        <div class="ui basic segment tab { active: tabSelected('teams') }" data-tab="teams">
           <teams tournament={ tournament }></teams>
         </div>
-        <div class="ui basic segment tab" data-tab="results">
+        <div class="ui basic segment tab { active: tabSelected('results') }" data-tab="results">
           <h3 class="ui tiny header">試合結果の登録</h3>
           <results tournament={ tournament } editable={ true }></results>
         </div>
-        <div class="ui basic segment tab" data-tab="share">
+        <div class="ui basic segment tab { active: tabSelected('share') }" data-tab="share">
           <share tournament={ tournament }></share>
         </div>
       </form>
     </div>
 
-    <div class="ui ten wide column">
+    <div class="ui { ten: selectedTab, fifteen: !selectedTab } wide column">
       <div class="ui basic segment">
         <bracket tournament={ tournament } editable={ true }></bracket>
         <match-modal tournament={ tournament }></match-modal>
@@ -66,17 +65,30 @@
     @media screen and (max-width: 480px) {
       .five.wide.secondary.column {
          padding: 0 !important;
-         display: none;
        }
     }
   </style>
 
 
   <script>
+    /***********************************************
+    * Variables
+    ***********************************************/
     var that = this
+    that.isMobile = window.innerWidth <= 480
+    that.selectedTab = (that.isMobile) ? null : 'settings'
 
+
+    /***********************************************
+    * Observables
+    ***********************************************/
     firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
+    })
+
+    obs.on("menuTabChanged", function(tab) {
+      that.selectedTab = tab
+      that.update()
     })
 
     // Footer表示制御
@@ -105,6 +117,10 @@
       }
     })
 
+
+    /***********************************************
+    * Functions
+    ***********************************************/
     saveTournament() {
       obs.trigger("dimmerChanged", 'active')
       var docRef = db.collection("tournaments").doc(opts.id)
@@ -123,6 +139,10 @@
       })
     }
 
+    tabSelected(tab) {
+      return tab == that.selectedTab
+    }
+
     removeTournament(e) {
       var ok = confirm('データを削除します。本当によろしいですか？')
       if(!ok) { return false }
@@ -133,9 +153,5 @@
         route('/mypage')
       })
     }
-
-    $(function(){
-      $('.ui.checkbox').checkbox()
-    })
   </script>
 </edit-tournament>
