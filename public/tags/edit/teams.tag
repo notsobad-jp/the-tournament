@@ -17,19 +17,19 @@
     <br><br>
 
     <div class="ui secondary pointing fluid two item pink small tabular menu">
-      <a class="active item" data-tab="textInput">
+      <a class="item { active: tabSelected('simple') }" onclick={ changeMenuTab.bind(this, 'simple') }>
         通常設定
       </a>
-      <a class="item" data-tab="detailInput">
+      <a class="item { active: tabSelected('detail') }" onclick={ changeMenuTab.bind(this, 'detail') }>
         詳細設定
       </a>
     </div>
 
-    <div class="ui active tab" data-tab="textInput">
+    <div class="ui tab { active: tabSelected('simple') }">
       <textarea name="teams" onchange={ updateTeams } style="line-height:22px; height:{ calcTextareaHeight() }px; max-height:256em;">{ teamText() }</textarea>
     </div>
 
-    <div class="ui tab" data-tab="detailInput">
+    <div class="ui tab { active: tabSelected('detail') }">
       <div class="ui segments">
         <div class="ui clearing segment" each={ team, teamIndex in tournament.teams }>
           <i class="flag { team.country }" if={ team.country }></i>
@@ -59,18 +59,70 @@
     ***********************************************/
     var that = this
     that.tournament = opts.tournament
+    that.selectedTab = 'simple'
     that.mixin('tournamentMixin')
-
-
-    /***********************************************
-    * Observables
-    ***********************************************/
 
 
     /***********************************************
     * Functions
     ***********************************************/
-    /* 通常設定 */
+    addRound() {
+      that.addTeams(that.tournament, 1, true)
+      obs.trigger("tournamentChanged", that.tournament)
+    }
+
+    calcTextareaHeight() {
+      var teamsCount = Object.keys(that.tournament.teams).length
+      var lineHeight = 22
+      return teamsCount * lineHeight + 70
+    }
+
+    changeMenuTab(tab) {
+      that.selectedTab = tab
+    }
+
+    removeRound() {
+      that.removeTeams(that.tournament, 1, true)
+      obs.trigger("tournamentChanged", that.tournament)
+    }
+
+    selectCountry(e) {
+      var countrySelect = that.refs.country_select
+      var teamIndex = e.currentTarget.getAttribute('data-teamid')
+      countrySelect.showModal(teamIndex)
+    }
+
+    showTeamModal(e) {
+      e.preventDefault()
+      var teamIndex = e.currentTarget.getAttribute('data-teamid')
+      obs.trigger("teamModalChanged", teamIndex)
+    }
+
+    tabSelected(tab) {
+      return tab == that.selectedTab
+    }
+
+    teamText() {
+      text = ''
+      for( key in that.tournament.teams ) {
+        text += that.tournament.teams[key]['name'] + '\n'
+      }
+      return text
+    }
+
+    /* 詳細入力モード */
+    updateTeam(e) {
+      var teamIndex = Number(e.currentTarget.getAttribute('data-teamid'))
+      var attribute = e.currentTarget.getAttribute('name')
+      that.tournament.teams[teamIndex][attribute] = e.currentTarget.value
+
+      if(attribute=='name') {
+        that.tournament = that.updateByeGames(that.tournament)
+      }
+      obs.trigger("tournamentChanged", that.tournament)
+    }
+
+    /* テキスト入力モード */
     updateTeams(e) {
       teams = e.target.value.trim().split('\n')
 
@@ -94,57 +146,5 @@
 
       obs.trigger("tournamentChanged", that.tournament)
     }
-
-    teamText() {
-      text = ''
-      for( key in that.tournament.teams ) {
-        text += that.tournament.teams[key]['name'] + '\n'
-      }
-      return text
-    }
-
-    calcTextareaHeight() {
-      var teamsCount = Object.keys(that.tournament.teams).length
-      var lineHeight = 22
-      return teamsCount * lineHeight + 70
-    }
-
-
-    /* 詳細設定 */
-    updateTeam(e) {
-      var teamIndex = Number(e.currentTarget.getAttribute('data-teamid'))
-      var attribute = e.currentTarget.getAttribute('name')
-      that.tournament.teams[teamIndex][attribute] = e.currentTarget.value
-
-      if(attribute=='name') {
-        that.tournament = that.updateByeGames(that.tournament)
-      }
-      obs.trigger("tournamentChanged", that.tournament)
-    }
-
-    selectCountry(e) {
-      var countrySelect = that.refs.country_select
-      var teamIndex = e.currentTarget.getAttribute('data-teamid')
-      countrySelect.showModal(teamIndex)
-    }
-
-    addRound() {
-      that.addTeams(that.tournament, 1, true)
-      obs.trigger("tournamentChanged", that.tournament)
-    }
-    removeRound() {
-      that.removeTeams(that.tournament, 1, true)
-      obs.trigger("tournamentChanged", that.tournament)
-    }
-
-    showTeamModal(e) {
-      e.preventDefault()
-      var teamIndex = e.currentTarget.getAttribute('data-teamid')
-      obs.trigger("teamModalChanged", teamIndex)
-    }
-
-    $(function(){
-      $('.tabular.menu .item').tab()
-    })
   </script>
 </teams>
