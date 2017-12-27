@@ -4,10 +4,15 @@
     <div class="ui tiny modal active">
       <i class="close icon" onclick={ hideModal }></i>
       <div class="header">
-        { roundName() + matchName() }
+        <i class="icon browser"></i>
+        試合結果の編集
       </div>
       <div class="content">
         <div class="ui center aligned grid form">
+          <div class="row">
+            【{ roundName() + matchName() }】
+          </div>
+
           <div class="row">
             <div class="ui seven wide column secondary segment">
               <h5 class="ui tiny header">{ teamName(getTeamIndex(tournament, roundIndex, matchIndex, 0)) || '--' }</h5>

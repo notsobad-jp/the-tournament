@@ -4,7 +4,8 @@
     <div class="ui tiny modal active">
       <i class="close icon" onclick={ hideModal }></i>
       <div class="header">
-        # { Number(teamIndex) + 1 }
+        <i class="icon user"></i>
+        参加者情報の編集
       </div>
       <div class="content">
         <div class="ui form grid">
@@ -25,6 +26,7 @@
               ({ team.country })
             </span>
             <small if={ !team.country }>国旗を選択</small>
+            <i class="icon link grey remove circle" if={ team.country } onclick={ removeCountry }></i>
           </div>
 
           <div class="sixteen wide column" if={ team.name!='' }>
@@ -97,6 +99,10 @@
     removeTeam() {
       that.team = {name: ''}
       that.saveChanges()
+    }
+
+    removeCountry() {
+      that.team.country = null
     }
 
     saveChanges() {

@@ -407,7 +407,6 @@
     showTeamModal(e) {
       e.stopPropagation()
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
-      console.log(teamIndex)
       obs.trigger("teamModalChanged", teamIndex)
     }
   </script>
