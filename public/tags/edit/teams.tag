@@ -2,28 +2,31 @@
   <div class="required field">
     <div class="ui tiny header">参加者の登録</div>
 
-    <div class="ui icon mini primary buttons">
-      <div class="ui icon button { disabled: Object.keys(tournament.teams).length >= 128 }" onclick={ addRound }>
-        <i class="icon plus"></i>
+    <div class="ui two column grid">
+      <div class="ui left aligned column">
+        <div class="ui icon mini primary buttons">
+          <div class="ui icon button { disabled: Object.keys(tournament.teams).length >= 128 }" onclick={ addRound }>
+            <i class="icon plus"></i>
+          </div>
+          <div class="ui icon button { disabled: Object.keys(tournament.teams).length <= 4 }" onclick={ removeRound }>
+            <i class="icon minus"></i>
+          </div>
+        </div>
+        <small>
+          参加者数
+          <span class="ui circular mini label">
+            { Object.keys(tournament.teams).length }
+          </span>
+        </small>
       </div>
-      <div class="ui icon button { disabled: Object.keys(tournament.teams).length <= 4 }" onclick={ removeRound }>
-        <i class="icon minus"></i>
+      <div class="ui right aligned column">
+        <div class="ui mini basic button { primary: tabSelected('simple') }" onclick={ toggleMenuTab }>
+            <i class="icon exchange }"></i>
+            { (tabSelected('simple')) ? '詳細情報を表示する' : 'シンプル表示に戻す' }
+        </div>
       </div>
     </div>
-    <small>
-      参加者数
-      <span class="ui circular mini label">{ Object.keys(tournament.teams).length }</span>
-    </small>
     <br><br>
-
-    <div class="ui secondary pointing fluid two item pink small tabular menu">
-      <a class="item { active: tabSelected('simple') }" onclick={ changeMenuTab.bind(this, 'simple') }>
-        通常設定
-      </a>
-      <a class="item { active: tabSelected('detail') }" onclick={ changeMenuTab.bind(this, 'detail') }>
-        詳細設定
-      </a>
-    </div>
 
     <div class="ui tab { active: tabSelected('simple') }">
       <textarea name="teams" onchange={ updateTeams } style="line-height:22px; height:{ calcTextareaHeight() }px; max-height:256em;">{ teamText() }</textarea>
@@ -108,6 +111,10 @@
         text += that.tournament.teams[key]['name'] + '\n'
       }
       return text
+    }
+
+    toggleMenuTab() {
+      that.selectedTab = (that.selectedTab=='simple') ? 'detail' : 'simple'
     }
 
     /* 詳細入力モード */
