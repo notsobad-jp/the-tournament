@@ -1,5 +1,5 @@
 <teams>
-  <div class="required field">
+  <div>
     <div class="ui tiny header">参加者の登録</div>
 
     <div class="ui two column grid">
@@ -29,7 +29,9 @@
     <br><br>
 
     <div class="ui tab { active: tabSelected('simple') }">
-      <textarea name="teams" onchange={ updateTeams } style="line-height:22px; height:{ calcTextareaHeight() }px; max-height:256em;">{ teamText() }</textarea>
+      <div class="ui form">
+        <textarea name="teams" onchange={ updateTeams } style="line-height:22px; height:{ calcTextareaHeight() }px; max-height:256em;">{ teamText() }</textarea>
+      </div>
     </div>
 
     <div class="ui tab { active: tabSelected('detail') }">

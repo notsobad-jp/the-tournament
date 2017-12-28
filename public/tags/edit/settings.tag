@@ -1,5 +1,5 @@
 <settings>
-  <div>
+  <div class="ui form">
     <div class="required field">
       <label>トーナメント名</label>
       <input type="text" name="title" value="{tournament.title}" onchange={ updateTournament }>
