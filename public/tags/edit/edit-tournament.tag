@@ -2,7 +2,7 @@
   <div class="ui stackable centered padded grid" if={ tournament }>
     <div class="ui one wide dark column" data-is="menu"></div>
 
-    <div class="ui five wide secondary column">
+    <div class="ui five wide secondary column" if={ selectedTab }>
       <form class="ui form">
         <div class="ui basic tabbable segment { active: tabSelected('settings') }">
           <settings tournament={ tournament }></settings>
@@ -52,37 +52,55 @@
       z-index: 2;
     }
     .ui.dark.column { background-color: #2D3E4F !important; }
-
     .ui.ten.wide.column { min-height: calc(100vh - 45px) }
     .ui.menu.fixed { z-index: 999; }
 
-    @keyframes fade-in {
-      0% {
-        display: none;
-        transform: translate(0, -100px);
-        opacity: 0;
-      }
-      1% {
-        display: block;
-        transform: translate(0, -100px);
-        opacity: 0;
-      }
-      100% {
-        display: block;
-        transform: translate(0, 0);
-        opacity: 1;
+    /* タブ切り替えアニメーション */
+    @media screen and (max-width: 480px) {
+      @keyframes fade-in {
+        0% {
+          display: none;
+          transform: translate(0, -100px);
+          opacity: 0;
+        }
+        1% {
+          display: block;
+          transform: translate(0, -100px);
+          opacity: 0;
+        }
+        100% {
+          display: block;
+          transform: translate(0, 0);
+          opacity: 1;
+        }
       }
     }
-
+    @media screen and (min-width: 481px) {
+      @keyframes fade-in {
+        0% {
+          display: none;
+          transform: translate(-100px, 0);
+          opacity: 0;
+        }
+        1% {
+          display: block;
+          transform: translate(-100px, 0);
+          opacity: 0;
+        }
+        100% {
+          display: block;
+          transform: translate(0, 0);
+          opacity: 1;
+        }
+      }
+    }
     .ui.tabbable.segment {
       display: none;
-      opacity: 0;
-      transform: translate(0, -100px);
+        opacity: 0;
     }
     .ui.tabbable.segment.active {
       display: block;
       opacity: 1;
-      transform: translate(0, 0);
       animation-duration: 300ms;
       animation-name: fade-in;
     }
