@@ -2,19 +2,19 @@
   <div class="ui stackable centered padded grid" if={ tournament }>
     <div class="ui one wide dark column" data-is="menu"></div>
 
-    <div class="ui five wide secondary column" if={ selectedTab }>
+    <div class="ui five wide secondary column">
       <form class="ui form">
-        <div class="ui basic segment tab { active: tabSelected('settings') }" data-tab="settings">
+        <div class="ui basic tabbable segment { active: tabSelected('settings') }">
           <settings tournament={ tournament }></settings>
         </div>
-        <div class="ui basic segment tab { active: tabSelected('teams') }" data-tab="teams">
+        <div class="ui basic tabbable segment { active: tabSelected('teams') }">
           <teams tournament={ tournament }></teams>
         </div>
-        <div class="ui basic segment tab { active: tabSelected('results') }" data-tab="results">
+        <div class="ui basic tabbable segment { active: tabSelected('results') }">
           <h3 class="ui tiny header">試合結果の登録</h3>
           <results tournament={ tournament } editable={ true }></results>
         </div>
-        <div class="ui basic segment tab { active: tabSelected('share') }" data-tab="share">
+        <div class="ui basic tabbable segment { active: tabSelected('share') }">
           <share tournament={ tournament }></share>
         </div>
       </form>
@@ -47,11 +47,45 @@
   <style>
     /* メニューまわり */
     .ui.secondary.column, .ui.secondary.grid { background-color: #F3F4F5 !important; }
-    .ui.one.wide.column { padding: 0 !important; }
+    .ui.one.wide.column {
+      padding: 0 !important;
+      z-index: 2;
+    }
     .ui.dark.column { background-color: #2D3E4F !important; }
 
     .ui.ten.wide.column { min-height: calc(100vh - 45px) }
     .ui.menu.fixed { z-index: 999; }
+
+    @keyframes fade-in {
+      0% {
+        display: none;
+        transform: translate(0, -100px);
+        opacity: 0;
+      }
+      1% {
+        display: block;
+        transform: translate(0, -100px);
+        opacity: 0;
+      }
+      100% {
+        display: block;
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+    }
+
+    .ui.tabbable.segment {
+      display: none;
+      opacity: 0;
+      transform: translate(0, -100px);
+    }
+    .ui.tabbable.segment.active {
+      display: block;
+      opacity: 1;
+      transform: translate(0, 0);
+      animation-duration: 300ms;
+      animation-name: fade-in;
+    }
 
     /*  PCではカラム別にスクロール */
     @media screen and (min-width: 481px) {

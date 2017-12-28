@@ -32,6 +32,8 @@
       border-radius: 0 !important;
     }
     .ui.inverted.pointing.dark.menu .active.item:after { background-color: #0e1d2d !important; }
+
+    .icon.content { transition: all 300ms 0s ease; }
   </style>
 
 
