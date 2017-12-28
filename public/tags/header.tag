@@ -60,9 +60,9 @@
         </div>
         <div class="item menu-title"></div>
         <div class="right menu">
-          <div class="ui simple dropdown item">
+          <div class="ui dropdown item { active: menuOpened, visible: menuOpened }" onmouseenter={ toggleMenu } onmouseleave={ toggleMenu }>
             <i class="content icon"></i>
-            <div class="menu">
+            <div class="menu { transition: menuOpened, visible: menuOpened }">
               <div class="header">
                 { (user && !user.isAnonymous) ? user.email : 'ゲストユーザー' }
               </div>
@@ -107,7 +107,16 @@
 
 
   <script>
+    /***********************************************
+    * Variables
+    ***********************************************/
     var that = this
+    that.menuOpened = false
+
+
+    /***********************************************
+    * Observables
+    ***********************************************/
     obs.on("mixinMounted", function() {
       that.mixin('tournamentMixin')
     })
@@ -121,12 +130,10 @@
       }
     })
 
-    signOut() {
-      firebase.auth().signOut()
-      obs.trigger("flashChanged", {type:'success',text:'ログアウトしました'})
-      route('/')
-    }
 
+    /***********************************************
+    * Functions
+    ***********************************************/
     createAndRedirectToTournament() {
       obs.trigger("dimmerChanged", 'active')
       that.createTournament(that.user.uid).then(function(id){
@@ -134,8 +141,14 @@
       })
     }
 
-    $(function(){
-      $('.ui.dropdown').dropdown()
-    })
+    signOut() {
+      firebase.auth().signOut()
+      obs.trigger("flashChanged", {type:'success',text:'ログアウトしました'})
+      route('/')
+    }
+
+    toggleMenu() {
+      that.menuOpened = !that.menuOpened
+    }
   </script>
 </header>
