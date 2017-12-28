@@ -4,17 +4,17 @@
 
     <div class="ui five wide secondary column" if={ selectedTab }>
       <form class="ui form">
-        <div class="ui basic tabbable segment { active: tabSelected('settings') }">
+        <div class="ui basic tab segment { active: tabSelected('settings') }">
           <settings tournament={ tournament }></settings>
         </div>
-        <div class="ui basic tabbable segment { active: tabSelected('teams') }">
+        <div class="ui basic tab segment { active: tabSelected('teams') }">
           <teams tournament={ tournament }></teams>
         </div>
-        <div class="ui basic tabbable segment { active: tabSelected('results') }">
+        <div class="ui basic tab segment { active: tabSelected('results') }">
           <h3 class="ui tiny header">試合結果の登録</h3>
           <results tournament={ tournament } editable={ true }></results>
         </div>
-        <div class="ui basic tabbable segment { active: tabSelected('share') }">
+        <div class="ui basic tab segment { active: tabSelected('share') }">
           <share tournament={ tournament }></share>
         </div>
       </form>
@@ -94,13 +94,7 @@
         }
       }
     }
-    .ui.tabbable.segment {
-      display: none;
-        opacity: 0;
-    }
-    .ui.tabbable.segment.active {
-      display: block;
-      opacity: 1;
+    .ui.five.wide.column {
       animation-duration: 300ms;
       animation-name: fade-in;
     }
