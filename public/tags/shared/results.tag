@@ -24,7 +24,7 @@
                     </div>
                   </virtual>
                 </div>
-                <div class="ui two wide column">
+                <div class="ui two wide middle aligned column">
                   <i class="icon minus"></i>
                 </div>
                 <div class="ui seven wide column { winner: match.winner==1, loser: match.winner==0 }">

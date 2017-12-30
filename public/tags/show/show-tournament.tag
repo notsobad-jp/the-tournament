@@ -1,55 +1,73 @@
 <show-tournament>
-  <div class="ui stackable padded grid" if={ tournament }>
-    <div class="ui sixteen wide dark column">
-      <div class="ui basic dark inverted segment">
-        <h1 class="ui huge header">{ tournament.title }</h1>
-        <div class="ui hidden divider"></div>
-        <div ref="detail"></div>
+  <div class="ui stackable padded centered grid" if={ tournament }>
+    <div class="ui eleven wide column">
+      <div class="ui breadcrumb">
+        <a class="section">トップ</a>
+        <i class="right chevron icon divider"></i>
+        <a class="section">すべてのトーナメント表</a>
+        <i class="right chevron icon divider"></i>
+        <div class="active section">{ tournament.title }</div>
       </div>
-    </div>
-    <div class="ui sixteen wide secondary column">
-      <a class="ui right floated primary small button" href="/tournaments/{ opts.id }/edit">
-        <i class="icon setting"></i>
-        編集
-      </a>
-    </div>
+      <br><br>
 
-    <div class="ui three wide column">
-      <div class="ui secondary fluid pink mini menu { (isMobile) ? 'pointing three item labeled icon tabular' : 'vertical' }">
+      <div class="">
+        <h1 class="ui large title header">
+          { tournament.title }
+          <a class="ui primary right floated mini button" href="/tournaments/{ opts.id }/edit">
+            <i class="icon setting"></i>
+            編集
+          </a>
+        </h1>
+        <div class="detail" ref="detail"></div>
+      </div>
+      <br>
+
+      <div class="ui fluid pink tabular menu { (isMobile) ? 'labeled icon mini three item' : '' }">
         <a class="item { active: tabSelected('bracket') }" onclick={ changeTab.bind(this, 'bracket') }>
           <i class="icon sitemap"></i>
           トーナメント表
         </a>
         <a class="item { active: tabSelected('results') }" onclick={ changeTab.bind(this, 'results') }>
           <i class="icon table"></i>
-          対戦表
+          対 戦 表
         </a>
         <a class="item { active: tabSelected('teams') }" onclick={ changeTab.bind(this, 'teams') }>
           <i class="icon users"></i>
           メンバー表
         </a>
       </div>
-    </div>
+      <br>
 
 
-    <div class="ui thirteen wide column">
-      <div class="ui tab { active: tabSelected('bracket') }" data-tab="bracket">
-        <bracket editable={ false } tournament={ tournament }></bracket>
-      </div>
+        <div class="ui tab { active: tabSelected('bracket') }">
+          <bracket editable={ false } tournament={ tournament }></bracket>
+        </div>
 
-      <div class="ui tab ten wide { active: tabSelected('results') }" data-tab="results">
-        <results tournament={ tournament } editable={ false }></results>
-      </div>
+        <div class="ui tab { active: tabSelected('results') }">
+          <results tournament={ tournament } editable={ false }></results>
+        </div>
 
-      <div class="ui tab ten wide { active: tabSelected('teams') }" data-tab="teams">
-        <div>
-          <div class="ui segments">
-            <div class="ui segment" each={ team, teamIndex in tournament.teams }>
-              { team['name'] }
+        <div class="ui tab { active: tabSelected('teams') }">
+          <div>
+            <div class="ui segments">
+              <div class="ui segment" each={ team, teamIndex in tournament.teams }>
+                <i class="flag { team.country }" if={ team.country }></i>
+                { team.name || '--' }
+                <span if={ team.group }>（{ team.group }）</span>
+                <a href={ team.url } target="_blank" if={ team.url && team.url != '' }>
+                  <i class="icon external"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+    </div>
+
+    <div class="ui four wide computer only column">
+      <div class="ui half page test ad" data-text="広告枠"></div>
+    </div>
+    <div class="ui four wide mobile tablet only column">
+      <div class="ui medium rectangle centered test ad" data-text="広告枠"></div>
     </div>
   </div>
   <br><br>
@@ -57,23 +75,21 @@
 
 
   <style>
-    .ui.dark.column, .ui.dark.inverted.segment { background-color: #2D3E4F !important; }
-    .ui.secondary.column {
-      background-color: #F3F4F5 !important;
-      padding: 7px 10px;
-    }
-    .ui.pink.secondary.vertical.menu .active.item {
-      background-color: #E03997!important;
-      color: #fff !important;
+    .title {
+      padding: 7px 0;
+      border-top: 4px solid #333;
+      border-bottom: 4px solid #333;
+      margin-bottom: 5px;
+      word-break: break-all;
     }
 
-    /* PC　*/
-    @media screen and (min-width: 480px) {
-      .ten.wide.tab { max-width: 62.5% !important; }
-      .ui.stackable.grid > .ui.dark.column {
-         padding-top: 2rem !important;
-         padding-bottom: 2rem !important;
-       }
+    .detail {
+      margin: 20px 0;
+    }
+
+    .ui.breadcrumb {
+      line-height: 1.3rem;
+      word-break: break-all;
     }
   </style>
 
