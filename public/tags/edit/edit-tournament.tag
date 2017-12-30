@@ -112,6 +112,13 @@
       that.user = user
     })
 
+    // unmount処理
+    that.on('unmount', function() {
+      obs.trigger("footerVisibility", true)
+      obs.off('menuTabChanged')
+      obs.off('tournamentChanged')
+    })
+
     obs.on("menuTabChanged", function(tab) {
       that.selectedTab = tab
       that.update()
@@ -119,9 +126,6 @@
 
     // Footer表示制御
     obs.trigger("footerVisibility", false)
-    that.on('unmount', function() {
-      obs.trigger("footerVisibility", true)
-    })
 
     obs.on("tournamentChanged", function(tournament) {
       that.tournament = tournament

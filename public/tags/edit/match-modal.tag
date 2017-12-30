@@ -102,6 +102,11 @@
       that.update()
     })
 
+    // unmount処理
+    that.on('unmount', function() {
+      obs.off('matchModalChanged')
+    })
+
 
     /***********************************************
     * Functions
