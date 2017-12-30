@@ -8,10 +8,12 @@
       </div>
       <div class="ui basic tab segment { active: tabSelected('teams') }">
         <teams tournament={ tournament }></teams>
+        <team-modal tournament={ tournament }></team-modal>
       </div>
       <div class="ui basic tab segment { active: tabSelected('results') }">
         <h3 class="ui tiny header">試合結果の登録</h3>
         <results tournament={ tournament } editable={ true }></results>
+        <match-modal tournament={ tournament }></match-modal>
       </div>
       <div class="ui basic tab segment { active: tabSelected('share') }">
         <share tournament={ tournament }></share>
@@ -21,8 +23,6 @@
     <div class="ui { ten: selectedTab, fifteen: !selectedTab } wide column">
       <div class="ui basic segment">
         <bracket tournament={ tournament } editable={ true }></bracket>
-        <match-modal tournament={ tournament }></match-modal>
-        <team-modal tournament={ tournament }></team-modal>
       </div>
       <br><br>
     </div>
@@ -54,25 +54,6 @@
     .ui.menu.fixed { z-index: 999; }
 
     /* タブ切り替えアニメーション */
-    @media screen and (max-width: 480px) {
-      @keyframes fade-in {
-        0% {
-          display: none;
-          transform: translate(0, -100px);
-          opacity: 0;
-        }
-        1% {
-          display: block;
-          transform: translate(0, -100px);
-          opacity: 0;
-        }
-        100% {
-          display: block;
-          transform: translate(0, 0);
-          opacity: 1;
-        }
-      }
-    }
     @media screen and (min-width: 481px) {
       @keyframes fade-in {
         0% {
@@ -91,10 +72,10 @@
           opacity: 1;
         }
       }
-    }
-    .ui.five.wide.column {
-      animation-duration: 300ms;
-      animation-name: fade-in;
+      .ui.five.wide.column {
+        animation-duration: 300ms;
+        animation-name: fade-in;
+      }
     }
 
     /*  PCではカラム別にスクロール */

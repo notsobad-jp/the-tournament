@@ -64,11 +64,7 @@
     * Functions
     ***********************************************/
     changeMenuTab(tab) {
-      /* 表示中のメニューを再度タップすると閉じる */
-      if(that.selectedTab == tab) {
-        that.toggleMenuTab()
-      /* そうじゃないときはメニュー切替 */
-      }else {
+      if(that.selectedTab != tab) {
         that.selectedTab = tab
         obs.trigger("menuTabChanged", tab)
       }
