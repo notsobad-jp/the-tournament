@@ -1,7 +1,7 @@
 <show-tournament>
   <div class="ui stackable padded centered grid" if={ tournament }>
     <div class="ui eleven wide column">
-      <div class="ui breadcrumb">
+      <div class="ui small breadcrumb">
         <a class="section">トップ</a>
         <i class="right chevron icon divider"></i>
         <a class="section">すべてのトーナメント表</a>
@@ -13,7 +13,7 @@
       <div class="">
         <h1 class="ui large title header">
           { tournament.title }
-          <a class="ui primary right floated mini button" href="/tournaments/{ opts.id }/edit">
+          <a class="ui primary right floated button { (isMobile) ? 'tiny' : 'small' }" href="/tournaments/{ opts.id }/edit">
             <i class="icon setting"></i>
             編集
           </a>

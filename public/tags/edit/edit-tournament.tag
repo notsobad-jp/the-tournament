@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="ui bottom fixed borderless menu">
+  <div class="ui bottom fixed borderless menu" if={ tournament }>
     <div class="item">
       <button class="ui red small button" onclick={ saveTournament } disabled={ JSON.stringify(tournament) == JSON.stringify(originalTournament) }>保存する</button>
     </div>
@@ -100,6 +100,7 @@
     * Variables
     ***********************************************/
     var that = this
+    that.tournament = null
     that.isMobile = window.innerWidth <= 480
     that.selectedTab = (that.isMobile) ? null : 'settings'
 

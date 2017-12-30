@@ -37,28 +37,26 @@
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected');" style="flex: { matchFlex(roundIndex, matchIndex) }">
           <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
-            <virtual each={ i in [0,1] }>
-              <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
-                <span class="winnerSelect" if={ editable }>
-                  <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
+            <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
+              <span class="winnerSelect" if={ editable }>
+                <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
+              </span>
+
+              <div class="name { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.nameWidth}px;">
+                <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
+                  <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
                 </span>
-
-                <div class="name { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.nameWidth}px;">
-                  <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
-                    <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
-                  </span>
-                  <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName }>
-                  <span if={ !editable }>{ teamName(teamIndex) }</span>
-                </div>
-
-                <div class="score { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.scoreWidth}px;">
-                  <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore } disabled={ match.bye }>
-                  <span if={ !editable }>{ match.score[i] }</span>
-                </div>
-
-                <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
+                <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName }>
+                <span if={ !editable }>{ teamName(teamIndex) }</span>
               </div>
-            </virtual>
+
+              <div class="score { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.scoreWidth}px;">
+                <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore } disabled={ match.bye }>
+                <span if={ !editable }>{ match.score[i] }</span>
+              </div>
+
+              <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
+            </div>
           </div>
 
           <div class="lineContainer">
@@ -156,6 +154,13 @@
     ***********************************************/
     isFinalRound(roundIndex) {
       return roundIndex == Object.keys(that.tournament.results).length - 1
+    }
+
+    matchTeamIndexes(roundIndex, matchIndex) {
+      return [
+        that.getTeamIndex(that.tournament, roundIndex, matchIndex, 0),
+        that.getTeamIndex(that.tournament, roundIndex, matchIndex, 1)
+      ]
     }
 
     updateScore(e) {
