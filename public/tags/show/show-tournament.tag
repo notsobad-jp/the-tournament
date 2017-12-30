@@ -4,7 +4,7 @@
       <div class="ui basic dark inverted segment">
         <h1 class="ui huge header">{ tournament.title }</h1>
         <div class="ui hidden divider"></div>
-        <div id="detail">{ tournament.detail }</div>
+        <div ref="detail"></div>
       </div>
     </div>
     <div class="ui sixteen wide secondary column">
@@ -14,33 +14,17 @@
       </a>
     </div>
 
-    <div class="ui three wide mobile tablet only column">
-      <div class="ui secondary pointing fluid three item labeled icon pink mini tabular menu">
-        <a class="active item" data-tab="bracket">
+    <div class="ui three wide column">
+      <div class="ui secondary fluid pink mini menu { (isMobile) ? 'pointing three item labeled icon tabular' : 'vertical' }">
+        <a class="item { active: tabSelected('bracket') }" onclick={ changeTab.bind(this, 'bracket') }>
           <i class="icon sitemap"></i>
           トーナメント表
         </a>
-        <a class="item" data-tab="results">
+        <a class="item { active: tabSelected('results') }" onclick={ changeTab.bind(this, 'results') }>
           <i class="icon table"></i>
           対戦表
         </a>
-        <a class="item" data-tab="teams">
-          <i class="icon users"></i>
-          メンバー表
-        </a>
-      </div>
-    </div>
-    <div class="ui three wide computer only column">
-      <div class="ui secondary fluid vertical pink menu">
-        <a class="active item" data-tab="bracket">
-          <i class="icon sitemap"></i>
-          トーナメント表
-        </a>
-        <a class="item" data-tab="results">
-          <i class="icon table"></i>
-          対戦表
-        </a>
-        <a class="item" data-tab="teams">
+        <a class="item { active: tabSelected('teams') }" onclick={ changeTab.bind(this, 'teams') }>
           <i class="icon users"></i>
           メンバー表
         </a>
@@ -49,15 +33,15 @@
 
 
     <div class="ui thirteen wide column">
-      <div class="ui active tab" data-tab="bracket">
+      <div class="ui tab { active: tabSelected('bracket') }" data-tab="bracket">
         <bracket editable={ false } tournament={ tournament }></bracket>
       </div>
 
-      <div class="ui tab ten wide" data-tab="results">
+      <div class="ui tab ten wide { active: tabSelected('results') }" data-tab="results">
         <results tournament={ tournament } editable={ false }></results>
       </div>
 
-      <div class="ui tab ten wide" data-tab="teams">
+      <div class="ui tab ten wide { active: tabSelected('teams') }" data-tab="teams">
         <div>
           <div class="ui segments">
             <div class="ui segment" each={ team, teamIndex in tournament.teams }>
@@ -95,10 +79,28 @@
 
 
   <script>
+    /***********************************************
+    * Variables
+    ***********************************************/
     var that = this
+    that.isMobile = window.innerWidth <= 480
+    that.selectedTab = 'bracket'
 
+
+    /***********************************************
+    * Observables
+    ***********************************************/
     firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
+    })
+
+    // 画面リサイズ時にPC/SPメニュー切替
+    window.addEventListener('resize', function(event){
+      isMobile = window.innerWidth <= 480
+      if(isMobile != that.isMobile) {
+        that.isMobile = isMobile
+        that.update()
+      }
     })
 
     obs.trigger("dimmerChanged", 'active')
@@ -110,15 +112,39 @@
         obs.trigger("dimmerChanged", '')
 
         // 改行反映
-        var detail = (that.tournament.detail) ? that.tournament.detail.replace(/\r?\n/g, '<br>') : ''
-        // $('#detail').html(detail)
-        // タブ有効化
-        // $('.menu .item').tab()
+        var detail = ''
+        if(that.tournament.detail && that.tournament.detail != '') {
+          detail = that.tournament.detail.replace(/\r?\n/g, '<br>')
+          detail = that.autoLink(detail)
+        }
+        that.refs.detail.innerHTML = detail
       }else {
         alert('ごめんなさい、トーナメント表の取得に失敗しました…。URLを再度ご確認ください。')
         obs.trigger("dimmerChanged", '')
         route('/')
       }
     })
+
+
+    /***********************************************
+    * Functions
+    ***********************************************/
+    autoLink(str) {
+      var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
+      var regexp_makeLink = function(all, url, h, href) {
+        return '<a href="h' + href + '" target="_blank">' + url + '</a>';
+      }
+      return str.replace(regexp_url, regexp_makeLink);
+    }
+
+    changeTab(tab) {
+      if(that.selectedTab != tab) {
+        that.selectedTab = tab
+      }
+    }
+
+    tabSelected(tab) {
+      return tab == that.selectedTab
+    }
   </script>
 </show-tournament>
