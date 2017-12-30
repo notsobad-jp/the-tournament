@@ -38,24 +38,27 @@
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick="this.classList.toggle('selected');" style="flex: { matchFlex(roundIndex, matchIndex) }">
           <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
             <virtual each={ i in [0,1] }>
-              <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] } onclick={ showTeamModal }>
-                <div class="name" style="width:{tournament.nameWidth}px;">
-                  <span>
-                    <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
-                      <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
-                    </span>
-                    { teamName(teamIndex) }
+              <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
+                <span class="winnerSelect" if={ editable }>
+                  <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
+                </span>
+
+                <div class="name { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.nameWidth}px;">
+                  <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
+                    <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
                   </span>
+                  <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName }>
+                  <span if={ !editable }>{ teamName(teamIndex) }</span>
                 </div>
 
-                <div class="score" style="width:{tournament.scoreWidth}px;">
-                  <span>{ match.score[i] }</span>
+                <div class="score { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.scoreWidth}px;">
+                  <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore } disabled={ match.bye }>
+                  <span if={ !editable }>{ match.score[i] }</span>
                 </div>
+
+                <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
               </div>
             </virtual>
-            <div class="ui primary mini match-edit icon button" if={ editable && !match['bye'] } onclick={ showMatchModal.bind(this, Number(roundIndex), Number(matchIndex)) }>
-              <i class="icon setting"></i>
-            </div>
           </div>
 
           <div class="lineContainer">
@@ -114,14 +117,12 @@
     }
     .editable.bracket .match.selected:after { display: none; }
     .editable.bracket .match { cursor: default; }
-    .editable.bracket .team { cursor: pointer; }
 
-    /* match編集ボタン */
-    .ui.mini.match-edit.button {
+    /* team削除ボタン */
+    .icon.link.remove.circle {
+      color: #999;
       position: absolute;
-      right: -15px;
-      top: calc(50% - 10px);
-      padding: 0.5em;
+      right: -20px;
     }
 
     /* 敗者うすくしない */
@@ -155,6 +156,24 @@
     ***********************************************/
     isFinalRound(roundIndex) {
       return roundIndex == Object.keys(that.tournament.results).length - 1
+    }
+
+    updateScore(e) {
+      var roundIndex = Number(e.currentTarget.getAttribute('data-round-index'))
+      var matchIndex = Number(e.currentTarget.getAttribute('data-match-index'))
+      var teamOrder = Number(e.currentTarget.getAttribute('data-team-order'))
+      that.tournament.results[roundIndex][matchIndex]['score'][teamOrder] = e.currentTarget.value
+      obs.trigger("tournamentChanged", that.tournament)
+    }
+
+    updateTeamName(e) {
+      var teamIndex = Number(e.currentTarget.getAttribute('data-teamid'))
+      that.tournament.teams[teamIndex]['name'] = e.currentTarget.value
+
+      if(e.currentTarget.value=='') {
+        that.tournament = that.updateByeGames(that.tournament)
+      }
+      obs.trigger("tournamentChanged", that.tournament)
     }
 
     updateTournament(e) {
@@ -375,7 +394,6 @@
     }
 
     removeTeam(e) {
-      e.stopPropagation()
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
       that.tournament.teams[teamIndex]['name'] = ''
       that.tournament = that.updateByeGames(that.tournament)
@@ -394,20 +412,6 @@
     removeRound() {
       that.removeTeams(that.tournament, 1, true)
       obs.trigger("tournamentChanged", that.tournament)
-    }
-
-    showMatchModal(roundIndex, matchIndex) {
-      var matchSelected = {
-        roundIndex: roundIndex,
-        matchIndex: matchIndex
-      }
-      obs.trigger("matchModalChanged", matchSelected)
-    }
-
-    showTeamModal(e) {
-      e.stopPropagation()
-      var teamIndex = e.currentTarget.getAttribute('data-teamid')
-      obs.trigger("teamModalChanged", teamIndex)
     }
   </script>
 </bracket>

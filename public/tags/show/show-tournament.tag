@@ -111,9 +111,9 @@
 
         // 改行反映
         var detail = (that.tournament.detail) ? that.tournament.detail.replace(/\r?\n/g, '<br>') : ''
-        $('#detail').html(detail)
+        // $('#detail').html(detail)
         // タブ有効化
-        $('.menu .item').tab()
+        // $('.menu .item').tab()
       }else {
         alert('ごめんなさい、トーナメント表の取得に失敗しました…。URLを再度ご確認ください。')
         obs.trigger("dimmerChanged", '')
