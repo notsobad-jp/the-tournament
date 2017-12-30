@@ -114,7 +114,8 @@
         // 改行反映
         var detail = ''
         if(that.tournament.detail && that.tournament.detail != '') {
-          detail = that.tournament.detail.replace(/\r?\n/g, '<br>')
+          detail = that.escapeHTML(that.tournament.detail)
+          detail = detail.replace(/\r?\n/g, '<br>')
           detail = that.autoLink(detail)
         }
         that.refs.detail.innerHTML = detail
@@ -135,6 +136,22 @@
         return '<a href="h' + href + '" target="_blank">' + url + '</a>';
       }
       return str.replace(regexp_url, regexp_makeLink);
+    }
+
+    escapeHTML(string) {
+      if(typeof string !== 'string') {
+        return string;
+      }
+      return string.replace(/[&'`"<>]/g, function(match) {
+        return {
+          '&': '&amp;',
+          "'": '&#x27;',
+          '`': '&#x60;',
+          '"': '&quot;',
+          '<': '&lt;',
+          '>': '&gt;',
+        }[match]
+      });
     }
 
     changeTab(tab) {
