@@ -8,28 +8,28 @@
     var tournamentMixin = {
       /* トーナメント作成処理 */
       createTournament: function(uid) {
-        var d = $.Deferred();
-        var tournament = {
-          title: "トーナメント表"+uid,
-          detail: null,
-          consolationRound: true,
-          teams: [{"name":"Player1"},{"name":"Player2"},{"name":"Player3"},{"name":"Player4"},{"name":"Player5"},{"name":"Player6"},{"name":"Player7"},{"name":"Player8"}],
-          results: {
-            0: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
-            1: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
-            2: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ]
-          },
-          nameWidth: 100,
-          scoreWidth: 40,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          userId: uid
-        }
-        var newTnmtRef = db.collection("tournaments").doc();
-        newTnmtRef.set(tournament).then(function(){
-          d.resolve(newTnmtRef.id)
-        })
-        return d.promise()
+        return new Promise(function(resolve, reject) {
+          let tournament = {
+            title: "あたらしいトーナメント表",
+            detail: null,
+            consolationRound: true,
+            teams: [{"name":"Player1"},{"name":"Player2"},{"name":"Player3"},{"name":"Player4"},{"name":"Player5"},{"name":"Player6"},{"name":"Player7"},{"name":"Player8"}],
+            results: {
+              0: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
+              1: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
+              2: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ]
+            },
+            nameWidth: 100,
+            scoreWidth: 40,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            userId: uid
+          }
+          let newTnmtRef = db.collection("tournaments").doc();
+          newTnmtRef.set(tournament).then(function(){
+            resolve(newTnmtRef.id)
+          })
+        });
       },
 
 
