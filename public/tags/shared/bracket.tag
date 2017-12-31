@@ -157,10 +157,10 @@
     }
 
     matchTeamIndexes(roundIndex, matchIndex) {
-      return [
-        that.getTeamIndex(that.tournament, roundIndex, matchIndex, 0),
-        that.getTeamIndex(that.tournament, roundIndex, matchIndex, 1)
-      ]
+      return {
+        0: that.getTeamIndex(that.tournament, roundIndex, matchIndex, 0),
+        1: that.getTeamIndex(that.tournament, roundIndex, matchIndex, 1)
+      }
     }
 
     updateScore(e) {
