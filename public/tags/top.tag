@@ -9,14 +9,12 @@
       圧倒的に使いやすい！無料トーナメント表作成ツールの決定版！
     </div>
     <br><br>
-      <!--
     <div>
       <button class="ui right labeled icon red large button" onclick={ createAndRedirectToTournament }>
         <i class="chevron right icon"></i>
         トーナメント表を作成する
       </button>
     </div>
-  -->
     <br><br>
   </div>
   <br><br>
@@ -187,7 +185,7 @@
 
   <script>
     var that = this
-    // that.mixin('tournamentMixin')
+    that.mixin('tournamentMixin')
 
     firebase.auth().onAuthStateChanged(function(user) {
       that.user = user

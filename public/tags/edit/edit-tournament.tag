@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="ui { ten: selectedTab, fifteen: !selectedTab } wide column">
+    <div class="ui { ten: selectedTab, fifteen: !selectedTab } wide bracket column">
       <div class="ui basic segment">
         <bracket tournament={ tournament } editable={ true }></bracket>
       </div>
@@ -30,14 +30,14 @@
 
   <div class="ui bottom fixed borderless menu" if={ tournament }>
     <div class="item">
-      <button class="ui red small button" onclick={ saveTournament } disabled={ JSON.stringify(tournament) == JSON.stringify(originalTournament) }>保存する</button>
+      <button class="ui red small button" onclick={ saveTournament } disabled={ !tournamentChanged }>保存する</button>
     </div>
 
     <div class="right menu">
-      <a href="/tournaments/{ opts.id }" class="item">
+      <div class="link item" onclick={ close }>
         <i class="icon remove"></i>
         閉じる
-      </a>
+      </div>
     </div>
   </div>
 
@@ -50,7 +50,7 @@
       z-index: 2;
     }
     .ui.dark.column { background-color: #2D3E4F !important; }
-    .ui.ten.wide.column { min-height: calc(100vh - 45px) }
+    .ui.bracket.column { min-height: calc(100vh - 45px) }
     .ui.menu.fixed { z-index: 999; }
 
     /* タブ切り替えアニメーション */
@@ -101,6 +101,7 @@
     ***********************************************/
     var that = this
     that.tournament = null
+    that.tournamentChanged = false
     that.isMobile = window.innerWidth <= 480
     that.selectedTab = (that.isMobile) ? null : 'settings'
 
@@ -129,6 +130,7 @@
 
     obs.on("tournamentChanged", function(tournament) {
       that.tournament = tournament
+      that.tournamentChanged = true
       that.update()
     })
 
@@ -137,7 +139,6 @@
     docRef.get().then(function(doc){
       if(doc.exists) {
         that.tournament = doc.data()
-        that.originalTournament = doc.data()
         that.update()
         obs.trigger("dimmerChanged", '')
       }else {
@@ -151,13 +152,22 @@
     /***********************************************
     * Functions
     ***********************************************/
+    close() {
+      if(that.tournamentChanged) {
+        let alert = '編集画面を閉じると、保存されていない変更が破棄されます。本当によろしいですか？'
+        if(!confirm(alert)) { return false }
+      }
+
+      route('/tournaments/'+ opts.id)
+    }
+
     saveTournament() {
       obs.trigger("dimmerChanged", 'active')
       var docRef = db.collection("tournaments").doc(opts.id)
       that.tournament['updatedAt'] = new Date()
       docRef.set(that.tournament)
       .then(function(docRef) {
-        that.originalTournament = JSON.parse(JSON.stringify(that.tournament))
+        that.tournamentChanged = false
         that.message = { type: 'success', text: 'トーナメントデータを保存しました' }
       })
       .catch(function(error) {
