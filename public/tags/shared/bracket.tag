@@ -51,7 +51,7 @@
               </div>
 
               <div class="score { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.scoreWidth}px;">
-                <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore } disabled={ match.bye }>
+                <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore }>
                 <span if={ !editable }>{ match.score[i] }</span>
               </div>
 

@@ -12,7 +12,7 @@
           let tournament = {
             title: "あたらしいトーナメント表",
             detail: null,
-            consolationRound: true,
+            consolationRound: false,
             teams: [{"name":"Player1"},{"name":"Player2"},{"name":"Player3"},{"name":"Player4"},{"name":"Player5"},{"name":"Player6"},{"name":"Player7"},{"name":"Player8"}],
             results: {
               0: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
