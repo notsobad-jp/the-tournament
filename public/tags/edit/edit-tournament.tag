@@ -139,13 +139,26 @@
     docRef.get().then(function(doc){
       if(doc.exists) {
         that.tournament = doc.data()
-        that.update()
-        obs.trigger("dimmerChanged", '')
       }else {
-        alert('ごめんなさい、トーナメント表の取得に失敗しました…。URLを再度ご確認ください。')
-        obs.trigger("dimmerChanged", '')
-        route('/')
+        that.tournament = {
+          title: "",
+          detail: null,
+          consolationRound: false,
+          teams: [{"name":"Player1"},{"name":"Player2"},{"name":"Player3"},{"name":"Player4"},{"name":"Player5"},{"name":"Player6"},{"name":"Player7"},{"name":"Player8"}],
+          results: {
+            0: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
+            1: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
+            2: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ]
+          },
+          nameWidth: 100,
+          scoreWidth: 40,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          userId: that.user.uid
+        }
       }
+      that.update()
+      obs.trigger("dimmerChanged", '')
     })
 
 

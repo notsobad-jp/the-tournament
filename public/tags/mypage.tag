@@ -38,10 +38,17 @@
   </style>
 
   <script>
+    /***********************************************
+    * Variables
+    ***********************************************/
     var that = this
-    that.deletedList = []
     that.mixin('tournamentMixin')
+    that.deletedList = []
 
+
+    /***********************************************
+    * Observables
+    ***********************************************/
     firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
       if(user) {
@@ -56,13 +63,10 @@
       }
     })
 
-    createAndRedirectToTournament() {
-      obs.trigger("dimmerChanged", 'active')
-      that.createTournament(that.user.uid).then(function(id){
-        route('tournaments/' + id + '/edit')
-      })
-    }
 
+    /***********************************************
+    * Functions
+    ***********************************************/
     removeTournament(e) {
       var ok = confirm('データを削除します。本当によろしいですか？')
       if(!ok) { return false }
@@ -71,9 +75,9 @@
       var tournamentId = e.currentTarget.dataset.tournamentId
 
       db.collection("tournaments").doc(tournamentId).delete().then(function() {
+        obs.trigger("dimmerChanged", '')
         that.deletedList.push(tournamentId)
         that.update()
-        obs.trigger("dimmerChanged", '')
       })
     }
   </script>

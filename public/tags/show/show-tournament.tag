@@ -136,7 +136,7 @@
         }
         that.refs.detail.innerHTML = detail
       }else {
-        alert('ごめんなさい、トーナメント表の取得に失敗しました…。URLを再度ご確認ください。')
+        // alert('ごめんなさい、トーナメント表の取得に失敗しました…。URLを再度ご確認ください。')
         obs.trigger("dimmerChanged", '')
         route('/')
       }

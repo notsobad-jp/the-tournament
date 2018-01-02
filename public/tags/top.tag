@@ -190,12 +190,5 @@
     firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
     })
-
-    createAndRedirectToTournament() {
-      obs.trigger("dimmerChanged", 'active')
-      that.createTournament(that.user.uid).then(function(id){
-        route('tournaments/' + id + '/edit')
-      })
-    }
   </script>
 </top>

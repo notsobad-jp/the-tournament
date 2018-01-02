@@ -134,13 +134,6 @@
     /***********************************************
     * Functions
     ***********************************************/
-    createAndRedirectToTournament() {
-      obs.trigger("dimmerChanged", 'active')
-      that.createTournament(that.user.uid).then(function(id){
-        route('tournaments/' + id + '/edit')
-      })
-    }
-
     signOut() {
       firebase.auth().signOut()
       obs.trigger("flashChanged", {type:'success',text:'ログアウトしました'})

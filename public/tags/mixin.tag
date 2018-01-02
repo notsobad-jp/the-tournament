@@ -6,30 +6,10 @@
     })
 
     var tournamentMixin = {
-      /* トーナメント作成処理 */
-      createTournament: function(uid) {
-        return new Promise(function(resolve, reject) {
-          let tournament = {
-            title: "あたらしいトーナメント表",
-            detail: null,
-            consolationRound: false,
-            teams: [{"name":"Player1"},{"name":"Player2"},{"name":"Player3"},{"name":"Player4"},{"name":"Player5"},{"name":"Player6"},{"name":"Player7"},{"name":"Player8"}],
-            results: {
-              0: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
-              1: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ],
-              2: [ {"score":{0:null,1:null},"comment":null,"winner":null}, {"score":{0:null,1:null},"comment":null,"winner":null} ]
-            },
-            nameWidth: 100,
-            scoreWidth: 40,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: uid
-          }
-          let newTnmtRef = db.collection("tournaments").doc();
-          newTnmtRef.set(tournament).then(function(){
-            resolve(newTnmtRef.id)
-          })
-        });
+      /* トーナメントのIDだけ取得して新規作成画面に遷移 */
+      createAndRedirectToTournament: function() {
+        let newTnmtRef = db.collection("tournaments").doc()
+        route('tournaments/' + newTnmtRef.id + '/edit')
       },
 
 
