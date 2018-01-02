@@ -148,13 +148,6 @@
       }
     })
 
-    window.addEventListener('beforeunload', function(e) {
-      if(that.tournamentChanged) {
-        let alertMessage = '編集画面を閉じると、保存されていない変更が破棄されます。本当によろしいですか？'
-        e.returnValue = alertMessage
-      }
-    }, false)
-
 
     /***********************************************
     * Functions
