@@ -10,6 +10,14 @@
     obs.on("dimmerChanged", function(state) {
       that.state = state
       that.update()
+
+      /* どんなに長くても10秒経ったらdimmer閉じる */
+      if(state=='active') {
+        setTimeout(function(){
+          that.state = ''
+          that.update()
+        }, 10000)
+      }
     })
   </script>
 </dimmer>
