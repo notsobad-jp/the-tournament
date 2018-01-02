@@ -1,10 +1,12 @@
 <bracket>
   <virtual if={ editable }>
-    <div class="ui transparent fluid icon input">
-      <input id="nameInput" type="text" name="title" placeholder="トーナメント名" value={ tournament.title } onchange={ updateTournament }>
+    <!--
+    <div class="ui transparent fluid icon input { error: tournament.title == '' }">
+      <input id="nameInput" type="text" name="title" placeholder="トーナメント名*" value={ tournament.title } onchange={ updateTournament }>
       <i class="icon write"></i>
     </div>
     <div class="ui divider"></div>
+    -->
     <div class="ui two column grid">
       <div class="ui left aligned column">
         <div class="ui icon mini primary buttons">

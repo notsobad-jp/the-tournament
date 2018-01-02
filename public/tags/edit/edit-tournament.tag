@@ -174,16 +174,20 @@
     }
 
     saveTournament() {
+      if(that.tournament.title=='') {
+        that.tournament.title = opts.id
+      }
+
       obs.trigger("dimmerChanged", 'active')
       var docRef = db.collection("tournaments").doc(opts.id)
       that.tournament['updatedAt'] = new Date()
       docRef.set(that.tournament)
       .then(function(docRef) {
         that.tournamentChanged = false
-        that.message = { type: 'success', text: 'トーナメントデータを保存しました' }
+        that.message = { type: 'success', text: 'トーナメントを保存しました！' }
       })
       .catch(function(error) {
-        that.message = { type: 'error', text: 'トーナメント作成に失敗しました…' }
+        that.message = { type: 'error', text: 'トーナメントの保存に失敗しました…(´；ω；｀)' }
       })
       .then(function(){
         obs.trigger("dimmerChanged", '')
