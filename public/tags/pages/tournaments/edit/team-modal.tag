@@ -71,6 +71,7 @@
     var that = this
     that.mixin('tournamentMixin')
     that.tournament = opts.tournament
+    that.team = that.teamIndex = null
 
 
     /***********************************************
@@ -78,7 +79,7 @@
     ***********************************************/
     obs.on("teamModalChanged", function(teamIndex) {
       that.teamIndex = teamIndex
-      that.team = that.tournament.teams[teamIndex]
+      that.team = JSON.parse(JSON.stringify(that.tournament.teams[teamIndex]))
       that.update()
     })
 
