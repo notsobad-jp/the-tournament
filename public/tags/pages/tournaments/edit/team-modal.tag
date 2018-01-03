@@ -71,27 +71,7 @@
     var that = this
     that.mixin('tournamentMixin')
     that.tournament = opts.tournament
-    that.team = that.teamIndex = null
-
-
-    /***********************************************
-    * Observables
-    ***********************************************/
-    obs.on("teamModalChanged", function(teamIndex) {
-      that.teamIndex = teamIndex
-      that.team = JSON.parse(JSON.stringify(that.tournament.teams[teamIndex]))
-      that.update()
-    })
-
-    obs.on("countrySelected", function(country) {
-      that.team.country = country
-      that.update()
-    })
-
-    // unmount処理
-    that.on('unmount', function() {
-      obs.off('teamModalChanged')
-    })
+    that.team = null
 
 
     /***********************************************
@@ -123,6 +103,17 @@
     selectCountry(e) {
       var countrySelect = that.refs.country_select
       countrySelect.showModal()
+    }
+
+    showModal(teamIndex) {
+      that.teamIndex = teamIndex
+      that.team = JSON.parse(JSON.stringify(that.tournament.teams[teamIndex]))
+      that.update()
+    }
+
+    updateCountry(country) {
+      that.team.country = country
+      that.update()
     }
 
     updateTeam(e) {

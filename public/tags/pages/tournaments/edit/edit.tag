@@ -8,7 +8,6 @@
       </div>
       <div class="ui basic tab segment { active: tabSelected('teams') }">
         <teams tournament={ tournament }></teams>
-        <team-modal tournament={ tournament }></team-modal>
       </div>
       <div class="ui basic tab segment { active: tabSelected('results') }">
         <h3 class="ui tiny header">試合結果の登録</h3>

@@ -51,6 +51,7 @@
       </div>
     </div>
   </div>
+  <team-modal ref="team_modal" tournament={ tournament }></team-modal>
 
 
   <style>
@@ -91,16 +92,11 @@
       obs.trigger("tournamentChanged", that.tournament)
     }
 
-    selectCountry(e) {
-      var countrySelect = that.refs.country_select
-      var teamIndex = e.currentTarget.getAttribute('data-teamid')
-      countrySelect.showModal(teamIndex)
-    }
-
     showTeamModal(e) {
       e.preventDefault()
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
-      obs.trigger("teamModalChanged", teamIndex)
+      var teamModal = that.refs.team_modal
+      teamModal.showModal(teamIndex)
     }
 
     tabSelected(tab) {

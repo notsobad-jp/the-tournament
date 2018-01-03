@@ -313,7 +313,7 @@
 
     updateCountry(e) {
       var country = e.currentTarget.getAttribute('data-country')
-      obs.trigger("countrySelected", country)
+      that.parent.updateCountry(country)
       that.hideModal()
     }
   </script>
