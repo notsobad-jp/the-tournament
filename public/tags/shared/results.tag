@@ -44,6 +44,7 @@
       </div>
     </virtual>
   </div>
+  <match-modal ref="match_modal" tournament={ tournament }></match-modal>
 
 
   <style>
@@ -108,7 +109,8 @@
         roundIndex: roundIndex,
         matchIndex: matchIndex
       }
-      obs.trigger("matchModalChanged", matchSelected)
+      var matchModal = that.refs.match_modal[0]
+      matchModal.showModal(matchSelected)
     }
 
     teamName(teamIndex) {

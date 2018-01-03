@@ -136,6 +136,13 @@
       return roundName
     }
 
+    showModal(matchSelected) {
+      that.roundIndex = matchSelected.roundIndex
+      that.matchIndex = matchSelected.matchIndex
+      that.match = JSON.parse(JSON.stringify(that.tournament.results[that.roundIndex][that.matchIndex]))
+      that.update()
+    }
+
     teamName(teamIndex) {
       return (teamIndex==null) ? '--' : that.tournament.teams[teamIndex]['name']
     }

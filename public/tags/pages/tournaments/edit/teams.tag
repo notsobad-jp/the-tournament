@@ -96,6 +96,7 @@
       e.preventDefault()
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
       var teamModal = that.refs.team_modal
+      console.log(teamModal)
       teamModal.showModal(teamIndex)
     }
 
