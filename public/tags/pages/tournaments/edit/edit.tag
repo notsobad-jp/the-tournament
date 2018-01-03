@@ -100,10 +100,18 @@
     * Settings
     ***********************************************/
     var that = this
+    that.mixin('tournamentMixin')
     that.tournament = null
     that.tournamentChanged = false
     that.isMobile = window.innerWidth <= 480
     that.selectedTab = (that.isMobile) ? null : 'settings'
+
+    /* metatag setting */
+    let meta = {
+      title: 'トーナメント表の編集',
+      noindex: true
+    }
+    that.setMetatags(meta)
 
 
     /***********************************************

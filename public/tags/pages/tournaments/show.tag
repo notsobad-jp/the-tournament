@@ -99,6 +99,7 @@
     * Settings
     ***********************************************/
     var that = this
+    that.mixin('tournamentMixin')
     that.isMobile = window.innerWidth <= 480
     that.selectedTab = 'bracket'
 
@@ -130,7 +131,7 @@
         /* metatag setting */
         let meta = {
           title: that.tournament.title,
-          description: that.tournament.detail,
+          description: that.tournament.detail || that.tournament.title + 'のトーナメント表',
           keyword: that.tournament.title
         }
         that.setMetatags(meta)

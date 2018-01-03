@@ -7,7 +7,7 @@
       </h1>
       <br><br>
 
-      <table class="ui basic table" if={ items.length!=0 }>
+      <table class="ui basic table" if={ items && items.length!=0 }>
         <tbody>
           <tr each={ item, index in items }>
             <td>
@@ -24,21 +24,35 @@
     </div>
   </div>
 
-	<style>
-		.grid { margin: 30px 0; }
-	</style>
+    <style>
+    .grid { margin: 30px 0; }
+    </style>
 
 	<script>
-		var that = this
-		obs.trigger("dimmerChanged", 'active')
+    /***********************************************
+    * Settings
+    ***********************************************/
+    var that = this
+    that.mixin('tournamentMixin')
 
+    /* metatag setting */
+    let meta = {
+      title: 'トーナメント表一覧',
+      description: 'トーナメント表の一覧です',
+      keyword: '一覧'
+    }
+    that.setMetatags(meta)
+
+
+    /***********************************************
+    * Observables
+    ***********************************************/
+    obs.trigger("dimmerChanged", 'active')
     var docRef = db.collection("tournaments").orderBy('updatedAt', 'desc')
-    console.log(docRef)
     docRef.get().then(function(querySnapshot){
       that.items = querySnapshot.docs
-      console.log(that.items)
       that.update()
       obs.trigger("dimmerChanged", '')
     })
-	</script>
+  </script>
 </search>

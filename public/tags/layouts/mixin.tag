@@ -96,12 +96,13 @@
 
 
       setMetatags: function(meta) {
-        let title = (meta) ? meta.title + ' | THE TOURNAMENT' : '【アルファ版】THE TOURNAMENT | 簡単・便利な無料のトーナメント表作成サービス'
-        let description = (meta) ? meta.description : "圧倒的に使いやすい、無料トーナメント表作成ツールの決定版！Webブラウザだけで簡単におしゃれなトーナメント表を作成できます。"
+        let title = (meta && meta.title) ? meta.title + ' | THE TOURNAMENT' : '【アルファ版】THE TOURNAMENT | 簡単・便利な無料のトーナメント表作成サービス'
+        let description = (meta && meta.description) ? meta.description : "圧倒的に使いやすい、無料トーナメント表作成ツールの決定版！Webブラウザだけで簡単におしゃれなトーナメント表を作成できます。"
         let keywords = 'トーナメント表,作成,THE TOURNAMENT,トーナメント'
-        if(meta) {
+        if(meta && meta.keyword) {
           keywords = keywords + ',' + meta.keyword
         }
+        let noindex = (meta && meta.noindex) ? 'noindex' : ''
 
         document.title = title
         document.getElementById('description').setAttribute('content', description)
@@ -109,6 +110,7 @@
         document.getElementById('og-title').setAttribute('content', title)
         document.getElementById('og-description').setAttribute('content', description)
         document.getElementById('og-url').setAttribute('content', location.href)
+        document.getElementById('robots').setAttribute('content', noindex)
       },
 
 
