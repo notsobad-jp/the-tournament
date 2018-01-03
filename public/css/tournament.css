@@ -24,6 +24,7 @@
   cursor: pointer;
   overflow: visible;
 }
+.round:not(:first-child) .match.bye { cursor: default; }
 .right.block .match { flex-direction: row-reverse; }
 
 .teamContainer {
