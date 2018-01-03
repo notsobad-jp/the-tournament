@@ -456,31 +456,47 @@
 
 
 /* シード表示 */
-.bracket:not(.showBye) { min-height: unset; }
-.bracket:not(.showBye) .round .match.skip { display: none; }
-.bracket:not(.showBye) .round:not(:first-child) .match.bye .teamContainer { display: none; }
-.bracket:not(.showBye) .round:not(:first-child) .match.bye .lineContainer { width: 100%; }
-.bracket:not(.showBye) .round:not(:first-child) .match.bye .lineContainer div div:first-child { width: calc(100% - 20px); }
+.bracket { min-height: unset; }
+.bracket .match.skip { display: none; }
+.bracket .round:not(:first-child) .match.bye .teamContainer { display: none; }
+.bracket .round:not(:first-child) .match.bye .lineContainer { width: 100%; }
+.bracket .round:not(:first-child) .match.bye .lineContainer div div:first-child { width: calc(100% - 20px); }
 
 /* next-bye: 次の試合もbyeのときは、lineをまっすぐ次に伸ばす  */
-.bracket:not(.showBye) .match.next-bye:nth-child(even) { margin-top: 0px; }
-.bracket:not(.showBye) .left.block .match.next-bye .lineContainer > div > div {
+.bracket .match.next-bye:nth-child(even) { margin-top: 0px; }
+.bracket .left.block .match.next-bye .lineContainer > div > div {
   border-right: none !important;
 }
-.bracket:not(.showBye) .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:last-child {
+.bracket .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:last-child {
   border-bottom: none;
   border-top-style: solid;
   border-top-width: 2px;
 }
-.bracket:not(.showBye) .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:last-child {
+.bracket .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:last-child {
   border-top: none;
   border-bottom-style: solid;
   border-bottom-width: 2px;
 }
 
 /* 空白試合を表示 */
+.bracket.showBye .match.skip { display: flex; }
 .bracket.showBye .match {
   flex: 1 1 auto !important;
 }
+.bracket.showBye .round:not(:first-child) .match.bye .teamContainer { display: block; }
 .bracket.showBye .teamContainer { top: unset !important; }
 .bracket.showBye .lineContainer div { flex-grow: 1 !important; }
+.bracket.showBye .lineContainer > div > div { width: 20px !important; }
+
+.bracket.showBye .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:first-child,
+.bracket.showBye .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:first-child {
+  border-right: 2px solid #999 !important;
+}
+.bracket.showBye .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:last-child {
+  border-bottom: 1px solid #999;
+  border-top: none !important;
+}
+.bracket.showBye .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:last-child {
+  border-top: 1px solid #999;
+  border-bottom: none !important;
+}
