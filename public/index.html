@@ -22,24 +22,24 @@
   <footer></footer>
 
 
-  <script src="/tags/mixin.tag" type="riot/tag"></script>
-  <script src="/tags/header.tag" type="riot/tag"></script>
-  <script src="/tags/footer.tag" type="riot/tag"></script>
-  <script src="/tags/flash.tag" type="riot/tag"></script>
-  <script src="/tags/dimmer.tag" type="riot/tag"></script>
-  <script src="/tags/top.tag" type="riot/tag"></script>
-  <script src="/tags/auth.tag" type="riot/tag"></script>
-  <script src="/tags/mypage.tag" type="riot/tag"></script>
-  <script src="/tags/search.tag" type="riot/tag"></script>
-  <script src="/tags/show/show-tournament.tag" type="riot/tag"></script>
-  <script src="/tags/edit/edit-tournament.tag" type="riot/tag"></script>
-  <script src="/tags/edit/menu.tag" type="riot/tag"></script>
-  <script src="/tags/edit/settings.tag" type="riot/tag"></script>
-  <script src="/tags/edit/teams.tag" type="riot/tag"></script>
-  <script src="/tags/edit/country-select.tag" type="riot/tag"></script>
-  <script src="/tags/edit/match-modal.tag" type="riot/tag"></script>
-  <script src="/tags/edit/team-modal.tag" type="riot/tag"></script>
-  <script src="/tags/edit/share.tag" type="riot/tag"></script>
+  <script src="/tags/layouts/dimmer.tag" type="riot/tag"></script>
+  <script src="/tags/layouts/flash.tag" type="riot/tag"></script>
+  <script src="/tags/layouts/footer.tag" type="riot/tag"></script>
+  <script src="/tags/layouts/header.tag" type="riot/tag"></script>
+  <script src="/tags/layouts/mixin.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/country-select.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/edit.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/match-modal.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/menu.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/settings.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/share.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/team-modal.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/teams.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/search.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/show.tag" type="riot/tag"></script>
+  <script src="/tags/pages/auth.tag" type="riot/tag"></script>
+  <script src="/tags/pages/mypage.tag" type="riot/tag"></script>
+  <script src="/tags/pages/top.tag" type="riot/tag"></script>
   <script src="/tags/shared/bracket.tag" type="riot/tag"></script>
   <script src="/tags/shared/results.tag" type="riot/tag"></script>
 
@@ -83,10 +83,10 @@
       riot.mount('content', 'mypage')
     })
     route('/tournaments/*', function(id){
-      riot.mount('content', 'show-tournament', {id: id})
+      riot.mount('content', 'show', {id: id})
     })
     route('/tournaments/*/edit', function(id){
-      riot.mount('content', 'edit-tournament', {id: id})
+      riot.mount('content', 'edit', {id: id})
     })
     route('/search..', function() {
       var q = route.query()

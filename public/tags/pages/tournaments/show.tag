@@ -1,4 +1,4 @@
-<show-tournament>
+<show>
   <div class="ui stackable padded centered grid" if={ tournament }>
     <div class="ui eleven wide column">
       <div class="ui small breadcrumb">
@@ -180,4 +180,4 @@
       return tab == that.selectedTab
     }
   </script>
-</show-tournament>
+</show>

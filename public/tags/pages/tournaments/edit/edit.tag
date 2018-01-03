@@ -1,4 +1,4 @@
-<edit-tournament>
+<edit>
   <div class="ui stackable centered padded grid" if={ tournament }>
     <div class="ui one wide dark column" data-is="menu"></div>
 
@@ -210,4 +210,4 @@
       })
     }
   </script>
-</edit-tournament>
+</edit>
