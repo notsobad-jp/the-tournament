@@ -97,7 +97,7 @@
 
   <script>
     /***********************************************
-    * Variables
+    * Settings
     ***********************************************/
     var that = this
     that.tournament = null

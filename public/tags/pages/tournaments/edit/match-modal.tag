@@ -85,7 +85,7 @@
 
   <script>
     /***********************************************
-    * Variables
+    * Settings
     ***********************************************/
     var that = this
     that.mixin('tournamentMixin')

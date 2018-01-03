@@ -108,7 +108,7 @@
 
   <script>
     /***********************************************
-    * Variables
+    * Settings
     ***********************************************/
     var that = this
     that.menuOpened = false

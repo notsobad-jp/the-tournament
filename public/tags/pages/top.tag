@@ -184,9 +184,19 @@
 
 
   <script>
+    /***********************************************
+    * Settings
+    ***********************************************/
     var that = this
     that.mixin('tournamentMixin')
 
+    /* metatag setting */
+    that.setMetatags()
+
+
+    /***********************************************
+    * Observables
+    ***********************************************/
     firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
     })

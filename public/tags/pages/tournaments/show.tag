@@ -96,7 +96,7 @@
 
   <script>
     /***********************************************
-    * Variables
+    * Settings
     ***********************************************/
     var that = this
     that.isMobile = window.innerWidth <= 480
@@ -126,6 +126,14 @@
         that.tournament = doc.data()
         that.update()
         obs.trigger("dimmerChanged", '')
+
+        /* metatag setting */
+        let meta = {
+          title: that.tournament.title,
+          description: that.tournament.detail,
+          keyword: that.tournament.title
+        }
+        that.setMetatags(meta)
 
         // 改行反映
         var detail = ''

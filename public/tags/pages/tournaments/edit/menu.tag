@@ -39,7 +39,7 @@
 
   <script>
     /***********************************************
-    * Variables
+    * Settings
     ***********************************************/
     var that = this
     that.isMobile = window.innerWidth <= 480

@@ -6,36 +6,6 @@
     })
 
     var tournamentMixin = {
-      /* トーナメントのIDだけ取得して新規作成画面に遷移 */
-      createAndRedirectToTournament: function() {
-        let newTnmtRef = db.collection("tournaments").doc()
-        route('tournaments/' + newTnmtRef.id + '/edit')
-      },
-
-
-      /* 勝ち上がりチーム情報の取得 */
-      getTeamIndex: function(tournament, roundIndex, matchIndex, teamOrder) {
-        var isConsolation = (roundIndex == Object.keys(tournament.results).length - 1) && (matchIndex == 1)
-        // 1回戦
-        if(roundIndex==0) {
-          teamIndex = ( matchIndex * 2 ) + teamOrder
-          return teamIndex
-        // 2回戦以降
-        }else {
-          prevMatchIndex = (isConsolation) ? teamOrder : ( matchIndex * 2 ) + teamOrder
-          prevResult = tournament.results[roundIndex-1][prevMatchIndex]
-          // 前の試合が終了している場合：遡って勝利チームを取得
-          if(prevResult['winner']!=null) {
-            prevWinnerIndex = (isConsolation) ? 1 - prevResult['winner'] : prevResult['winner']
-            return tournamentMixin.getTeamIndex(tournament, roundIndex-1, prevMatchIndex, prevWinnerIndex)
-          // 前の試合が終了していない場合
-          }else {
-            return null
-          }
-        }
-      },
-
-
       /* チーム数増減 */
       addTeams: function(tournament, roundCountDiff, withTeamName) {
         // add teams
@@ -70,6 +40,37 @@
         tournament.results[oldRoundNum+roundCountDiff-1] = [{"score": {0:null, 1:null}, "comment": null, "winner": null}, {"score": {0:null, 1:null}, "comment": null, "winner": null}]
       },
 
+
+      /* トーナメントのIDだけ取得して新規作成画面に遷移 */
+      createAndRedirectToTournament: function() {
+        let newTnmtRef = db.collection("tournaments").doc()
+        route('tournaments/' + newTnmtRef.id + '/edit')
+      },
+
+
+      /* 勝ち上がりチーム情報の取得 */
+      getTeamIndex: function(tournament, roundIndex, matchIndex, teamOrder) {
+        var isConsolation = (roundIndex == Object.keys(tournament.results).length - 1) && (matchIndex == 1)
+        // 1回戦
+        if(roundIndex==0) {
+          teamIndex = ( matchIndex * 2 ) + teamOrder
+          return teamIndex
+        // 2回戦以降
+        }else {
+          prevMatchIndex = (isConsolation) ? teamOrder : ( matchIndex * 2 ) + teamOrder
+          prevResult = tournament.results[roundIndex-1][prevMatchIndex]
+          // 前の試合が終了している場合：遡って勝利チームを取得
+          if(prevResult['winner']!=null) {
+            prevWinnerIndex = (isConsolation) ? 1 - prevResult['winner'] : prevResult['winner']
+            return tournamentMixin.getTeamIndex(tournament, roundIndex-1, prevMatchIndex, prevWinnerIndex)
+          // 前の試合が終了していない場合
+          }else {
+            return null
+          }
+        }
+      },
+
+
       removeTeams: function(tournament, roundCountDiff) {
         // remove teams
         var oldTeamsCount = Object.keys(tournament.teams).length
@@ -92,6 +93,24 @@
           delete tournament.results[i-1]
         }
       },
+
+
+      setMetatags: function(meta) {
+        let title = (meta) ? meta.title + ' | THE TOURNAMENT' : '【アルファ版】THE TOURNAMENT | 簡単・便利な無料のトーナメント表作成サービス'
+        let description = (meta) ? meta.description : "圧倒的に使いやすい、無料トーナメント表作成ツールの決定版！Webブラウザだけで簡単におしゃれなトーナメント表を作成できます。"
+        let keywords = 'トーナメント表,作成,THE TOURNAMENT,トーナメント'
+        if(meta) {
+          keywords = keywords + ',' + meta.keyword
+        }
+
+        document.title = title
+        document.getElementById('description').setAttribute('content', description)
+        document.getElementById('keywords').setAttribute('content', keywords)
+        document.getElementById('og-title').setAttribute('content', title)
+        document.getElementById('og-description').setAttribute('content', description)
+        document.getElementById('og-url').setAttribute('content', location.href)
+      },
+
 
       /* seed設定 */
       updateByeGame: function(tournament, teamIndex) {
@@ -116,6 +135,7 @@
         }
         return tournament.results
       },
+
 
       updateByeGames: function(tournament) {
         for(var roundIndex = 0; roundIndex < Object.keys(tournament.results).length; roundIndex++) {

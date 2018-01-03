@@ -39,11 +39,19 @@
 
   <script>
     /***********************************************
-    * Variables
+    * Settings
     ***********************************************/
     var that = this
     that.mixin('tournamentMixin')
     that.deletedList = []
+
+    /* metatag setting */
+    let meta = {
+      title: 'マイページ',
+      description: 'マイページだよ',
+      keyword: 'マイページ'
+    }
+    that.setMetatags(meta)
 
 
     /***********************************************
