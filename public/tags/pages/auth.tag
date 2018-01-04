@@ -57,12 +57,23 @@
 
 
   <script>
+    /***********************************************
+    * Settings
+    ***********************************************/
     var that = this
 
+
+    /***********************************************
+    * Observables
+    ***********************************************/
     firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
     })
 
+
+    /***********************************************
+    * Functions
+    ***********************************************/
     snsLogin(providerName) {
       var provider = ""
       if(providerName=='facebook') {
