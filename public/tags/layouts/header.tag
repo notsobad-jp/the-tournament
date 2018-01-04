@@ -20,13 +20,16 @@
           </div>
           <a class="item" href="/mypage">
             <i class="user icon"></i>
-            マイページ
+            { (user && !user.isAnonymous) ? user.email : 'ゲストユーザー' }
           </a>
 
-          <!--
-          <div class="ui simple dropdown item">
-            <i class="content icon"></i>
-            <div class="menu">
+          <div class="ui dropdown item { active: menuOpened, visible: menuOpened }" onclick={ toggleMenu }>
+            <i class="content icon { rotated: menuOpened }"></i>
+            <div class="menu { transition: menuOpened, visible: menuOpened }">
+              <div class="header">
+                { (user && !user.isAnonymous) ? user.email : 'ゲストユーザー' }
+              </div>
+              <div class="divider"></div>
               <a class="item" href="/mypage">
                 <i class="icon folder"></i>
                 マイページ
@@ -41,7 +44,6 @@
               </a>
             </div>
           </div>
-          -->
         </div>
       </div>
     </div>
@@ -75,16 +77,14 @@
                 <i class="icon user"></i>
                 マイページ
               </a>
-              <!--
               <a class="item" onclick={signOut} if={ user && !user.isAnonymous }>
                 <i class="icon sign out"></i>
                 ログアウト
               </a>
               <a class="item" href='/signin' if={ !user || user.isAnonymous }>
                 <i class="icon sign in"></i>
-                簡単ログイン
+                ログイン
               </a>
-              -->
             </div>
           </div>
         </div>
@@ -94,16 +94,21 @@
 
 
   <style>
-    .ui.fluid.menu { margin-bottom: -1px; }
-
+    .grid { margin: 0 !important; }
+    .row { padding: 0 !important; }
+    .ui.fluid.menu {
+      margin-bottom: -1px;
+      border: none;
+      border-radius: 0;
+      z-index: 3;
+    }
     .header.item {
       background-color: #333 !important;
       padding: 5px 25px !important;
+      border-radius: 0 !important;
     }
     .header.item img { height: 20px; }
-
     .icon.content { transition: all 300ms 0s ease; }
-
     .label.item { padding-left: 0 !important; }
   </style>
 
