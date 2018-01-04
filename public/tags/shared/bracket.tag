@@ -176,10 +176,8 @@
     updateTeamName(e) {
       var teamIndex = Number(e.currentTarget.getAttribute('data-teamid'))
       that.tournament.teams[teamIndex]['name'] = e.currentTarget.value
+      that.updateByeGames(that.tournament)
 
-      if(e.currentTarget.value=='') {
-        that.tournament = that.updateByeGames(that.tournament)
-      }
       obs.trigger("tournamentChanged", that.tournament)
     }
 

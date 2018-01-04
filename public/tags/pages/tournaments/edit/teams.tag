@@ -96,7 +96,6 @@
       e.preventDefault()
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
       var teamModal = that.refs.team_modal
-      console.log(teamModal)
       teamModal.showModal(teamIndex)
     }
 
@@ -123,7 +122,7 @@
       that.tournament.teams[teamIndex][attribute] = e.currentTarget.value
 
       if(attribute=='name') {
-        that.tournament = that.updateByeGames(that.tournament)
+        that.updateByeGames(that.tournament)
       }
       obs.trigger("tournamentChanged", that.tournament)
     }
