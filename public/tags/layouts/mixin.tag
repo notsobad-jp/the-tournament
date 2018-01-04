@@ -41,13 +41,6 @@
       },
 
 
-      /* トーナメントのIDだけ取得して新規作成画面に遷移 */
-      createAndRedirectToTournament: function() {
-        let newTnmtRef = db.collection("tournaments").doc()
-        route('tournaments/' + newTnmtRef.id + '/edit')
-      },
-
-
       /* 勝ち上がりチーム情報の取得 */
       getTeamIndex: function(tournament, roundIndex, matchIndex, teamOrder) {
         var isConsolation = (roundIndex == Object.keys(tournament.results).length - 1) && (matchIndex == 1)
@@ -111,31 +104,6 @@
         document.getElementById('og-description').setAttribute('content', description)
         document.getElementById('og-url').setAttribute('content', location.href)
         document.getElementById('robots').setAttribute('content', noindex)
-      },
-
-
-      /* seed設定 */
-      updateByeGame: function(tournament, teamIndex) {
-        var team = tournament.teams[teamIndex]
-        var matchIndex = Math.floor(teamIndex/2)
-
-        if(team['name']=='') {
-          var pairTeam = (teamIndex%2==0) ? tournament.teams[teamIndex+1] : tournament.teams[teamIndex-1]
-          if(pairTeam['name']=='') {
-            var winner = null  //相手もbyeのとき
-          }else {
-            var winner = (teamIndex%2==0) ? 1 : 0
-          }
-          tournament.results[0][matchIndex] = {
-            winner: winner,
-            bye: true,
-            score: {0: null, 1: null},
-            comment: null
-          }
-        }else {
-          tournament.results[0][matchIndex]['bye'] = false
-        }
-        return tournament.results
       },
 
 

@@ -117,10 +117,6 @@
     /***********************************************
     * Observables
     ***********************************************/
-    obs.on("mixinMounted", function() {
-      that.mixin('tournamentMixin')
-    })
-
     firebase.auth().onAuthStateChanged(function(user) {
       if(user) {
         that.user = user
@@ -134,6 +130,12 @@
     /***********************************************
     * Functions
     ***********************************************/
+    /* トーナメントのIDだけ取得して新規作成画面に遷移 */
+    createAndRedirectToTournament() {
+      let newTnmtRef = db.collection("tournaments").doc()
+      route('tournaments/' + newTnmtRef.id + '/edit')
+    }
+
     signOut() {
       firebase.auth().signOut()
       obs.trigger("flashChanged", {type:'success',text:'ログアウトしました'})

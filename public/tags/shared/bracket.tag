@@ -147,11 +147,6 @@
 
 
     /***********************************************
-    * Observables
-    ***********************************************/
-
-
-    /***********************************************
     * Functions
     ***********************************************/
     isFinalRound(roundIndex) {
@@ -401,7 +396,8 @@
     removeTeam(e) {
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
       that.tournament.teams[teamIndex] = { name: '' }
-      that.tournament = that.updateByeGames(that.tournament)
+      that.updateByeGames(that.tournament)
+
       obs.trigger("tournamentChanged", that.tournament)
     }
 

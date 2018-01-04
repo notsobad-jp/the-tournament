@@ -75,6 +75,12 @@
     /***********************************************
     * Functions
     ***********************************************/
+    /* トーナメントのIDだけ取得して新規作成画面に遷移 */
+    createAndRedirectToTournament() {
+      let newTnmtRef = db.collection("tournaments").doc()
+      route('tournaments/' + newTnmtRef.id + '/edit')
+    }
+
     removeTournament(e) {
       var ok = confirm('データを削除します。本当によろしいですか？')
       if(!ok) { return false }

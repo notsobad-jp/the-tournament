@@ -92,11 +92,10 @@
     }
 
     saveChanges() {
-      that.tournament.teams[that.teamIndex] = that.team
-      if(that.team.name=='') {
-        that.tournament = that.updateByeGames(that.tournament)
-      }
+      that.tournament.teams[that.teamIndex] = JSON.parse(JSON.stringify(that.team))
+      that.updateByeGames(that.tournament)
       that.team = null
+
       obs.trigger("tournamentChanged", that.tournament)
     }
 
