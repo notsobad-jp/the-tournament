@@ -9,6 +9,7 @@
     .ui.message {
       width: 100%;
       position: absolute;
+      top: 42px;
       z-index: 100;
       border-radius: 0;
     }

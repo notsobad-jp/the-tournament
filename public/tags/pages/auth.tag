@@ -64,14 +64,6 @@
 
 
     /***********************************************
-    * Observables
-    ***********************************************/
-    firebase.auth().onAuthStateChanged(function(user) {
-      that.user = user
-    })
-
-
-    /***********************************************
     * Functions
     ***********************************************/
     snsLogin(providerName) {
@@ -83,7 +75,12 @@
       }else if(providerName=='google') {
         provider = new firebase.auth.GoogleAuthProvider();
       }
-      firebase.auth().signInWithRedirect(provider);
+      firebase.auth().signInWithPopup(provider).then(function(result){
+        obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
+        route('mypage')
+      }).catch(function(error) {
+        console.log(error)
+      })
     }
 
     magicAuth() {
