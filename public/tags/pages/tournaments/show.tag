@@ -2,9 +2,9 @@
   <div class="ui stackable padded centered grid" if={ tournament }>
     <div class="ui eleven wide column">
       <div class="ui small breadcrumb">
-        <a class="section">トップ</a>
+        <a class="section" href="/">トップ</a>
         <i class="right chevron icon divider"></i>
-        <a class="section">すべてのトーナメント表</a>
+        <a class="section" href="/search">すべてのトーナメント表</a>
         <i class="right chevron icon divider"></i>
         <div class="active section">{ tournament.title }</div>
       </div>
