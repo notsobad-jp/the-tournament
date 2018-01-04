@@ -60,8 +60,8 @@
         </div>
         <div class="item menu-title"></div>
         <div class="right menu">
-          <div class="ui dropdown item { active: menuOpened, visible: menuOpened }" onmouseenter={ toggleMenu } onmouseleave={ toggleMenu }>
-            <i class="content icon"></i>
+          <div class="ui dropdown item { active: menuOpened, visible: menuOpened }" onclick={ toggleMenu }>
+            <i class="content icon { rotated: menuOpened }"></i>
             <div class="menu { transition: menuOpened, visible: menuOpened }">
               <div class="header">
                 { (user && !user.isAnonymous) ? user.email : 'ゲストユーザー' }
@@ -101,6 +101,8 @@
       padding: 5px 25px !important;
     }
     .header.item img { height: 20px; }
+
+    .icon.content { transition: all 300ms 0s ease; }
 
     .label.item { padding-left: 0 !important; }
   </style>
