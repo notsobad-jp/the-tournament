@@ -99,7 +99,6 @@
     * Settings
     ***********************************************/
     var that = this
-    that.mixin('tournamentMixin')
     that.isMobile = window.innerWidth <= 480
     that.selectedTab = 'bracket'
 

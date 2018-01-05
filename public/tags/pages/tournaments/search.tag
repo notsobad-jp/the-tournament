@@ -33,7 +33,6 @@
     * Settings
     ***********************************************/
     var that = this
-    that.mixin('tournamentMixin')
 
     /* metatag setting */
     let meta = {

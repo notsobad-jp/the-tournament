@@ -78,8 +78,6 @@
       that.segmentVisible.push(true)
     }
 
-    that.mixin('tournamentMixin')
-
 
     /***********************************************
     * Functions

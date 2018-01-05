@@ -88,7 +88,6 @@
     * Settings
     ***********************************************/
     var that = this
-    that.mixin('tournamentMixin')
     that.tournament = opts.tournament
 
 

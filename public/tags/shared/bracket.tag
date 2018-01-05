@@ -143,7 +143,6 @@
     that.tournament = opts.tournament
     that.editable = opts.editable
     that.showBye = false
-    that.mixin('tournamentMixin')
 
 
     /***********************************************

@@ -42,7 +42,6 @@
     * Settings
     ***********************************************/
     var that = this
-    that.mixin('tournamentMixin')
     that.deletedList = []
 
     /* metatag setting */

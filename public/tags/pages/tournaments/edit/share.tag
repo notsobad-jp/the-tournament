@@ -52,6 +52,9 @@
 
 
   <script>
+    /***********************************************
+    * Settings
+    ***********************************************/
     var that = this
     that.tournament = that.parent.tournament
     that.id = that.parent.opts.id

@@ -98,7 +98,6 @@
     * Settings
     ***********************************************/
     var that = this
-    that.mixin('tournamentMixin')
     that.tournament = null
     that.tournamentChanged = false
     that.isMobile = window.innerWidth <= 480

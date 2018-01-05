@@ -66,7 +66,6 @@
     var that = this
     that.tournament = opts.tournament
     that.selectedTab = 'simple'
-    that.mixin('tournamentMixin')
 
 
     /***********************************************
