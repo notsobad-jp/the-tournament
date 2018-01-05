@@ -52,6 +52,7 @@
     .row.bye .ui.column.winner { color: #999999; }
     .ui.column.loser { color: #999999; }
     .ui.compact.segment {
+      word-break: break-all;
       display: block;
       margin: 0;
     }
