@@ -10,10 +10,10 @@
       </div>
       <br><br>
 
-      <div class="">
+      <div>
         <h1 class="ui large title header">
           { tournament.title }
-          <a class="ui primary right floated button { (isMobile) ? 'tiny' : 'small' }" href="/tournaments/{ opts.id }/edit">
+          <a class="ui primary right floated button { (isMobile) ? 'tiny' : 'small' }" href="/tournaments/{ opts.id }/edit" if={ tournament.userId == user.uid }>
             <i class="icon setting"></i>
             編集
           </a>

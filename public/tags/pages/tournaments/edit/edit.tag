@@ -144,6 +144,14 @@
     docRef.get().then(function(doc){
       if(doc.exists) {
         that.tournament = doc.data()
+
+        /* 権限確認 */
+        if(that.tournament.userId != that.user.uid) {
+          obs.trigger("dimmerChanged", '')
+          obs.trigger("flashChanged", {type:'error',text:'トーナメント表の編集権限がありません…。ログイン状態を確認してください。'})
+          route('/')
+          return false
+        }
       }else {
         that.tournament = {
           title: "",
@@ -189,10 +197,10 @@
       docRef.set(that.tournament)
       .then(function(docRef) {
         that.tournamentChanged = false
-        that.message = { type: 'success', text: 'トーナメントを保存しました！' }
+        obs.trigger("flashChanged", {type:'success',text:'トーナメント表を保存しました！'})
       })
       .catch(function(error) {
-        that.message = { type: 'error', text: 'トーナメントの保存に失敗しました…(´；ω；｀)' }
+        obs.trigger("flashChanged", {type:'error',text:'トーナメント表の保存に失敗しました…(´；ω；｀)'})
       })
       .then(function(){
         obs.trigger("dimmerChanged", '')
