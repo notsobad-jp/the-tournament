@@ -48,7 +48,7 @@
                 <span class="f16" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }>
                   <span class="flag { tournament.teams[teamIndex]['country'] }"></span>
                 </span>
-                <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName }>
+                <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName } disabled={ teamIndex == null }>
                 <span if={ !editable }>{ teamName(teamIndex) }</span>
               </div>
 
