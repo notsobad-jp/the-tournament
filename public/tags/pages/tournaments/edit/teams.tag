@@ -20,21 +20,36 @@
         </small>
       </div>
       <div class="ui right aligned column">
-        <div class="ui mini basic button { primary: tabSelected('simple') }" onclick={ toggleMenuTab }>
-            <i class="icon exchange }"></i>
-            { (tabSelected('simple')) ? '詳細情報を表示する' : 'シンプル表示に戻す' }
+        <div class="ui mini basic primary button" onclick={ shuffleTeams }>
+          <i class="icon random"></i>
+          シャッフル
         </div>
       </div>
     </div>
     <br><br>
 
+    <div class="ui secondary pointing two item menu">
+      <div class="link item { active: tabSelected('simple') }" onclick={ changeMenuTab.bind(this, 'simple') }>
+        シンプル入力
+      </div>
+      <div class="link item { active: tabSelected('detail') }" onclick={ changeMenuTab.bind(this, 'detail') }>
+        詳細入力
+      </div>
+    </div>
+
     <div class="ui tab { active: tabSelected('simple') }">
+      <div class="ui info message">
+        改行区切りで参加者を登録できます。空白行にすると対戦相手がシード扱いになります。
+      </div>
       <div class="ui form">
         <textarea name="teams" onchange={ updateTeams } style="line-height:22px; height:{ calcTextareaHeight() }px; max-height:256em;">{ teamText() }</textarea>
       </div>
     </div>
 
     <div class="ui tab { active: tabSelected('detail') }">
+      <div class="ui info message">
+        「<i class="icon setting"></i>」をクリックすると、各参加者ごとに所属などの詳細情報を登録できます。
+      </div>
       <div class="ui segments">
         <div class="ui clearing segment" each={ team, teamIndex in tournament.teams }>
           <i class="flag { team.country }" if={ team.country }></i>
@@ -91,6 +106,18 @@
       obs.trigger("tournamentChanged", that.tournament)
     }
 
+    shuffleTeams() {
+      const ary = that.tournament.teams.slice();
+      for (let i = ary.length - 1; 0 < i; i--) {
+        let r = Math.floor(Math.random() * (i + 1));
+        // ary[i] <-> ary[r]
+        [ary[i], ary[r]] = [ary[r], ary[i]];
+      }
+      that.tournament.teams = ary
+      that.updateByeGames(that.tournament)
+      obs.trigger('tournamentChanged', that.tournament)
+    }
+
     showTeamModal(e) {
       e.preventDefault()
       var teamIndex = e.currentTarget.getAttribute('data-teamid')
@@ -108,10 +135,6 @@
         text += that.tournament.teams[key]['name'] + '\n'
       }
       return text
-    }
-
-    toggleMenuTab() {
-      that.selectedTab = (that.selectedTab=='simple') ? 'detail' : 'simple'
     }
 
     /* 詳細入力モード */
