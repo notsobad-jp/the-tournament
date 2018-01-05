@@ -9,9 +9,13 @@
         </a>
         <div class="label item">
           <span class="ui left pointing pink mini label">
-            アルファ版
+            ベータ版
           </span>
         </div>
+        <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
+          <i class="icon mail"></i>
+          不具合報告
+        </a>
 
         <div class="right menu">
           <div class="link item" onclick={ createAndRedirectToTournament }>
@@ -55,11 +59,10 @@
             <img class="ui image" src="/img/logo_w.png">
           </h2>
         </a>
-        <div class="label item">
-          <span class="ui left pointing pink mini label">
-            アルファ版
-          </span>
-        </div>
+        <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
+          <i class="icon mail"></i>
+          不具合報告
+        </a>
         <div class="item menu-title"></div>
         <div class="right menu">
           <div class="ui dropdown item { active: menuOpened, visible: menuOpened }" onclick={ toggleMenu }>
