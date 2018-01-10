@@ -33,7 +33,9 @@
     obs.on("flashChanged", function(obj) {
       that.flash = obj
       that.update()
-      that.close(3000)
+      if(!obj.permanent) {
+        that.close(3000)
+      }
     })
 
 

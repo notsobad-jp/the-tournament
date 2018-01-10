@@ -79,6 +79,11 @@
         obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
         route('mypage')
       }).catch(function(error) {
+        obs.trigger("flashChanged", {
+          type: 'error',
+          text: 'ログインに失敗しました..。' + error,
+          permanent: true
+        })
         console.log(error)
       })
     }
