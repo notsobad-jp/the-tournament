@@ -197,8 +197,12 @@
     /***********************************************
     * Observables
     ***********************************************/
-    firebase.auth().onAuthStateChanged(function(user) {
+    var authUnsubscribe = firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
+    })
+
+    that.on('unmount', function(){
+      authUnsubscribe()
     })
 
 

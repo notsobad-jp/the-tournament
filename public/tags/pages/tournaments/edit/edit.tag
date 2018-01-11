@@ -114,12 +114,13 @@
     /***********************************************
     * Observables
     ***********************************************/
-    firebase.auth().onAuthStateChanged(function(user) {
+    var authUnsubscribe = firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
     })
 
     // unmount処理
     that.on('unmount', function() {
+      authUnsubscribe()
       obs.trigger("footerVisibility", true)
       obs.off('menuTabChanged')
       obs.off('tournamentChanged')

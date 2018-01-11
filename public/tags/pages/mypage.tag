@@ -56,7 +56,7 @@
     /***********************************************
     * Observables
     ***********************************************/
-    firebase.auth().onAuthStateChanged(function(user) {
+    var authUnsubscribe = firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
       if(user) {
         obs.trigger("dimmerChanged", 'active')
@@ -68,6 +68,10 @@
           obs.trigger("dimmerChanged", '')
         })
       }
+    })
+
+    that.on('unmount', function(){
+      authUnsubscribe()
     })
 
 

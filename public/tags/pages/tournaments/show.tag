@@ -106,8 +106,12 @@
     /***********************************************
     * Observables
     ***********************************************/
-    firebase.auth().onAuthStateChanged(function(user) {
+    var authUnsubscribe = firebase.auth().onAuthStateChanged(function(user) {
       that.user = user
+    })
+
+    that.on('unmount', function(){
+      authUnsubscribe()
     })
 
     // 画面リサイズ時にPC/SPメニュー切替
