@@ -470,7 +470,7 @@
         // 前の試合が終了している場合：遡って勝利チームを取得
         if(prevResult['winner']!=null) {
           prevWinnerIndex = (isConsolation) ? 1 - prevResult['winner'] : prevResult['winner']
-          return tournamentMixin.getTeamIndex(tournament, roundIndex-1, prevMatchIndex, prevWinnerIndex)
+          return that.getTeamIndex(tournament, roundIndex-1, prevMatchIndex, prevWinnerIndex)
         // 前の試合が終了していない場合
         }else {
           return null
