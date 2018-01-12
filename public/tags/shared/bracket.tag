@@ -114,6 +114,8 @@
       background: rgba(255,255,255,0.4);
       padding: 0 5px;
     }
+
+    /* ポップアップ非表示 */
     .editable.bracket .match.selected:after { display: none; }
     .editable.bracket .match { cursor: default; }
 
@@ -125,9 +127,7 @@
     }
 
     /* 敗者うすくしない */
-    .match:not(.final):not(.consolation) .team.loser:not(.highlight) {
-      opacity: 1;
-    }
+    .editable.bracket .match:not(.final):not(.consolation) .team.loser:not(.highlight) { opacity: 1; }
 
     /* その他 */
     small { margin-left: 10px; }

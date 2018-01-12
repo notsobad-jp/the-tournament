@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const riot = require('riot');
-const bracket = require('./bracket.tag');
+const bracket = require('./tags/shared/bracket.tag');
 
 var serviceAccount = require("./cert.json");
 admin.initializeApp({
@@ -11,6 +11,7 @@ admin.initializeApp({
 });
 var db = admin.firestore();
 var bucket = admin.storage().bucket('app.the-tournament.jp');
+
 
 
 exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(event => {
