@@ -1,40 +1,5 @@
 <bracket>
-  <virtual if={ editable }>
-    <!--
-    <div class="ui transparent fluid icon input { error: tournament.title == '' }">
-      <input id="nameInput" type="text" name="title" placeholder="トーナメント名*" value={ tournament.title } onchange={ updateTournament }>
-      <i class="icon write"></i>
-    </div>
-    <div class="ui divider"></div>
-    -->
-    <div class="ui two column grid">
-      <div class="ui left aligned column">
-        <div class="ui icon mini primary buttons">
-          <div class="ui icon button { disabled: Object.keys(tournament.teams).length >= 128 }" onclick={ addRound }>
-            <i class="icon plus"></i>
-          </div>
-          <div class="ui icon button { disabled: Object.keys(tournament.teams).length <= 4 }" onclick={ removeRound }>
-            <i class="icon minus"></i>
-          </div>
-        </div>
-        <small>
-          参加者数
-          <span class="ui circular mini label">
-            { Object.keys(tournament.teams).length }
-          </span>
-        </small>
-      </div>
-      <div class="ui right aligned column">
-        <div class="ui mini basic button { primary: !showBye }" onclick={ toggleShowBye }>
-            <i class="icon { unhide: !showBye, hide: showBye }"></i>
-            { (!showBye) ? '空白試合を表示' : '空白試合を隠す' }
-        </div>
-      </div>
-    </div>
-    <br><br>
-  </virtual>
-
-  <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
+  <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: tournament.showBye, editable: editable }">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick={ (roundIndex != 0 && match['bye']) ? "" : "this.classList.toggle('selected');" } style="flex: { matchFlex(roundIndex, matchIndex) }">
@@ -141,7 +106,6 @@
     var that = this
     that.tournament = opts.tournament
     that.editable = opts.editable
-    that.showBye = false
 
 
     /***********************************************
@@ -434,20 +398,6 @@
       that.tournament.teams[teamIndex] = { name: '' }
       that.updateByeGames(that.tournament)
 
-      obs.trigger("tournamentChanged", that.tournament)
-    }
-
-    toggleShowBye(e) {
-      that.showBye = !that.showBye
-      that.update()
-    }
-
-    addRound() {
-      that.addTeams(that.tournament, 1, true)
-      obs.trigger("tournamentChanged", that.tournament)
-    }
-    removeRound() {
-      that.removeTeams(that.tournament, 1, true)
       obs.trigger("tournamentChanged", that.tournament)
     }
   </script>

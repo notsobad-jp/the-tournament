@@ -51,6 +51,7 @@
   <script src="/tags/layouts/footer.tag" type="riot/tag"></script>
   <script src="/tags/layouts/header.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/edit/country-select.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/edit/bracket-header.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/edit/edit.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/edit/match-modal.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/edit/menu.tag" type="riot/tag"></script>
@@ -128,7 +129,6 @@
 
 
       /* 勝ち上がりチーム情報の取得 */
-      // FIXME: mixinからコピペ。修正時は注意
       getTeamIndex: function(tournament, roundIndex, matchIndex, teamOrder) {
         var isConsolation = (roundIndex == Object.keys(tournament.results).length - 1) && (matchIndex == 1)
         // 1回戦

@@ -20,6 +20,8 @@
 
     <div class="ui { ten: selectedTab, fifteen: !selectedTab } wide bracket column">
       <div class="ui basic segment">
+        <bracket-header tournament={ tournament }></bracket-header>
+        <div class="ui hidden divider"></div>
         <bracket ref="bracket" tournament={ tournament } editable={ true }></bracket>
       </div>
       <br><br>
