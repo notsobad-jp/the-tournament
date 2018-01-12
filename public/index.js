@@ -47,9 +47,6 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
 
       <title>THE TOURNAMENT</title>
 
-      <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
-      <![endif]-->
       <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/lafeber/world-flags-sprite/9a8b5ea6/stylesheets/flags16.css">
       <link rel="stylesheet" type="text/css" href="https://app.the-tournament.jp/assets/css/tournament.css">
     </head>

@@ -128,6 +128,7 @@
 
 
       /* 勝ち上がりチーム情報の取得 */
+      // FIXME: mixinからコピペ。修正時は注意
       getTeamIndex: function(tournament, roundIndex, matchIndex, teamOrder) {
         var isConsolation = (roundIndex == Object.keys(tournament.results).length - 1) && (matchIndex == 1)
         // 1回戦
