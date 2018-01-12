@@ -20,7 +20,7 @@
 
     <div class="ui { ten: selectedTab, fifteen: !selectedTab } wide bracket column">
       <div class="ui basic segment">
-        <bracket tournament={ tournament } editable={ true }></bracket>
+        <bracket ref="bracket" tournament={ tournament } editable={ true }></bracket>
       </div>
       <br><br>
     </div>
@@ -188,15 +188,27 @@
     }
 
     saveTournament() {
+      obs.trigger("dimmerChanged", 'active')
+
+      let batch = db.batch();
+      let tournamentRef = db.collection("tournaments").doc(opts.id)
       if(that.tournament.title=='') {
         that.tournament.title = opts.id
       }
-
-      obs.trigger("dimmerChanged", 'active')
-      var docRef = db.collection("tournaments").doc(opts.id)
       that.tournament['updatedAt'] = new Date()
-      docRef.set(that.tournament)
-      .then(function(docRef) {
+      batch.set(tournamentRef, that.tournament)
+
+      /* 埋め込み用HTML取得 */
+      let bracketTag = that.refs.bracket
+      bracketTag.editable = false
+      that.update()
+      let bracketHTML = document.getElementById('bracket').outerHTML
+      let embedRef = db.collection("embeds").doc(opts.id)
+      batch.set(embedRef, {html: bracketHTML})
+
+      /* 保存処理 */
+      batch.commit()
+      .then(function() {
         that.tournamentChanged = false
         obs.trigger("flashChanged", {type:'success',text:'トーナメント表を保存しました！'})
       })
@@ -204,6 +216,7 @@
         obs.trigger("flashChanged", {type:'error',text:'トーナメント表の保存に失敗しました…(´；ω；｀)'})
       })
       .then(function(){
+        bracketTag.editable = true
         obs.trigger("dimmerChanged", '')
         that.update()
       })
