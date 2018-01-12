@@ -52,8 +52,12 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     </head>
   */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
 
-  var file = bucket.file('alpha/' + id + '.html');
-  file.save(header + html + '</html>', {
+  var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
+  container += '<h1><a target="_blank" href="https://tournament-7e3b7.firebaseapp.com/tournaments/'+ id +'">'+ tournament.title;
+  container += '</a><small> powered by <a href="https://tournament-7e3b7.firebaseapp.com/" target="_blank">THE TOURNAMENT</a> </small></h1></div><div id="emb-body">';
+
+  var file = bucket.file('embed/v1/' + id + '.html');
+  file.save(header + container + html + '</div></div></body></html>', {
     metadata: { contentType: 'text/html' },
     gzip: true
   });
