@@ -1,5 +1,5 @@
 <bracket>
-  <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: tournament.showBye, editable: editable }">
+  <div class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: tournament.showBye, editable: editable }">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick={ (roundIndex != 0 && match['bye']) ? "" : "this.classList.toggle('selected');" } style="flex: { matchFlex(roundIndex, matchIndex) }">
@@ -399,6 +399,33 @@
       that.updateByeGames(that.tournament)
 
       obs.trigger("tournamentChanged", that.tournament)
+    }
+
+
+    /***********************************************
+    * Mixin (only for SSR)
+    * FIXME: mixinからコピペ。修正時は注意
+    ***********************************************/
+    /* 勝ち上がりチーム情報の取得 */
+    getTeamIndex(tournament, roundIndex, matchIndex, teamOrder) {
+      var isConsolation = (roundIndex == Object.keys(tournament.results).length - 1) && (matchIndex == 1)
+      // 1回戦
+      if(roundIndex==0) {
+        teamIndex = ( matchIndex * 2 ) + teamOrder
+        return teamIndex
+      // 2回戦以降
+      }else {
+        prevMatchIndex = (isConsolation) ? teamOrder : ( matchIndex * 2 ) + teamOrder
+        prevResult = tournament.results[roundIndex-1][prevMatchIndex]
+        // 前の試合が終了している場合：遡って勝利チームを取得
+        if(prevResult['winner']!=null) {
+          prevWinnerIndex = (isConsolation) ? 1 - prevResult['winner'] : prevResult['winner']
+          return that.getTeamIndex(tournament, roundIndex-1, prevMatchIndex, prevWinnerIndex)
+        // 前の試合が終了していない場合
+        }else {
+          return null
+        }
+      }
     }
   </script>
 </bracket>
