@@ -36,7 +36,7 @@ exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCr
       });
     })
   });
-  process.on('unhandledRejection', reject());
+  process.on('unhandledRejection', console.dir);
   return promise;
 });
 

@@ -111,6 +111,7 @@
     /***********************************************
     * Observables
     ***********************************************/
+    if(!obs) { var obs = riot.observable() }
     obs.on('bracketChanged', function(params){
       that.showBye = params.showBye
       that.update()
