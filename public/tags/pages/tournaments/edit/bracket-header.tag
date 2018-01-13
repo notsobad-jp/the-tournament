@@ -51,7 +51,7 @@
     ***********************************************/
     toggleShowBye(e) {
       that.showBye = !that.showBye
-      obs.trigger('bracketChanged', {showBye: that.showBye})
+      obs.trigger('showByeChanged', that.showBye)
     }
 
     addRound() {

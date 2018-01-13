@@ -22,7 +22,7 @@
       <div class="ui basic segment">
         <bracket-header tournament={ tournament }></bracket-header>
         <div class="ui hidden divider"></div>
-        <bracket tournament={ tournament } editable={ true }></bracket>
+        <bracket name="bracket" tournament={ tournament } editable={ true }></bracket>
       </div>
       <br><br>
     </div>
@@ -126,6 +126,7 @@
       obs.trigger("footerVisibility", true)
       obs.off('menuTabChanged')
       obs.off('tournamentChanged')
+      obs.off('showByeChanged')
     })
 
     obs.on("menuTabChanged", function(tab) {
@@ -140,6 +141,11 @@
       that.tournament = tournament
       that.tournamentChanged = true
       that.update()
+    })
+
+    obs.on("showByeChanged", function(showBye){
+      that.tags.bracket.showBye = showBye
+      that.tags.bracket.update()
     })
 
     obs.trigger("dimmerChanged", 'active')
