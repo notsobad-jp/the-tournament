@@ -1,5 +1,5 @@
 <bracket>
-  <div class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: tournament.showBye, editable: editable }">
+  <div class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick={ (roundIndex != 0 && match['bye']) ? "" : "this.classList.toggle('selected');" } style="flex: { matchFlex(roundIndex, matchIndex) }">
@@ -105,6 +105,16 @@
     var that = this
     that.tournament = opts.tournament
     that.editable = opts.editable
+    that.showBye = false
+
+
+    /***********************************************
+    * Observables
+    ***********************************************/
+    obs.on('bracketChanged', function(params){
+      that.showBye = params.showBye
+      that.update()
+    })
 
 
     /***********************************************

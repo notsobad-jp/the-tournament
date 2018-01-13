@@ -23,14 +23,12 @@
         </span>
       </small>
     </div>
-    <!-- TODO: fix showBye
     <div class="ui right aligned column">
       <div class="ui mini basic button { primary: !showBye }" onclick={ toggleShowBye }>
           <i class="icon { unhide: !showBye, hide: showBye }"></i>
           { (!showBye) ? '空白試合を表示' : '空白試合を隠す' }
       </div>
     </div>
-    -->
   </div>
 
 
@@ -53,7 +51,7 @@
     ***********************************************/
     toggleShowBye(e) {
       that.showBye = !that.showBye
-      that.update()
+      obs.trigger('bracketChanged', {showBye: that.showBye})
     }
 
     addRound() {
