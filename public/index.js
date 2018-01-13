@@ -18,23 +18,26 @@ exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCr
   var newUid = event.params.newUid;
   var oldUid = event.data.data().oldUid;
 
-  var tnmtRef = db.collection("tournaments").where("userId", "==", oldUid)
-  tnmtRef.get().then(function(querySnapshot){
-    var batch = db.batch();
-    for(i in querySnapshot.docs) {
-      var ref = db.collection("tournaments").doc(querySnapshot.docs[i].id);
-      batch.update(ref, {userId: newUid});
-    }
-    //不要になった移行用レコードを消しとく
-    batch.delete(db.collection("anonymousUsers").doc(oldUid))
-    batch.delete(db.collection("linkRequests").doc(newUid))
+  var promise = new Promise(function(resolve, reject) {
+    var tnmtRef = db.collection("tournaments").where("userId", "==", oldUid)
+    tnmtRef.get().then(function(querySnapshot){
+      var batch = db.batch();
+      for(i in querySnapshot.docs) {
+        var ref = db.collection("tournaments").doc(querySnapshot.docs[i].id);
+        batch.update(ref, {userId: newUid});
+      }
+      //不要になった移行用レコードを消しとく
+      batch.delete(db.collection("anonymousUsers").doc(oldUid))
+      batch.delete(db.collection("linkRequests").doc(newUid))
 
-    //処理実行
-    batch.commit().then(function () {
-      return true;
-    });
-  })
-  process.on('unhandledRejection', console.dir);
+      //処理実行
+      batch.commit().then(function () {
+        resolve();
+      });
+    })
+  });
+  process.on('unhandledRejection', reject());
+  return promise;
 });
 
 
