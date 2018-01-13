@@ -58,8 +58,7 @@
                   </div>
                 </virtual>
               </div>
-              <div id="popup_{ roundIndex }_{ matchIndex }" class="popupComment" onshow={ setRawHtml(roundIndex+"_"+matchIndex, match.comment) }>
-              </div>
+              <div data-is="raw" content="{ match.comment }" class="popupComment"></div>
             </div>
           </div>
         </div>
@@ -111,44 +110,6 @@
     /***********************************************
     * Functions
     ***********************************************/
-    setRawHtml(matchId, content) {
-      if(!content || content == '') { return false }
-
-      setTimeout(function(){
-        let popup = document.getElementById('popup_'+ matchId)
-        let detail = that.escapeHTML(content)
-        detail = detail.replace(/\r?\n/g, '<br>')
-        detail = that.autoLink(detail)
-        popup.innerHTML = detail
-      }, 0)
-    }
-
-    autoLink(str) {
-      var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
-      var regexp_makeLink = function(all, url, h, href) {
-        return '<a href="h' + href + '" target="_blank">' + url + '</a>';
-      }
-      return str.replace(regexp_url, regexp_makeLink);
-    }
-
-    escapeHTML(string) {
-      if(typeof string !== 'string') {
-        return string;
-      }
-      return string.replace(/[&'`"<>]/g, function(match) {
-        return {
-          '&': '&amp;',
-          "'": '&#x27;',
-          '`': '&#x60;',
-          '"': '&quot;',
-          '<': '&lt;',
-          '>': '&gt;',
-        }[match]
-      });
-    }
-
-
-
     isFinalRound(roundIndex) {
       return roundIndex == Object.keys(that.tournament.results).length - 1
     }

@@ -61,5 +61,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     metadata: { contentType: 'text/html' },
     gzip: true
   });
+
   process.on('unhandledRejection', console.dir);
+  return true;
 });
