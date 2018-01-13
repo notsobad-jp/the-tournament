@@ -116,6 +116,10 @@
       that.update()
     })
 
+    that.on('unmount', function(){
+      obs.off('bracketChanged')
+    })
+
 
     /***********************************************
     * Functions
