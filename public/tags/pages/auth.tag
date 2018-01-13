@@ -67,6 +67,8 @@
     * Functions
     ***********************************************/
     snsLogin(providerName) {
+      obs.trigger("dimmerChanged", 'active')
+
       var provider = ""
       if(providerName=='facebook') {
         provider = new firebase.auth.FacebookAuthProvider()
@@ -75,22 +77,33 @@
       }else if(providerName=='google') {
         provider = new firebase.auth.GoogleAuthProvider();
       }
-      firebase.auth().signInWithPopup(provider).then(function(result){
-        obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
-        route('mypage')
-      }).catch(function(error) {
-        obs.trigger("flashChanged", {
-          type: 'error',
-          text: 'ログインに失敗しました..。' + error,
-          permanent: true
+
+      var anonymousUid = firebase.auth().currentUser.uid
+      var docRef = db.collection("anonymous").doc(anonymousUid)
+      docRef.get().then(function(doc){
+        firebase.auth().signInWithPopup(provider).then(function(result){
+          //匿名でトーナメント作成してたら、userIdをログインしたユーザーのUIDに書き換え
+          if(doc.exists) {
+            //trigger
+          }
+
+          obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
+          route('mypage')
+        }).catch(function(error) {
+          obs.trigger("flashChanged", {
+            type: 'error',
+            text: 'ログインに失敗しました..。' + error,
+            permanent: true
+          })
+          console.log(error)
         })
-        console.log(error)
       })
+
     }
 
     magicAuth() {
       that.errorMessage = ''
-			obs.trigger("dimmerChanged", 'active')
+      obs.trigger("dimmerChanged", 'active')
       var newPassword = Math.random().toString(36).slice(-12)
 
       firebase.auth().createUserWithEmailAndPassword(that.refs.email.value, newPassword).then(function(){
@@ -118,7 +131,7 @@
         }
       }).then(function(){
         that.update()
-			  obs.trigger("dimmerChanged", '')
+        obs.trigger("dimmerChanged", '')
       })
     }
   </script>

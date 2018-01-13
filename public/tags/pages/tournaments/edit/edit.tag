@@ -203,6 +203,12 @@
       .then(function() {
         that.tournamentChanged = false
         obs.trigger("flashChanged", {type:'success',text:'トーナメント表を保存しました！'})
+
+        /* 匿名ユーザーはDBにフラグ立てとく */
+        if(that.user.isAnonymous) {
+          let tmpRef = db.collection("anonymous").doc(that.user.uid)
+          tmpRef.set({hoge: true})
+        }
       })
       .catch(function(error) {
         obs.trigger("flashChanged", {type:'error',text:'トーナメント表の保存に失敗しました…(´；ω；｀)'})

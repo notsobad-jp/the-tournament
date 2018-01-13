@@ -5,5 +5,8 @@ service cloud.firestore {
     	allow create: if request.auth != null;
 			allow write: if resource.data.userId == request.auth.uid;
     }
+    match /anonymous/{userId} {
+			allow read, write: if request.auth.uid == userId;
+    }
   }
 }
