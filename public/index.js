@@ -25,11 +25,13 @@ exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCr
       var ref = db.collection("tournaments").doc(querySnapshot.docs[i].id);
       batch.update(ref, {userId: newUid});
     }
+    //不要になった移行用レコードを消しとく
+    batch.delete(db.collection("anonymousUsers").doc(oldUid))
+    batch.delete(db.collection("linkRequests").doc(newUid))
+
+    //処理実行
     batch.commit().then(function () {
-      //不要になったanonymousUsersのレコードは消しとく
-      db.collection("anonymousUsers").doc(oldUid).delete().then(function(){
-        return true;
-      });
+      return true;
     });
   })
   process.on('unhandledRejection', console.dir);

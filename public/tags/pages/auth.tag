@@ -82,7 +82,7 @@
       var docRef = db.collection("anonymousUsers").doc(anonymousUid)
       docRef.get().then(function(doc){
         firebase.auth().signInWithPopup(provider).then(function(result){
-          //匿名でトーナメント作成してたら、userIdをログインしたユーザーのUIDに書き換え
+          //匿名でトーナメント作成してたらfunctionでアカウント紐付け
           if(doc.exists) {
             let tmpRef = db.collection("linkRequests").doc(result.user.uid)
             tmpRef.set({oldUid: anonymousUid})

@@ -207,7 +207,7 @@
         /* 匿名ユーザーはDBにフラグ立てとく */
         if(that.user.isAnonymous) {
           let tmpRef = db.collection("anonymousUsers").doc(that.user.uid)
-          tmpRef.set({userId: that.user.uid})
+          tmpRef.set({ updatedAt: new Date() })
         }
       })
       .catch(function(error) {
