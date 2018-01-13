@@ -79,15 +79,21 @@
       }
 
       var anonymousUid = firebase.auth().currentUser.uid
-      var docRef = db.collection("anonymous").doc(anonymousUid)
+      var docRef = db.collection("anonymousUsers").doc(anonymousUid)
       docRef.get().then(function(doc){
         firebase.auth().signInWithPopup(provider).then(function(result){
           //匿名でトーナメント作成してたら、userIdをログインしたユーザーのUIDに書き換え
           if(doc.exists) {
-            //trigger
+            let tmpRef = db.collection("linkRequests").doc(result.user.uid)
+            tmpRef.set({oldUid: anonymousUid})
+            obs.trigger("flashChanged", {
+              type:'success',
+              text:'ログインしました！ゲストユーザーで作成したトーナメントは、ログイン後のアカウントに引き継がれます。移行処理に最大5〜10分程度かかる場合があります。マイページに表示されない場合、しばらく経ってから画面をリロードしてください。',
+              permanent: true
+            })
+          }else {
+            obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
           }
-
-          obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
           route('mypage')
         }).catch(function(error) {
           obs.trigger("flashChanged", {

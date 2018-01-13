@@ -13,7 +13,30 @@ var db = admin.firestore();
 var bucket = admin.storage().bucket('app.the-tournament.jp');
 
 
+/* 匿名ユーザーで作成したトーナメントを、ログイン後の正規アカウントに移行 */
+exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCreate(event => {
+  var newUid = event.params.newUid;
+  var oldUid = event.data.data().oldUid;
 
+  var tnmtRef = db.collection("tournaments").where("userId", "==", oldUid)
+  tnmtRef.get().then(function(querySnapshot){
+    var batch = db.batch();
+    for(i in querySnapshot.docs) {
+      var ref = db.collection("tournaments").doc(querySnapshot.docs[i].id);
+      batch.update(ref, {userId: newUid});
+    }
+    batch.commit().then(function () {
+      //不要になったanonymousUsersのレコードは消しとく
+      db.collection("anonymousUsers").doc(oldUid).delete().then(function(){
+        return true;
+      });
+    });
+  })
+  process.on('unhandledRejection', console.dir);
+});
+
+
+/* トーナメント更新時に、riotでSSRしてstorageに静的HTMLをアップ */
 exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(event => {
   var tournament = event.data.data();
   var id = event.params.id;
