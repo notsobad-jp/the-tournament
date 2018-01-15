@@ -1,5 +1,5 @@
 <tournament-list>
-  <table class="ui basic table" if={ user && items.length!=0 }>
+  <table class="ui basic table" if={ items.length!=0 }>
     <tbody>
       <tr each={ item, index in items } if={ deletedList.indexOf(item.id) < 0 }>
         <td>
@@ -22,6 +22,14 @@
       </tr>
     </tbody>
   </table>
+  <div class="ui basic segment" if={ items.length==0 }>
+    <p>まだトーナメント表がありません...😢</p>
+
+    <div class="ui red button" onclick={ createAndRedirectToTournament }>
+      <i class="icon plus"></i>
+      トーナメント表を作成する
+    </div>
+  </div>
 
 
   <style>
@@ -38,17 +46,19 @@
     * Settings
     ***********************************************/
     var that = this
+    that.items = opts.items
     that.deletedList = []
-
-
-    /***********************************************
-    * Observables
-    ***********************************************/
 
 
     /***********************************************
     * Functions
     ***********************************************/
+    /* トーナメントのIDだけ取得して新規作成画面に遷移 */
+    createAndRedirectToTournament() {
+      let newTnmtRef = db.collection("tournaments").doc()
+      route('tournaments/' + newTnmtRef.id + '/edit')
+    }
+
     formatDate(date, format) {
       if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
       format = format.replace(/YYYY/g, date.getFullYear());
