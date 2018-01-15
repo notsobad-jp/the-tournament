@@ -1,15 +1,20 @@
 <show>
-  <div class="ui stackable padded centered grid" if={ tournament }>
-    <div class="ui eleven wide column">
-      <div class="ui small breadcrumb">
+  <div class="ui padded centered secondary grid" if={ tournament }>
+    <div class="ui fifteen wide column">
+      <div class="ui tiny breadcrumb">
         <a class="section" href="/">トップ</a>
         <i class="right chevron icon divider"></i>
         <a class="section" href="/search">すべてのトーナメント表</a>
         <i class="right chevron icon divider"></i>
         <div class="active section">{ tournament.title }</div>
       </div>
-      <br><br>
+    </div>
+  </div>
 
+  <br>
+
+  <div class="ui stackable padded centered grid" if={ tournament }>
+    <div class="ui eleven wide column">
       <div>
         <h1 class="ui large title header">
           { tournament.title }
@@ -91,6 +96,8 @@
       line-height: 1.3rem;
       word-break: break-all;
     }
+    .secondary.grid { background: #F3F4F5; }
+    .secondary.grid .fifteen.wide.column { padding: 0.7em; }
   </style>
 
 

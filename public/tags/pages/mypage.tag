@@ -1,19 +1,24 @@
 <mypage>
-  <div class="ui stackable padded centered grid" if={ user }>
-    <div class="ui eleven wide column">
-      <div class="ui small breadcrumb">
+  <div class="ui padded centered secondary grid">
+    <div class="ui fifteen wide column">
+      <div class="ui tiny breadcrumb">
         <a class="section" href="/">トップ</a>
         <i class="right chevron icon divider"></i>
         <div class="active section">マイページ</div>
       </div>
+    </div>
+  </div>
 
+
+  <div class="ui stackable padded centered grid" if={ user }>
+    <div class="ui eleven wide column">
       <div class="ui secondary pointing menu">
         <div class="ui active item">
           <i class="icon folder"></i>
           作成済みトーナメント表
         </div>
       </div>
-      <tournament-list items={ items }></tournament-list>
+      <tournament-list items={ items } editable={ true }></tournament-list>
       <div class="ui hidden divider"></div>
     </div>
 
@@ -76,11 +81,8 @@
 
   <style>
     .grid { margin: 30px 0; }
-    @media only screen and (max-width: 767px) {
-      .ui.table:not(.unstackable) td:first-child, .ui.table:not(.unstackable) th:first-child small {
-        font-weight: normal;
-      }
-    }
+    .secondary.grid { background: #F3F4F5; }
+    .secondary.grid .fifteen.wide.column { padding: 0.7em; }
   </style>
 
 

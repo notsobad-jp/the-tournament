@@ -9,10 +9,10 @@
           <br>
           <small>
             <i class="icon clock"></i>
-            最終更新: { formatDate(item.data().createdAt, 'YYYY年MM月DD日 hh:mm') }
+            最終更新: { (item.data().createdAt) ? formatDate(item.data().createdAt, 'YYYY年MM月DD日 hh:mm') : '--' }
           </small>
         </td>
-        <td class="right aligned">
+        <td class="right aligned" if={ editable }>
           <a class="ui icon primary basic button" href={ '/tournaments/'+item.id+'/edit' } data-tooltip="編集する" data-inverted="">
             <i class="icon setting"></i>
             編集
@@ -47,6 +47,7 @@
     ***********************************************/
     var that = this
     that.items = opts.items
+    that.editable = opts.editable
     that.deletedList = []
 
 

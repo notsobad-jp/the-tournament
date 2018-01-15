@@ -1,32 +1,43 @@
 <search>
-  <div class="ui stackable centered grid">
-    <div class="ui twelve wide column">
-      <h1 class="ui medium header">
-        <i class="icon list"></i>
-        トーナメント表一覧
-      </h1>
-      <br><br>
-
-      <table class="ui basic table" if={ items && items.length!=0 }>
-        <tbody>
-          <tr each={ item, index in items }>
-            <td>
-              <a href={ '/tournaments/'+item.id }>
-                { item.data().title }
-              </a>
-            </td>
-            <td class="right aligned">
-              <a class="ui icon primary basic button" href={ '/tournaments/'+item.id } data-tooltip="閲覧する" data-inverted=""><i class="icon search"></i></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="ui padded centered secondary grid">
+    <div class="ui fifteen wide column">
+      <div class="ui tiny breadcrumb">
+        <a class="section" href="/">トップ</a>
+        <i class="right chevron icon divider"></i>
+        <div class="active section">すべてのトーナメント表</div>
+      </div>
     </div>
   </div>
 
-    <style>
+
+  <div class="ui stackable padded centered grid" if={ items }>
+    <div class="ui eleven wide column">
+      <div class="ui secondary pointing menu">
+        <div class="ui active item">
+          <i class="icon search"></i>
+          すべてのトーナメント表
+        </div>
+      </div>
+      <tournament-list items={ items }></tournament-list>
+      <div class="ui hidden divider"></div>
+    </div>
+
+
+    <div class="ui four wide computer only column">
+      <div class="ui half page test ad" data-text="広告枠"></div>
+    </div>
+    <div class="ui four wide mobile tablet only column">
+      <div class="ui medium rectangle centered test ad" data-text="広告枠"></div>
+    </div>
+  </div>
+
+
+  <style>
     .grid { margin: 30px 0; }
-    </style>
+    .secondary.grid { background: #F3F4F5; }
+    .secondary.grid .fifteen.wide.column { padding: 0.7em; }
+  </style>
+
 
 	<script>
     /***********************************************
