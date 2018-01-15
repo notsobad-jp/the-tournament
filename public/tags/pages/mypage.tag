@@ -30,10 +30,10 @@
             <i class="icon sign out"></i>
             ログアウト
           </div>
-          <div class="ui basic button" href='/signin' if={ !user || user.isAnonymous }>
+          <a class="ui basic button" href='/signin' if={ !user || user.isAnonymous }>
             <i class="icon sign in"></i>
             簡単ログイン
-          </div>
+          </a>
         </div>
         <div class="ui hidden divider"></div>
       </div>
