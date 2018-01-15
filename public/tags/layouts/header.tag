@@ -23,15 +23,20 @@
             トーナメント表作成
           </div>
           <a class="item" href="/mypage">
-            <i class="user icon"></i>
-            { (user && !user.isAnonymous) ? user.email : 'ゲストユーザー' }
+            <virtual if={ user && user.photoURL }>
+              <img class="ui avatar image" src={ user.photoURL }>
+            </virtual>
+            <virtual if={ !user || !user.photoURL }>
+              <i class="user icon"></i>
+            </virtual>
+            { (user && !user.isAnonymous) ? user.displayName || user.email : 'ゲストユーザー' }
           </a>
 
           <div class="ui dropdown item { active: menuOpened, visible: menuOpened }" onclick={ toggleMenu }>
             <i class="content icon { rotated: menuOpened }"></i>
             <div class="menu { transition: menuOpened, visible: menuOpened }">
               <div class="header">
-                { (user && !user.isAnonymous) ? user.email : 'ゲストユーザー' }
+                { (user && !user.isAnonymous) ? user.displayName || user.email : 'ゲストユーザー' }
               </div>
               <div class="divider"></div>
               <a class="item" href="/mypage">
@@ -69,7 +74,10 @@
             <i class="content icon { rotated: menuOpened }"></i>
             <div class="menu { transition: menuOpened, visible: menuOpened }">
               <div class="header">
-                { (user && !user.isAnonymous) ? user.email : 'ゲストユーザー' }
+                <virtual if={ user && user.photoURL }>
+                  <img class="ui avatar image" src={ user.photoURL }>
+                </virtual>
+                { (user && !user.isAnonymous) ? user.displayName || user.email : 'ゲストユーザー' }
               </div>
               <div class="divider"></div>
               <div class="item" onclick={ createAndRedirectToTournament }>
@@ -113,6 +121,10 @@
     .header.item img { height: 20px; }
     .icon.content { transition: all 300ms 0s ease; }
     .label.item { padding-left: 0 !important; }
+    .right.menu .item {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
   </style>
 
 
@@ -130,6 +142,7 @@
     firebase.auth().onAuthStateChanged(function(user) {
       if(user) {
         that.user = user
+        console.log(user)
         that.update()
       }else {
         firebase.auth().signInAnonymously()
