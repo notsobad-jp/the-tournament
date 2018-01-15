@@ -142,7 +142,6 @@
     firebase.auth().onAuthStateChanged(function(user) {
       if(user) {
         that.user = user
-        console.log(user)
         that.update()
       }else {
         firebase.auth().signInAnonymously()
