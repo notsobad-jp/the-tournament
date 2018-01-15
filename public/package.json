@@ -2,8 +2,11 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "chromeless": "^1.4.0",
     "firebase-admin": "5.5.1",
     "firebase-functions": "0.7.3",
+    "node-webshot": "^1.0.2",
+    "phantomjscloud": "^3.0.0",
     "riot": "3.7.4"
   },
   "private": true
