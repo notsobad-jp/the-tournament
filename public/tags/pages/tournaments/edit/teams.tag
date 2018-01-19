@@ -102,6 +102,9 @@
     }
 
     removeRound() {
+      let alertMessage = 'トーナメントのサイズを半分にします。トーナメント下半分の参加者・試合結果が削除されますが、本当によろしいですか？'
+      if(!confirm(alertMessage)) { return false }
+
       that.removeTeams(that.tournament, 1, true)
       obs.trigger("tournamentChanged", that.tournament)
     }
