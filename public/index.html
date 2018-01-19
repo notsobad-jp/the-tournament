@@ -59,7 +59,7 @@
   <script src="/tags/pages/tournaments/edit/share.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/edit/team-modal.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/edit/teams.tag" type="riot/tag"></script>
-  <script src="/tags/pages/tournaments/search.tag" type="riot/tag"></script>
+  <script src="/tags/pages/tournaments/index.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/show.tag" type="riot/tag"></script>
   <script src="/tags/pages/auth.tag" type="riot/tag"></script>
   <script src="/tags/pages/mypage.tag" type="riot/tag"></script>
@@ -279,9 +279,8 @@
     route('/tournaments/*/edit', function(id){
       riot.mount('content', 'edit', {id: id})
     })
-    route('/search..', function() {
-      var q = route.query()
-      riot.mount('content', 'search', {q: q})
+    route('/tournaments', function() {
+      riot.mount('content', 'index')
     })
     route('/auth..', function(){
       obs.trigger("dimmerChanged", 'active')

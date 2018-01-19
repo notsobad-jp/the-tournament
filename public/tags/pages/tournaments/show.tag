@@ -94,7 +94,7 @@
     that.isMobile = window.innerWidth <= 480
     that.selectedTab = 'bracket'
     that.breads = [
-      { title: 'すべてのトーナメント表一覧', url: '/search' },
+      { title: 'すべてのトーナメント表一覧', url: '/tournaments' },
       { title: '' } //データ取得後にトーナメント名をセット
     ]
 

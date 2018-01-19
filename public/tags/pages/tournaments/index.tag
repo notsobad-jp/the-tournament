@@ -1,4 +1,4 @@
-<search>
+<index>
   <div if={ items }>
     <breadcrumb breads={ breads }></breadcrumb>
 
@@ -59,4 +59,4 @@
       obs.trigger("dimmerChanged", '')
     })
   </script>
-</search>
+</index>
