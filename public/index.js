@@ -52,7 +52,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     <head>
       <meta charset="utf-8" />
       <title>{{title}} | THE TOURNAMENT</title>
-      <link rel="canonical" href="https://tournament-7e3b7.firebaseapp.com/tournaments/{{tournamendId}}">
+      <link rel="canonical" href="https://tournament-7e3b7.firebaseapp.com/tournaments/{{tournamentId}}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
