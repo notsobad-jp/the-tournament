@@ -27,8 +27,8 @@ exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCr
         batch.update(ref, {userId: newUid});
       }
       //不要になった移行用レコードを消しとく
-      batch.delete(db.collection("anonymousUsers").doc(oldUid))
-      batch.delete(db.collection("linkRequests").doc(newUid))
+      // batch.delete(db.collection("anonymousUsers").doc(oldUid))
+      // batch.delete(db.collection("linkRequests").doc(newUid))
 
       //処理実行
       batch.commit().then(function () {
@@ -51,7 +51,8 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     <html>
     <head>
       <meta charset="utf-8" />
-      <meta content='noindex' name='robots'>
+      <title>{{title}} | THE TOURNAMENT</title>
+      <link rel="canonical" href="https://tournament-7e3b7.firebaseapp.com/tournaments/{{tournamendId}}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -78,7 +79,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
       <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/lafeber/world-flags-sprite/9a8b5ea6/stylesheets/flags16.css">
       <link rel="stylesheet" type="text/css" href="https://app.the-tournament.jp/assets/css/tournament.css">
     </head>
-  */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
+  */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
 
   var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
   container += '<h1><a target="_blank" href="https://tournament-7e3b7.firebaseapp.com/tournaments/'+ id +'">'+ tournament.title;
