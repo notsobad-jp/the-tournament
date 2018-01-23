@@ -195,18 +195,6 @@
 
 
     /***********************************************
-    * Observables
-    ***********************************************/
-    var authUnsubscribe = firebase.auth().onAuthStateChanged(function(user) {
-      that.user = user
-    })
-
-    that.on('unmount', function(){
-      authUnsubscribe()
-    })
-
-
-    /***********************************************
     * Functions
     ***********************************************/
     /* トーナメントのIDだけ取得して新規作成画面に遷移 */

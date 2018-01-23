@@ -61,6 +61,7 @@
   <script src="/tags/pages/tournaments/edit/teams.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/index.tag" type="riot/tag"></script>
   <script src="/tags/pages/tournaments/show.tag" type="riot/tag"></script>
+  <script src="/tags/pages/about.tag" type="riot/tag"></script>
   <script src="/tags/pages/auth.tag" type="riot/tag"></script>
   <script src="/tags/pages/mypage.tag" type="riot/tag"></script>
   <script src="/tags/pages/top.tag" type="riot/tag"></script>
@@ -179,7 +180,7 @@
 
 
       setMetatags: function(meta) {
-        let title = (meta && meta.title) ? meta.title + ' | THE TOURNAMENT' : '【アルファ版】THE TOURNAMENT | 簡単・便利な無料のトーナメント表作成サービス'
+        let title = (meta && meta.title) ? meta.title + ' | THE TOURNAMENT' : '【ベータ版】THE TOURNAMENT | 簡単・便利な無料のトーナメント表作成サービス'
         let description = (meta && meta.description) ? meta.description : "圧倒的に使いやすい、無料トーナメント表作成ツールの決定版！Webブラウザだけで簡単におしゃれなトーナメント表を作成できます。"
         let keywords = 'トーナメント表,作成,THE TOURNAMENT,トーナメント'
         if(meta && meta.keyword) {
@@ -263,6 +264,9 @@
 
     route('/', function() {
       riot.mount('content', 'top')
+    })
+    route('/about', function() {
+      riot.mount('content', 'about')
     })
     route('/signin', function(){
       riot.mount('content', 'auth', {type: 'signin'})
