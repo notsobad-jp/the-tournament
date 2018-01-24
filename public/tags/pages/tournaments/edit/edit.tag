@@ -23,6 +23,39 @@
         <bracket-header tournament={ tournament }></bracket-header>
         <div class="ui hidden divider"></div>
         <bracket name="bracket" tournament={ tournament } editable={ true }></bracket>
+        <br><br>
+
+        <div class="ui stackable centered secondary segment grid" if={ false && use.isAnonymous }>
+          <div class="ui sixteen wide column">
+            <h6 class="ui tiny dividing header">
+              <i class="icon question circle"></i>
+              使い方ガイド
+            </h6>
+          </div>
+          <div class="ui eight wide column">
+            <div class="ui medium rectangle centered test ad" data-text="dummy"></div>
+          </div>
+          <div class="ui eight wide column">
+            <div class="ui link list">
+              <a class="item">
+                <i class="icon caret right"></i>
+                参加者を改行テキストで入力したい
+              </a>
+              <a class="item">
+                <i class="icon caret right"></i>
+                組み合わせをシャッフルしたい
+              </a>
+              <a class="item">
+                <i class="icon caret right"></i>
+                試合の詳細情報を登録したい
+              </a>
+              <a class="item">
+                <i class="icon caret right"></i>
+                シードの選手を設定したい
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
       <br><br>
     </div>
