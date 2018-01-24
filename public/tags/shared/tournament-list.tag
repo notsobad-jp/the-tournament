@@ -1,5 +1,5 @@
 <tournament-list>
-  <table class="ui basic table" if={ items.length!=0 }>
+  <table class="ui basic table" if={ items && items.length!=0 }>
     <tbody>
       <tr each={ item, index in items } if={ deletedList.indexOf(item.id) < 0 }>
         <td>
@@ -9,7 +9,7 @@
           <br>
           <small>
             <i class="icon clock"></i>
-            最終更新: { (item.data().createdAt) ? formatDate(item.data().createdAt, 'YYYY年MM月DD日 hh:mm') : '--' }
+            最終更新: { (item.data().updatedAt) ? formatDate(item.data().updatedAt, 'YYYY年MM月DD日 hh:mm') : '--' }
           </small>
         </td>
         <td class="right aligned" if={ editable }>
@@ -22,12 +22,25 @@
       </tr>
     </tbody>
   </table>
-  <div class="ui basic segment" if={ items.length==0 }>
+  <div class="ui basic segment" if={ !items || items.length==0 }>
     <p>まだトーナメント表がありません...😢</p>
 
     <div class="ui red button" onclick={ createAndRedirectToTournament }>
       <i class="icon plus"></i>
       トーナメント表を作成する
+    </div>
+  </div>
+
+  <div class="ui mini secondary menu">
+    <div class="link item" onclick={ prevPage } if={ firstVisible }>
+      <i class="icon chevron left"></i>
+      Prev
+    </div>
+    <div class="right menu">
+      <div class="link item" onclick={ nextPage } if={ lastVisible }>
+        Next
+        <i class="icon chevron right"></i>
+      </div>
     </div>
   </div>
 
@@ -46,9 +59,24 @@
     * Settings
     ***********************************************/
     var that = this
-    that.items = opts.items
     that.editable = opts.editable
+    that.user = opts.user
     that.deletedList = []
+
+    /* paging */
+    that.items = null
+    that.perPage = 25
+    that.firstId = null
+    that.lastVisible = null
+    that.firstVisible = null
+
+
+    /***********************************************
+    * Observables
+    ***********************************************/
+    that.on('mount', function(){
+      that.getItems({})
+    })
 
 
     /***********************************************
@@ -74,6 +102,60 @@
         for (var i = 0; i < length; i++) format = format.replace(/S/, milliSeconds.substring(i, i + 1));
       }
       return format;
+    }
+
+    getItems(args) {
+      obs.trigger("dimmerChanged", 'active')
+
+      var docRef = db.collection("tournaments")
+      // マイページ
+      if(that.user) { docRef = docRef.where("userId", "==", that.user.uid) }
+      // Next
+      if(args.startAfter) {
+        docRef = docRef.orderBy('updatedAt', 'desc').startAfter(args.startAfter)
+      // Prev
+      }else if(args.endBefore) {
+        docRef = docRef.orderBy('updatedAt').startAfter(args.endBefore)
+      // Initial
+      }else {
+        docRef = docRef.orderBy('updatedAt', 'desc')
+      }
+      docRef = docRef.limit(that.perPage)
+
+      docRef.get().then(function(querySnapshot){
+        that.items = querySnapshot.docs
+        if(args.endBefore) { that.items = that.items.reverse() }
+
+        // 最終ページ判定
+        if(that.items.length >= that.perPage) {
+          that.lastVisible = that.items[that.items.length-1]
+        }else {
+          that.lastVisible = null
+        }
+
+        // 最初にページアクセスしたときに、最初のIDを記録しておく
+        if(Object.keys(args).length === 0) {
+          that.firstId = that.items[0].id
+        // ページ遷移時に、先頭まで戻ったかどうかの判定
+        }else {
+          if(that.firstId == that.items[0].id) {
+            that.firstVisible = null
+          }else {
+            that.firstVisible = that.items[0]
+          }
+        }
+
+        that.update()
+        obs.trigger("dimmerChanged", '')
+      })
+    }
+
+    nextPage() {
+      that.getItems({startAfter: that.lastVisible})
+    }
+
+    prevPage() {
+      that.getItems({endBefore: that.firstVisible})
     }
 
     removeTournament(e) {

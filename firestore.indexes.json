@@ -6,6 +6,13 @@
         { "fieldPath": "userId", "mode": "ASCENDING" },
         { "fieldPath": "updatedAt", "mode": "DESCENDING" }
       ]
+    },
+    {
+      "collectionId": "tournaments",
+      "fields": [
+        { "fieldPath": "userId", "mode": "ASCENDING" },
+        { "fieldPath": "updatedAt", "mode": "ASCENDING" }
+      ]
     }
   ]
 }

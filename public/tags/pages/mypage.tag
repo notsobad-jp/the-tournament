@@ -10,7 +10,7 @@
             作成済みトーナメント表
           </div>
         </div>
-        <tournament-list items={ items } editable={ true }></tournament-list>
+        <tournament-list editable={ true } user={ user }></tournament-list>
         <div class="ui hidden divider"></div>
       </div>
 

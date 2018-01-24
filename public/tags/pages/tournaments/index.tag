@@ -1,5 +1,5 @@
 <index>
-  <div if={ items }>
+  <div>
     <breadcrumb breads={ breads }></breadcrumb>
 
     <div class="ui stackable padded centered grid">
@@ -10,7 +10,7 @@
             すべてのトーナメント表
           </div>
         </div>
-        <tournament-list items={ items }></tournament-list>
+        <tournament-list></tournament-list>
         <div class="ui hidden divider"></div>
       </div>
 
@@ -46,17 +46,5 @@
       keyword: '一覧'
     }
     that.setMetatags(meta)
-
-
-    /***********************************************
-    * Observables
-    ***********************************************/
-    obs.trigger("dimmerChanged", 'active')
-    var docRef = db.collection("tournaments").orderBy('updatedAt', 'desc')
-    docRef.get().then(function(querySnapshot){
-      that.items = querySnapshot.docs
-      that.update()
-      obs.trigger("dimmerChanged", '')
-    })
   </script>
 </index>
