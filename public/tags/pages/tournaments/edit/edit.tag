@@ -25,16 +25,19 @@
         <bracket name="bracket" tournament={ tournament } editable={ true }></bracket>
         <br><br>
 
-        <div class="ui stackable centered secondary segment grid" if={ false && use.isAnonymous }>
+        <div class="ui stackable centered secondary segment grid" if={ use.isAnonymous }>
           <div class="ui sixteen wide column">
             <h6 class="ui tiny dividing header">
               <i class="icon question circle"></i>
               使い方ガイド
             </h6>
           </div>
-          <div class="ui eight wide column">
-            <div class="ui medium rectangle centered test ad" data-text="dummy"></div>
+          <div class="ui sixteen wide column">
+            <video muted controls>
+              <source src="/img/howto.mp4" type="video/mp4" />
+            </video>
           </div>
+          <!--
           <div class="ui eight wide column">
             <div class="ui link list">
               <a class="item">
@@ -55,6 +58,7 @@
               </a>
             </div>
           </div>
+          -->
         </div>
       </div>
       <br><br>
@@ -125,6 +129,8 @@
          padding: 0 !important;
        }
     }
+
+    video { max-width: 100%; }
   </style>
 
 
