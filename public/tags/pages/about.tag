@@ -20,13 +20,42 @@
 
 
   <div class="ui stackable centered secondary basic segment grid">
-    <div class="twelve wide column">
+    <div class="twelve wide computer only column">
       <div class="ui fluid five item secondary menu">
-        <a href="#feature" class="ui item">機能</a>
-        <a href="#price" class="ui item">料金表</a>
-        <a href="#usecase" class="ui item">利用実績</a>
-        <a href="#faq" class="ui item">FAQ</a>
-        <a href="#contact" class="ui item">お問合せ</a>
+        <a href="#feature" class="ui item">
+          <i class="icon options"></i>機能
+        </a>
+        <a href="#price" class="ui item">
+          <i class="icon dollar"></i>料金表
+        </a>
+        <a href="#usecase" class="ui item">
+          <i class="icon building outline"></i>利用実績
+        </a>
+        <a href="#faq" class="ui item">
+          <i class="icon comments"></i>FAQ
+        </a>
+        <a href="#contact" class="ui item">
+          <i class="icon mail outline"></i>お問合せ
+        </a>
+      </div>
+    </div>
+    <div class="twelve wide mobile tablet only column">
+      <div class="ui fluid five item secondary menu">
+        <a href="#feature" class="ui item">
+          機能
+        </a>
+        <a href="#price" class="ui item">
+          料金表
+        </a>
+        <a href="#usecase" class="ui item">
+          利用実績
+        </a>
+        <a href="#faq" class="ui item">
+          FAQ
+        </a>
+        <a href="#contact" class="ui item">
+          お問合せ
+        </a>
       </div>
     </div>
   </div>
