@@ -22,11 +22,11 @@
   <div class="ui stackable centered secondary basic segment grid">
     <div class="twelve wide column">
       <div class="ui fluid five item secondary menu">
-        <a href="#feature" class="ui item">主な機能</a>
+        <a href="#feature" class="ui item">機能</a>
         <a href="#price" class="ui item">料金表</a>
         <a href="#usecase" class="ui item">利用実績</a>
         <a href="#faq" class="ui item">FAQ</a>
-        <a href="#contact" class="ui item">お問い合わせ</a>
+        <a href="#contact" class="ui item">お問合せ</a>
       </div>
     </div>
   </div>
@@ -87,7 +87,7 @@
     <div class="twelve wide column">
       <h3 class="ui horizontal divider header">
         <i class="icon options"></i>
-        すごい機能
+        主な機能
       </h3>
       <div class="ui basic center aligned segment">
         THE TOURNAMENTは現在も活発に機能追加を続けています。
@@ -214,23 +214,22 @@
     <div class="twelve wide column">
       <h3 class="ui horizontal divider header">
         <i class="icon dollar"></i>
-        シンプルすぎる料金表
+        料金プラン
       </h3>
     </div>
     <div class="twelve wide column">
       <div class="ui two stackable cards">
         <div class="ui card">
+          <div class="ui secondary center aligned attached segment">
+            <h5 class="ui small header">FREEプラン</h5>
+          </div>
           <div class="content">
-            <div class="center aligned header">
-              FREEプラン
-            </div>
-            <div class="ui divider"></div>
-            <br>
             <div class="description">
               <div class="ui huge center aligned red header">
                 無料
                 <div class="sub header">基本機能はうれしいずっと無料！</div>
               </div>
+              <div class="ui divider"></div>
               <div class="ui small header">
                 <i class="icon green check"></i>
                 すべての基本機能
@@ -258,17 +257,16 @@
         </div>
 
         <div class="ui card">
+          <div class="ui secondary center aligned attached segment">
+            <h5 class="ui small header">PROプラン</h5>
+          </div>
           <div class="content">
-            <div class="center aligned header">
-              PROプラン
-            </div>
-            <div class="ui divider"></div>
-            <br>
             <div class="description">
               <div class="ui huge center aligned red header">
                 個別見積り
                 <div class="sub header">カスタム開発で（ほぼ）あらゆる要望に応えます！</div>
               </div>
+              <div class="ui divider"></div>
               <div class="ui small header">
                 <i class="icon green check"></i>
                 すべての基本機能
@@ -325,7 +323,7 @@
     <div class="twelve wide column">
       <h3 class="ui horizontal divider header">
         <i class="icon building outline"></i>
-        すばらしい利用実績
+        ご利用実績
       </h3>
       <div class="ui basic center aligned segment">
         各種スポーツの全日本連盟や、TV・新聞などの大手メディア他、多数の法人にご利用いただいています。
@@ -342,7 +340,7 @@
     <div class="twelve wide column">
       <h3 class="ui horizontal divider header">
         <i class="icon comments"></i>
-        とてもよくある質問
+        よくある質問
       </h3>
       <br>
       <div class="ui relaxed items">
@@ -352,8 +350,8 @@
             <div class="description">
               <p>
                 ログインせずに、ゲストユーザーとして利用することも可能です。ゲストユーザーでもFREEプランのすべての機能を利用できます。
-                ただしゲストユーザーで作成したトーナメントは、セッションが切れると編集できなくなってしまいます。
-                永続的に残したい場合は、ログインしてください。
+                ただしゲストユーザーで作成したトーナメントは、セッションが切れると編集できなくなってしまいます（トーナメント表が見れなくなるわけではありません）。
+                ずっと管理したい場合は、ログインしてください。
               </p>
             </div>
           </div>
@@ -361,7 +359,7 @@
         <div class="ui hidden divider"></div>
         <div class="item">
           <div class="content">
-            <div class="header">ゲストで作成したトーナメント表がログインしても引き継がれないのですが</div>
+            <div class="header">ゲストで作成したトーナメント表が、ログインしても引き継がれないのですが</div>
             <div class="description">
               <p>
                 ゲストユーザーで作成したトーナメント表は、ログインした時点で自動的にログイン後のアカウントに引き継がれます。
@@ -374,7 +372,7 @@
         <div class="ui hidden divider"></div>
         <div class="item">
           <div class="content">
-            <div class="header">思い通りにトーナメント表が作れません。。</div>
+            <div class="header">どうしても思い通りにトーナメント表が作れません。。</div>
             <div class="description">
               <p>
                 人生なかなかうまくいかないときもあるものです。
@@ -397,7 +395,7 @@
       <div class="twelve wide column">
         <h3 class="ui horizontal divider header">
           <i class="mail outline icon"></i>
-          すぐに返事が来るお問い合わせ
+          お問い合わせ
         </h3>
         <div class="ui basic center aligned segment">
           <p>
@@ -418,7 +416,7 @@
     h1 img { max-width: 90% !important; }
     .ui.secondary.basic.segment.grid { margin: 0; }
     .ui.secondary.basic.segment.grid .column { padding: 0.5rem !important; }
-    .ui.secondary.basic.segment.grid .ui.item { font-weight: bold: }
+    .ui.secondary.basic.segment.grid .ui.item { font-weight: bold; }
   </style>
 
 
