@@ -1,11 +1,9 @@
 <bracket-header>
-  <!--
   <div class="ui transparent fluid icon input { error: tournament.title == '' }">
     <input id="nameInput" type="text" name="title" placeholder="トーナメント名*" value={ tournament.title } onchange={ updateTournament }>
     <i class="icon write"></i>
   </div>
   <div class="ui divider"></div>
-  -->
   <div class="ui two column grid">
     <div class="ui left aligned column">
       <div class="ui icon mini primary buttons">
@@ -58,11 +56,17 @@
       that.addTeams(that.tournament, 1, true)
       obs.trigger("tournamentChanged", that.tournament)
     }
+
     removeRound() {
       let alertMessage = 'トーナメントのサイズを半分にします。トーナメント下半分の参加者・試合結果が削除されますが、本当によろしいですか？'
       if(!confirm(alertMessage)) { return false }
 
       that.removeTeams(that.tournament, 1, true)
+      obs.trigger("tournamentChanged", that.tournament)
+    }
+
+    updateTournament(e) {
+      that.tournament.title = e.currentTarget.value
       obs.trigger("tournamentChanged", that.tournament)
     }
   </script>

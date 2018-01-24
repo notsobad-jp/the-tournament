@@ -232,11 +232,13 @@
       obs.trigger("dimmerChanged", 'active')
 
       if(that.tournament.title=='') {
-        that.tournament.title = opts.id
+        obs.trigger("dimmerChanged", '')
+        alert('トーナメント名を入力してください！')
+        return false
       }
-      that.tournament.updatedAt = new Date()
 
       /* 保存処理 */
+      that.tournament.updatedAt = new Date()
       var docRef = db.collection("tournaments").doc(opts.id)
       docRef.set(that.tournament)
       .then(function() {

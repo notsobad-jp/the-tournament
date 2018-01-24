@@ -12,10 +12,6 @@
             ベータ版
           </span>
         </div>
-        <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
-          <i class="icon mail"></i>
-          不具合報告
-        </a>
 
         <div class="right menu">
           <div class="link item" onclick={ createAndRedirectToTournament }>
@@ -63,10 +59,6 @@
           <h2>
             <img class="ui image" src="/img/logo_w.png">
           </h2>
-        </a>
-        <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
-          <i class="icon mail"></i>
-          不具合報告
         </a>
         <div class="item menu-title"></div>
         <div class="right menu">

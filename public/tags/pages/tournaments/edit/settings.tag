@@ -1,6 +1,6 @@
 <settings>
   <div class="ui form">
-    <div class="required field">
+    <div class="required field { error: tournament.title=='' }">
       <label>トーナメント名</label>
       <input type="text" name="title" value="{tournament.title}" onchange={ updateTournament }>
     </div>
