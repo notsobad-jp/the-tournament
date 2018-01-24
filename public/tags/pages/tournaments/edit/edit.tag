@@ -33,8 +33,8 @@
             </h6>
           </div>
           <div class="ui sixteen wide column">
-            <video muted controls>
-              <source src="/img/howto.mp4" type="video/mp4" />
+            <video muted controls poster="/img/howto/cover.png">
+              <source src="/img/howto/howto.mp4" type="video/mp4" />
             </video>
           </div>
           <!--
