@@ -25,7 +25,7 @@
         <bracket name="bracket" tournament={ tournament } editable={ true }></bracket>
         <br><br>
 
-        <div class="ui stackable centered secondary segment grid" if={ use.isAnonymous }>
+        <div class="ui stackable centered secondary segment grid" if={ user.isAnonymous }>
           <div class="ui sixteen wide column">
             <h6 class="ui tiny dividing header">
               <i class="icon question circle"></i>
