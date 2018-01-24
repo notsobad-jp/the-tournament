@@ -23,8 +23,8 @@
       <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">お問い合わせ</a>
       <a class="item" href="http://blog.notsobad.jp/" target="_blank">公式ブログ</a>
       <a class="item" href="https://trello.com/b/G9vXQ1rT/" target="_blank">開発ロードマップ</a>
-      <a class="item" href="/terms" target="_blank">利用規約</a>
-      <a class="item" href="/privary" target="_blank">プライバシーポリシー</a>
+      <a class="item" href="https://app.the-tournament.jp/pages/terms.html" target="_blank">利用規約</a>
+      <a class="item" href="https://app.the-tournament.jp/pages/privacy.html" target="_blank">プライバシーポリシー</a>
     </div>
   </div>
 
