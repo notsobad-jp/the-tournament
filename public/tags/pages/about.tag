@@ -23,39 +23,29 @@
     <div class="twelve wide computer only column">
       <div class="ui fluid five item secondary menu">
         <a href="#feature" class="ui item">
-          <i class="icon options"></i>機能
+          <i class="icon options"></i>主な機能
         </a>
         <a href="#price" class="ui item">
-          <i class="icon dollar"></i>料金表
+          <i class="icon dollar"></i>料金プラン
         </a>
         <a href="#usecase" class="ui item">
-          <i class="icon building outline"></i>利用実績
+          <i class="icon building outline"></i>ご利用実績
         </a>
         <a href="#faq" class="ui item">
-          <i class="icon comments"></i>FAQ
+          <i class="icon comments"></i>よくある質問
         </a>
         <a href="#contact" class="ui item">
-          <i class="icon mail outline"></i>お問合せ
+          <i class="icon mail outline"></i>お問い合わせ
         </a>
       </div>
     </div>
     <div class="twelve wide mobile tablet only column">
       <div class="ui fluid five item secondary menu">
-        <a href="#feature" class="ui item">
-          機能
-        </a>
-        <a href="#price" class="ui item">
-          料金表
-        </a>
-        <a href="#usecase" class="ui item">
-          利用実績
-        </a>
-        <a href="#faq" class="ui item">
-          FAQ
-        </a>
-        <a href="#contact" class="ui item">
-          お問合せ
-        </a>
+        <a href="#feature" class="ui item">機能</a>
+        <a href="#price" class="ui item">料金</a>
+        <a href="#usecase" class="ui item">実績</a>
+        <a href="#faq" class="ui item">FAQ</a>
+        <a href="#contact" class="ui item">お問合せ</a>
       </div>
     </div>
   </div>
@@ -76,7 +66,7 @@
       <bracket editable={ false } tournament={ tournament } if={ tournament }></bracket>
       <small>※タップすると試合詳細を表示します。</small>
     </div>
-    <div class="four wide center aligned column">
+    <div class="four wide center aligned computer only column">
       <div class="ui small icon header">
         <i class="icon sitemap pink"></i>
         きれいで見やすいトーナメント表
@@ -86,6 +76,20 @@
         初めてでも簡単！直感的な操作方法
       </div>
       <div class="ui small icon header">
+        <i class="icon code pink"></i>
+        ブログやHPにも簡単に埋め込み可能！
+      </div>
+    </div>
+    <div class="four wide center aligned mobile tablet only column">
+      <div class="ui small header">
+        <i class="icon sitemap pink"></i>
+        きれいで見やすいトーナメント表
+      </div>
+      <div class="ui small header">
+        <i class="icon smile pink"></i>
+        初めてでも簡単！直感的な操作方法
+      </div>
+      <div class="ui small header">
         <i class="icon code pink"></i>
         ブログやHPにも簡単に埋め込み可能！
       </div>
@@ -123,17 +127,6 @@
         今後の開発予定は「<a href="https://trello.com/b/G9vXQ1rT" target="_blank">開発ロードマップ</a>」で確認可能です。
       </div>
       <div class="ui three doubling cards">
-        <div class="card">
-          <div class="image">
-            <img src="img/top/feature/third-place.png">
-          </div>
-          <div class="content">
-            <div class="header">3位決定戦</div>
-            <div class="description">
-              3位決定戦の有無を簡単に切り替え可能です。
-            </div>
-          </div>
-        </div>
         <div class="card">
           <div class="image">
             <img src="img/top/feature/multi-seed.png">
@@ -180,34 +173,6 @@
         </div>
         <div class="card">
           <div class="image">
-            <img src="img/top/feature/profile-image.png">
-          </div>
-          <div class="content">
-            <div class="header">
-              選手の顔写真表示
-              <span class="ui orange mini label">PRO</span>
-            </div>
-            <div class="description">
-              各選手ごとに顔写真を登録して表示することができます。※PROプランのみ
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="image">
-            <img src="img/top/feature/image-download.jpg">
-          </div>
-          <div class="content">
-            <div class="header">
-              画像ダウンロード
-              <span class="ui mini label">開発中…</span>
-            </div>
-            <div class="description">
-              トーナメント表を画像でダウンロードできます。SNSでのシェアに便利です。
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="image">
             <img src="img/top/feature/double-mountain.png">
           </div>
           <div class="content">
@@ -223,8 +188,70 @@
         </div>
         <div class="card">
           <div class="image">
-            <img src="img/top/feature/long-name.png">
+            <img src="img/top/feature/profile-image.png">
           </div>
+          <div class="content">
+            <div class="header">
+              選手の顔写真表示
+              <span class="ui orange mini label">PRO</span>
+            </div>
+            <div class="description">
+              各選手ごとに顔写真を登録して表示することができます。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui three doubling cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              参加者シャッフル
+            </div>
+            <div class="description">
+              何度でもランダムで参加者の配置をシャッフルできます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              外部サイト埋め込み
+            </div>
+            <div class="description">
+              コードをコピペするだけで、外部のブログやHPに埋め込めます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              スコアなし（勝敗のみ記録）
+            </div>
+            <div class="description">
+              トーナメント表からスコア表示をなくし、勝敗のみ記録することもできます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">3位決定戦</div>
+            <div class="description">
+              3位決定戦の有無を簡単に切り替え可能です。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              画像ダウンロード
+              <span class="ui mini label">開発中…</span>
+            </div>
+            <div class="description">
+              トーナメント表を画像でダウンロードできます。SNSでのシェアに便利です。
+            </div>
+          </div>
+        </div>
+        <div class="card">
           <div class="content">
             <div class="header">参加者・スコアの表示幅調整</div>
             <div class="description">
