@@ -115,6 +115,7 @@
 }
 .lineContainer > div > div {
   width: 20px;
+  box-sizing: border-box;
   border-color: #999;
 }
 .left.block .final.round .lineContainer { display: none; }
@@ -487,10 +488,7 @@
 .bracket.showBye .round:not(:first-child) .match.bye .teamContainer { display: block; }
 .bracket.showBye .teamContainer { top: unset !important; }
 .bracket.showBye .lineContainer div { flex-grow: 1 !important; }
-.bracket.showBye .lineContainer > div > div {
-  width: 20px !important; 
-  box-sizing: border-box;
-}
+.bracket.showBye .lineContainer > div > div { width: 20px !important; }
 
 .bracket.showBye .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:first-child,
 .bracket.showBye .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:first-child {
