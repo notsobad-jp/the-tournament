@@ -46,7 +46,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   var tournament = event.data.data();
   var id = event.params.id;
 
-  var html = riot.render(bracket, {tournament: tournament, editable: false, id: id});
+  var html = riot.render(bracket, {tournament: tournament, editable: false});
   var header = function(){/*
     <html>
     <head>
