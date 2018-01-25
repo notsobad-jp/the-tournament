@@ -22,22 +22,6 @@ var autoLink = function(str) {
   return str.replace(regexp_url, regexp_makeLink);
 }
 
-var escapeHTML = function(string) {
-  if(typeof string !== 'string') {
-    return string;
-  }
-  return string.replace(/[&'`"<>]/g, function(match) {
-    return {
-      '&': '&amp;',
-      "'": '&#x27;',
-      '`': '&#x60;',
-      '"': '&quot;',
-      '<': '&lt;',
-      '>': '&gt;',
-    }[match]
-  });
-}
-
 
 /* 匿名ユーザーで作成したトーナメントを、ログイン後の正規アカウントに移行 */
 exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCreate(event => {
@@ -73,7 +57,6 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   var id = event.params.id;
 
   var html = riot.render(bracket, {tournament: tournament, editable: false, embed: true});
-  html = escapeHTML(html)
   html = html.replace(/\r?\n/g, '<br>')
   html = autoLink(html)
 
