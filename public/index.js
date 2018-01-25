@@ -13,6 +13,32 @@ var db = admin.firestore();
 var bucket = admin.storage().bucket('app.the-tournament.jp');
 
 
+
+var autoLink = function(str) {
+  var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
+  var regexp_makeLink = function(all, url, h, href) {
+    return '<a href="h' + href + '" target="_blank">' + url + '</a>';
+  }
+  return str.replace(regexp_url, regexp_makeLink);
+}
+
+var escapeHTML = function(string) {
+  if(typeof string !== 'string') {
+    return string;
+  }
+  return string.replace(/[&'`"<>]/g, function(match) {
+    return {
+      '&': '&amp;',
+      "'": '&#x27;',
+      '`': '&#x60;',
+      '"': '&quot;',
+      '<': '&lt;',
+      '>': '&gt;',
+    }[match]
+  });
+}
+
+
 /* 匿名ユーザーで作成したトーナメントを、ログイン後の正規アカウントに移行 */
 exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCreate(event => {
   var newUid = event.params.newUid;
@@ -47,6 +73,10 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   var id = event.params.id;
 
   var html = riot.render(bracket, {tournament: tournament, editable: false});
+  html = escapeHTML(html)
+  html = html.replace(/\r?\n/g, '<br>')
+  html = autoLink(html)
+
   var header = function(){/*
     <html>
     <head>

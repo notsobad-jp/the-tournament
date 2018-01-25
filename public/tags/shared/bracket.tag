@@ -58,7 +58,8 @@
                   </div>
                 </virtual>
               </div>
-              <div id="popup_{ roundIndex }-{ matchIndex }" class="popupComment" onload={ setRawHTML(this, match.comment) }></div>
+              <div data-is="raw" class="popupComment" if={ !embed } content={ match.comment }></div>
+              <div if={ embed } class="popupComment">{ match.comment }</div>
             </div>
           </div>
         </div>
@@ -105,47 +106,8 @@
     var that = this
     that.tournament = opts.tournament
     that.editable = opts.editable
+    that.embed = opts.embed
     that.showBye = false
-
-
-    /***********************************************
-    * Raw HTML Comment
-    ***********************************************/
-    setRawHTML(obj, comment) {
-      setTimeout(function(){
-        var popupComment =document.getElementById('popup_'+obj.roundIndex+'-'+obj.matchIndex)
-        if(comment && comment !== '') {
-          comment = that.escapeHTML(comment)
-          comment = comment.replace(/\r?\n/g, '<br>')
-          comment = that.autoLink(comment)
-        }
-        popupComment.innerHTML = comment
-      }, 10)
-    }
-
-    autoLink(str) {
-      var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
-      var regexp_makeLink = function(all, url, h, href) {
-        return '<a href="h' + href + '" target="_blank">' + url + '</a>';
-      }
-      return str.replace(regexp_url, regexp_makeLink);
-    }
-
-    escapeHTML(string) {
-      if(typeof string !== 'string') {
-        return string;
-      }
-      return string.replace(/[&'`"<>]/g, function(match) {
-        return {
-          '&': '&amp;',
-          "'": '&#x27;',
-          '`': '&#x60;',
-          '"': '&quot;',
-          '<': '&lt;',
-          '>': '&gt;',
-        }[match]
-      });
-    }
 
 
     /***********************************************
