@@ -481,7 +481,7 @@
     * Settings
     ***********************************************/
     var that = this
-    var id = "KsJAc45wdlhGyPtLka9H"
+    var id = "lJO8z1lh3BwPwXEsVREM"
     var docRef = db.collection("tournaments").doc(id)
     docRef.get().then(function(doc){
       if(doc.exists) {
