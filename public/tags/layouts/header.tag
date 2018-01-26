@@ -7,11 +7,10 @@
             <img class="ui image" src="/img/logo_w.png">
           </h2>
         </a>
-        <div class="label item">
-          <span class="ui left pointing pink mini label">
-            ベータ版
-          </span>
-        </div>
+        <a class="item" href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b" target="_blank">
+          <i class="icon question circle"></i>
+          使い方
+        </a>
 
         <div class="right menu">
           <div class="link item" onclick={ createAndRedirectToTournament }>
@@ -59,6 +58,10 @@
           <h2>
             <img class="ui image" src="/img/logo_w.png">
           </h2>
+        </a>
+        <a href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b" class="item" target="_blank">
+          <i class="icon question circle"></i>
+          使い方
         </a>
         <div class="item menu-title"></div>
         <div class="right menu">
@@ -112,7 +115,6 @@
     }
     .header.item img { height: 20px; }
     .icon.content { transition: all 300ms 0s ease; }
-    .label.item { padding-left: 0 !important; }
     .right.menu .item {
       padding-top: 0px;
       padding-bottom: 0px;

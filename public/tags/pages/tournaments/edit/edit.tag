@@ -32,33 +32,36 @@
               使い方ガイド
             </h6>
           </div>
-          <div class="ui sixteen wide column">
+          <div class="ui eight wide column">
+            <small class="ui tiny header">10秒動画で使い方をチェック</small>
             <video muted controls poster="/img/howto/cover.png">
               <source src="/img/howto/howto.mp4" type="video/mp4" />
             </video>
           </div>
-          <!--
           <div class="ui eight wide column">
+            <small class="ui tiny header">その他のドキュメント</small>
             <div class="ui link list">
-              <a class="item">
+              <a class="item" href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b/detail/db5e2bf5b8fde4b521b36837ce95fc003ba97318" target="_blank">
                 <i class="icon caret right"></i>
                 参加者を改行テキストで入力したい
               </a>
-              <a class="item">
+              <a class="item" href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b/detail/edd19af7c7b2442d3d7339acc35ca8d29f54c8ae" target="_blank">
                 <i class="icon caret right"></i>
                 組み合わせをシャッフルしたい
               </a>
-              <a class="item">
+              <a class="item" href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b/detail/c86db5c03b7e59da3a9a738a0422926e2ea158aa" target="_blank">
                 <i class="icon caret right"></i>
                 試合の詳細情報を登録したい
               </a>
-              <a class="item">
+              <a class="item" href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b/detail/ed7e8086db9cb6370eb66906b78d3373f02c7a08" target="_blank">
                 <i class="icon caret right"></i>
                 シードの選手を設定したい
               </a>
+              <a class="item" href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b" target="_blank">
+                ...もっとドキュメントを見る
+              </a>
             </div>
           </div>
-          -->
         </div>
       </div>
       <br><br>
