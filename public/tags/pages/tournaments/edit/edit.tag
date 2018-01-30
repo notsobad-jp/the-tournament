@@ -91,7 +91,7 @@
     }
     .ui.dark.column { background-color: #2D3E4F !important; }
     .ui.bracket.column { min-height: calc(100vh - 45px) }
-    .ui.menu.fixed { z-index: 999; }
+    .ui.menu.fixed { z-index: 2147483646 !important; }
 
     /* タブ切り替えアニメーション */
     @media screen and (min-width: 481px) {
