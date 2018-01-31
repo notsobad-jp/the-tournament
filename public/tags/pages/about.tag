@@ -25,11 +25,11 @@
         <a href="#feature" class="ui item">
           <i class="icon options"></i>主な機能
         </a>
-        <a href="#price" class="ui item">
-          <i class="icon dollar"></i>料金プラン
-        </a>
         <a href="#usecase" class="ui item">
           <i class="icon building outline"></i>ご利用実績
+        </a>
+        <a href="#price" class="ui item">
+          <i class="icon dollar"></i>料金プラン
         </a>
         <a href="#faq" class="ui item">
           <i class="icon comments"></i>よくある質問
@@ -42,8 +42,8 @@
     <div class="twelve wide mobile tablet only column">
       <div class="ui fluid five item secondary menu">
         <a href="#feature" class="ui item">機能</a>
-        <a href="#price" class="ui item">料金</a>
         <a href="#usecase" class="ui item">実績</a>
+        <a href="#price" class="ui item">料金</a>
         <a href="#faq" class="ui item">FAQ</a>
         <a href="#contact" class="ui item">お問合せ</a>
       </div>
@@ -266,6 +266,23 @@
   <br><br>
 
 
+  <div id="usecase" class="ui stackable centered grid">
+    <div class="twelve wide column">
+      <h3 class="ui horizontal divider header">
+        <i class="icon building outline"></i>
+        ご利用実績
+      </h3>
+      <div class="ui basic center aligned segment">
+        各種スポーツの全日本連盟や、TV・新聞などの大手メディア他、多数の法人にご利用いただいています。
+        <br>
+        詳しい利用実績をご希望の方はお問い合わせください。
+      </div>
+    </div>
+  </div>
+  <div class="ui hidden divider"></div>
+  <br><br>
+
+
   <div id="price" class="ui stackable centered grid">
     <div class="twelve wide column">
       <h3 class="ui horizontal divider header">
@@ -273,8 +290,8 @@
         料金プラン
       </h3>
     </div>
-    <div class="twelve wide column">
-      <div class="ui two stackable cards">
+    <div class="fourteen wide column">
+      <div class="ui three stackable cards">
         <div class="ui card">
           <div class="ui secondary center aligned attached segment">
             <h5 class="ui small header">FREEプラン</h5>
@@ -282,6 +299,8 @@
           <div class="content">
             <div class="description">
               <div class="ui huge center aligned red header">
+                <img src="img/top/price/free.png" alt="FREEプラン">
+                <br>
                 無料
                 <div class="sub header">基本機能はうれしいずっと無料！</div>
               </div>
@@ -292,18 +311,12 @@
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
-                大会参加者：〜128名
+                参加者数：〜128名
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
                 通常サポート（チャット・メール）
               </div>
-              <div class="ui small header"></div>
-              <div class="ui small header"></div>
-              <div class="ui small header"></div>
-              <div class="ui small header"></div>
-              <div class="ui small header"></div>
-              <div class="ui small header"></div>
             </div>
           </div>
           <div class="ui bottom attached red button" onclick={ createAndRedirectToTournament }>
@@ -314,13 +327,15 @@
 
         <div class="ui card">
           <div class="ui secondary center aligned attached segment">
-            <h5 class="ui small header">PROプラン</h5>
+            <h5 class="ui small header">STANDARDプラン</h5>
           </div>
           <div class="content">
             <div class="description">
               <div class="ui huge center aligned red header">
-                個別見積り
-                <div class="sub header">カスタム開発で（ほぼ）あらゆる要望に応えます！</div>
+                <img src="img/top/price/standard.png" alt="STANDARDプラン">
+                <br>
+                5,000円/回
+                <div class="sub header">お手軽価格で大規模大会にも対応！</div>
               </div>
               <div class="ui divider"></div>
               <div class="ui small header">
@@ -329,15 +344,11 @@
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
-                大会参加者：128名以上も可能です
+                参加者数：〜1,024名
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
                 全力サポート（電話・チャット・メール）
-              </div>
-              <div class="ui small header">
-                <i class="icon green check"></i>
-                特殊なトーナメント形式
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
@@ -346,6 +357,46 @@
               <div class="ui small header">
                 <i class="icon green check"></i>
                 両山スタイル
+              </div>
+            </div>
+          </div>
+          <div class="ui bottom attached basic segment">
+            <p>トーナメントを複数作成したい場合の割引も可能です。お気軽にご相談ください。</p>
+          </div>
+          <a class="ui bottom attached primary button" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
+            <i class="icon mail"></i>
+            お問い合わせ
+          </a>
+        </div>
+
+        <div class="ui card">
+          <div class="ui secondary center aligned attached segment">
+            <h5 class="ui small header">PROプラン</h5>
+          </div>
+          <div class="content">
+            <div class="description">
+              <div class="ui huge center aligned red header">
+                <img src="img/top/price/pro.png" alt="PROプラン">
+                <br>
+                個別見積り
+                <div class="sub header">カスタム開発で（ほぼ）何でも対応！</div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                すべての基本機能
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                参加者数：1,024名〜
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                全力サポート（電話・チャット・メール）
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                特殊なトーナメント形式
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
@@ -359,32 +410,16 @@
                 <i class="icon green check"></i>
                 大会現地サポート
               </div>
-              <div class="ui divider"></div>
-              <p>その他、大抵のことは対応可能です。お気軽にご相談ください。</p>
             </div>
+          </div>
+          <div class="ui bottom attached basic segment">
+            <p>その他、大抵のことは対応可能です。お気軽にご相談ください。</p>
           </div>
           <a class="ui bottom attached primary button" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
             <i class="icon mail"></i>
             お問い合わせ
           </a>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="ui hidden divider"></div>
-  <br><br>
-
-
-  <div id="usecase" class="ui stackable centered grid">
-    <div class="twelve wide column">
-      <h3 class="ui horizontal divider header">
-        <i class="icon building outline"></i>
-        ご利用実績
-      </h3>
-      <div class="ui basic center aligned segment">
-        各種スポーツの全日本連盟や、TV・新聞などの大手メディア他、多数の法人にご利用いただいています。
-        <br>
-        詳しい利用実績をご希望の方はお問い合わせください。
       </div>
     </div>
   </div>
@@ -473,6 +508,13 @@
     .ui.secondary.basic.segment.grid { margin: 0; }
     .ui.secondary.basic.segment.grid .column { padding: 0.5rem !important; }
     .ui.secondary.basic.segment.grid .ui.item { font-weight: bold; }
+
+    .ui.bottom.attached.basic.segment {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .ui.three.stackable.cards .card { margin-bottom: 30px; }
   </style>
 
 
