@@ -36,6 +36,8 @@
 
           <div class="ui tab { active: tabSelected('bracket') }">
             <bracket editable={ false } tournament={ tournament }></bracket>
+            <div class="ui divider"></div>
+            <sns-share tournament={ tournament } id={ opts.id }></sns-share>
           </div>
 
           <div class="ui tab { active: tabSelected('results') }">

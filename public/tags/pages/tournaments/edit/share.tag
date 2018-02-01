@@ -1,5 +1,5 @@
 <share>
-  <div class="">
+  <div>
     <h5 class="ui small header">公開URL</h5>
     <div class="ui small basic message">
       <a href="https://tournament-7e3b7.firebaseapp.com/tournaments/{ parent.opts.id }" target="_blank">
@@ -16,25 +16,12 @@
     </div>
 
     <h5 class="ui small header">SNSシェア</h5>
-    <div class="ui horizontal list">
-      <div class="item">
-        <a class="ui facebook small button" href="http://www.facebook.com/share.php?u={ shareURL }" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;">
-          <i class="facebook icon"></i>
-          Facebook
-        </a>
-      </div>
-      <div class="item">
-        <a class="ui twitter small button" href="http://twitter.com/share?url={ shareURL }&text={ shareText }" target="_blank">
-          <i class="twitter icon"></i>
-          Twitter
-        </a>
-      </div>
-    </div>
+    <sns-share tournament={ tournament } id={ id }></sns-share>
 
     <h5 class="ui small header">
       画像ダウンロード
     </h5>
-    <div class="ui icon primary button" onclick={ saveImage } if={ !downloading }>
+    <div class="ui icon primary small button" onclick={ saveImage } if={ !downloading }>
       <i class="icon download"></i>
       画像をダウンロードする
     </div>
@@ -53,6 +40,7 @@
         </a>
       </small>
     </div>
+    <br><br>
   </div>
 
 
