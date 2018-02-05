@@ -61,6 +61,54 @@
     * Settings
     ***********************************************/
     var that = this
+    that.user = null
+    that.accountLinkable = false
+
+
+    /***********************************************
+    * Observables
+    ***********************************************/
+    that.on('mount', function() {
+      obs.trigger("dimmerChanged", 'active')
+    })
+
+    that.on('unmount', function() {
+      authUnsubscribe()
+    })
+
+    //匿名ユーザー情報を取得して、アカウント紐付けが必要か判別
+    var authUnsubscribe = firebase.auth().onAuthStateChanged(function(user) {
+      that.user = user
+      if(!user.isAnonymous) {
+        obs.trigger("dimmerChanged", '')
+        route('/mypage')
+        return false
+      }
+
+      //匿名ユーザーの場合は、トーナメント作成してたらアカウント紐付け
+      var docRef = db.collection("anonymousUsers").doc(user.uid)
+      docRef.get().then(function(doc){
+        if(doc.exists) {
+          that.accountLinkable = true
+        }
+        obs.trigger("dimmerChanged", '')
+      })
+    })
+
+    firebase.auth().getRedirectResult().then(function(result) {
+      //ログイン成功
+      if(result.user) {
+        obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
+      }
+    }).catch(function(error) {
+      //ログイン失敗
+      obs.trigger("flashChanged", {
+        type: 'error',
+        text: 'ログインに失敗しました..。' + error.code + ':' + error.message,
+        permanent: true
+      })
+      console.log(error)
+    })
 
 
     /***********************************************
@@ -73,38 +121,16 @@
       if(providerName=='facebook') {
         provider = new firebase.auth.FacebookAuthProvider()
       }else if(providerName=='twitter') {
-        provider = new firebase.auth.TwitterAuthProvider();
+        provider = new firebase.auth.TwitterAuthProvider()
       }else if(providerName=='google') {
-        provider = new firebase.auth.GoogleAuthProvider();
+        provider = new firebase.auth.GoogleAuthProvider()
       }
 
-      var anonymousUid = firebase.auth().currentUser.uid
-      var docRef = db.collection("anonymousUsers").doc(anonymousUid)
-      docRef.get().then(function(doc){
-        firebase.auth().signInWithPopup(provider).then(function(result){
-          //匿名でトーナメント作成してたらfunctionでアカウント紐付け
-          if(doc.exists) {
-            let tmpRef = db.collection("linkRequests").doc(result.user.uid)
-            tmpRef.set({oldUid: anonymousUid})
-            obs.trigger("flashChanged", {
-              type:'success',
-              text:'ログインしました！ゲストユーザーで作成したトーナメントはこのアカウントに引き継がれます。移行処理に最大5〜10分程度かかる場合がありますので、しばらく経ってから画面をリロードしてください。',
-              permanent: true
-            })
-          }else {
-            obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
-          }
-          route('mypage')
-        }).catch(function(error) {
-          obs.trigger("flashChanged", {
-            type: 'error',
-            text: 'ログインに失敗しました..。' + error,
-            permanent: true
-          })
-          console.log(error)
-        })
-      })
-
+      if(that.accountLinkable) {
+        that.user.linkWithRedirect(provider)
+      }else {
+        firebase.auth().signInWithRedirect(provider)
+      }
     }
 
     magicAuth() {

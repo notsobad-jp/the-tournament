@@ -8,8 +8,5 @@ service cloud.firestore {
     match /anonymousUsers/{userId} {
       allow read, write: if request.auth.uid == userId;
     }
-    match /linkRequests/{userId} {
-      allow read, write: if request.auth.uid == userId;
-    }
   }
 }

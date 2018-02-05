@@ -23,34 +23,6 @@ var autoLink = function(str) {
 }
 
 
-/* 匿名ユーザーで作成したトーナメントを、ログイン後の正規アカウントに移行 */
-exports.linkAccount = functions.firestore.document('linkRequests/{newUid}').onCreate(event => {
-  var newUid = event.params.newUid;
-  var oldUid = event.data.data().oldUid;
-
-  var promise = new Promise(function(resolve, reject) {
-    var tnmtRef = db.collection("tournaments").where("userId", "==", oldUid)
-    tnmtRef.get().then(function(querySnapshot){
-      var batch = db.batch();
-      for(i in querySnapshot.docs) {
-        var ref = db.collection("tournaments").doc(querySnapshot.docs[i].id);
-        batch.update(ref, {userId: newUid});
-      }
-      //不要になった移行用レコードを消しとく
-      // batch.delete(db.collection("anonymousUsers").doc(oldUid))
-      // batch.delete(db.collection("linkRequests").doc(newUid))
-
-      //処理実行
-      batch.commit().then(function () {
-        resolve();
-      });
-    })
-  });
-  process.on('unhandledRejection', console.dir);
-  return promise;
-});
-
-
 /* トーナメント更新時に、riotでSSRしてstorageに静的HTMLをアップ */
 exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(event => {
   var tournament = event.data.data();
