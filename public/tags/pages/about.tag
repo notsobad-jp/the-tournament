@@ -450,12 +450,12 @@
         <div class="ui hidden divider"></div>
         <div class="item">
           <div class="content">
-            <div class="header">ゲストで作成したトーナメント表が、ログインしても引き継がれないのですが</div>
+            <div class="header">ゲストで作成したトーナメント表を、ログインしてアカウントに引き継ぎたい</div>
             <div class="description">
               <p>
-                ゲストユーザーで作成したトーナメント表は、ログインした時点で自動的にログイン後のアカウントに引き継がれます。
-                ただし引き継ぎ処理の完了までに数分程度かかりますので、ログイン後すぐはマイページにトーナメント表が表示されません。
-                しばらくしてからページを再読み込みしてみてください。
+                ゲストユーザーで作成したトーナメント表は、アカウントを登録（初ログイン）した際に、自動的にそのアカウントに引き継がれます。
+                ただし、<span class="ui small red header">すでに登録済みのアカウントに、ゲストユーザーからデータを引き継ぐことはできません</span>。
+                もし間違えてゲストで作成したデータを引き継ぎたい場合は、運営までお問い合わせください。
               </p>
             </div>
           </div>
@@ -523,8 +523,8 @@
     * Settings
     ***********************************************/
     var that = this
-    var id = "lJO8z1lh3BwPwXEsVREM"
-    var docRef = db.collection("tournaments").doc(id)
+    var sampleId = "lJO8z1lh3BwPwXEsVREM"
+    var docRef = db.collection("tournaments").doc(sampleId)
     docRef.get().then(function(doc){
       if(doc.exists) {
         that.tournament = doc.data()
