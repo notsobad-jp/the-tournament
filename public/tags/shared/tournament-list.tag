@@ -135,7 +135,7 @@
 
         // 最初にページアクセスしたときに、最初のIDを記録しておく
         if(Object.keys(args).length === 0) {
-          that.firstId = that.items[0].id
+          that.firstId = (that.items[0]) ? that.items[0].id : null
         // ページ遷移時に、先頭まで戻ったかどうかの判定
         }else {
           if(that.firstId == that.items[0].id) {
