@@ -95,19 +95,38 @@
       })
     })
 
+    //ログイン成功
     firebase.auth().getRedirectResult().then(function(result) {
-      //ログイン成功
       if(result.user) {
         obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
       }
+    //ログイン失敗
     }).catch(function(error) {
-      //ログイン失敗
-      obs.trigger("flashChanged", {
-        type: 'error',
-        text: 'ログインに失敗しました..。' + error.code + ':' + error.message,
-        permanent: true
-      })
-      console.log(error)
+      // ゲストから登録済みのユーザーに紐付けようとしたとき
+      if(error.code == 'auth/credential-already-in-use') {
+        obs.trigger("dimmerChanged", '')
+        let alertMessage = 'すでに登録済みのアカウントに、ゲストユーザーのトーナメント表を引き継ぐことはできません。ログインすると現在ゲストで作成したトーナメント表は失われますが、よろしいですか？'
+        if(confirm(alertMessage)) {
+          firebase.auth().signInWithCredential(error.credential).then(function(){
+            obs.trigger("flashChanged", {type:'success',text:'ログインしました！'})
+          })
+        }else {
+          obs.trigger("flashChanged", {
+            type: 'error',
+            text: 'ログインをキャンセルしました。現在ゲストで作成しているトーナメント表を引き継ぎたい場合、運営までお問い合わせください。',
+            permanent: true
+          })
+          return false
+        }
+      // その他のエラー
+      }else {
+        obs.trigger("flashChanged", {
+          type: 'error',
+          text: '【エラー】' + error.message,
+          permanent: true
+        })
+        console.log(error)
+      }
     })
 
 
