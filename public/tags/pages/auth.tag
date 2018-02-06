@@ -157,10 +157,17 @@
       obs.trigger("dimmerChanged", 'active')
       var newPassword = Math.random().toString(36).slice(-12)
 
-      firebase.auth().createUserWithEmailAndPassword(that.refs.email.value, newPassword).then(function(){
-        //新規ユーザーの場合
+      if(that.accountLinkable) {
+        var credential = firebase.auth.EmailAuthProvider.credential(that.refs.email.value, newPassword);
+        var userPromise = firebase.auth().currentUser.linkWithCredential(credential)
+      }else {
+        var userPromise = firebase.auth().createUserWithEmailAndPassword(that.refs.email.value, newPassword)
+      }
+
+      //新規登録orアカウントリンク実行
+      userPromise.then(function(){
+        //新規ユーザーだった場合
         firebase.auth().sendPasswordResetEmail(that.refs.email.value)
-        firebase.auth().signOut()
         that.message = {
           type: 'success',
           text: 'ログイン用のメールを送信しました。メール内のリンクをクリックしてログインしてください。'
@@ -168,6 +175,19 @@
       }).catch(function(error) {
         //アドレスが既に登録済みの場合
         if(error.code == 'auth/email-already-in-use') {
+          // ゲストからの引き継ぎがある場合、確認アラートしてキャンセルを許可
+          if(that.accountLinkable) {
+            let alertMessage = 'すでに登録済みのアカウントに、ゲストユーザーのトーナメント表を引き継ぐことはできません。ログインすると現在ゲストで作成したトーナメント表は失われますが、よろしいですか？'
+            if(!confirm(alertMessage)) {
+              obs.trigger("flashChanged", {
+                type: 'error',
+                text: 'ログインをキャンセルしました。現在ゲストで作成しているトーナメント表を引き継ぎたい場合、運営までお問い合わせください。',
+                permanent: true
+              })
+              return false
+            }
+          }
+          // 簡単ログインメール送信
           firebase.auth().sendPasswordResetEmail(that.refs.email.value)
           that.message = {
             type: 'success',
