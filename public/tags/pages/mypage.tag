@@ -17,10 +17,10 @@
 
       <div class="ui four wide computer only column">
         <div class="ui center aligned segment">
-          <img class="ui tiny circular bordered centered image" src={ user.photoURL } alt={ user.displayName } if={ user && user.photoURL }>
+          <img class="ui tiny circular bordered centered image" src={ user.photoURL } alt={ user.displayName || user.email } if={ user && user.photoURL }>
           <i class="user huge circular icon" if={ !user || !user.photoURL }></i>
           <h1 class="ui small header">
-            { ( user && !user.isAnonymous ) ? user.displayName : 'ゲストユーザー' }
+            { ( user && !user.isAnonymous ) ? user.displayName || user.email : 'ゲストユーザー' }
             <div class="subheader">
               <i class="small icon { userIcon() }" if={ userIcon() }></i>
             </div>
@@ -43,12 +43,12 @@
         <div class="ui feed secondary segment">
           <div class="event">
             <div class="label">
-              <img src={ user.photoURL } alt={ user.displayName } if={ user && user.photoURL }>
+              <img src={ user.photoURL } alt={ user.displayName || user.email } if={ user && user.photoURL }>
               <i class="user small circular icon" if={ !user || !user.photoURL }></i>
             </div>
             <div class="content">
               <div class="summary">
-                { ( user && !user.isAnonymous ) ? user.displayName : 'ゲストユーザー' }
+                { ( user && !user.isAnonymous ) ? user.displayName || user.email : 'ゲストユーザー' }
                 <div class="date">
                   <i class="small icon { userIcon() }" if={ userIcon() }></i>
                 </div>
