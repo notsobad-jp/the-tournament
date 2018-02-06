@@ -21,8 +21,8 @@
             <div class="ui icon button { disabled: team.name=='' }" onclick={ selectCountry }>
               <i class="icon globe" ></i>
             </div>
-            <span if={ team.country } class="f16">
-              <span class="flag { team.country }" if={ team.country }></span>
+            <span if={ team.country }>
+              <i class="flag { team.country }" if={ team.country }></i>
               ({ team.country })
             </span>
             <small if={ !team.country }>国旗を選択</small>

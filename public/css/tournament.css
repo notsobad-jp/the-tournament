@@ -63,6 +63,10 @@
   overflow: hidden;
   line-height: 25px;
 }
+.name i.flag:not(.icon) {
+  line-height: 25px;
+  margin: 0;
+}
 
 /* Profile Image */
 .profileImages .name, .profileImages .score {

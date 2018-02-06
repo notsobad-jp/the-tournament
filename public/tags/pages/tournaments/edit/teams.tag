@@ -52,7 +52,7 @@
       </div>
       <div class="ui segments">
         <div class="ui clearing segment" each={ team, teamIndex in tournament.teams }>
-          <span class="f16" if={ team.country }><span class="flag { team.country }"></span></span>
+          <span if={ team.country }><i class="flag { team.country }"></i></span>
           { team.name || '--' }
           <span if={ team.group }>（{ team.group }）</span>
           <a href={ team.url } target="_blank" if={ team.url && team.url != '' }>

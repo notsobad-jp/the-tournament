@@ -61,7 +61,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
 
       <title>THE TOURNAMENT</title>
 
-      <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/lafeber/world-flags-sprite/9a8b5ea6/stylesheets/flags16.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Semantic-Org/UI-Flag/d9e1c3ec/flag.min.css">
       <link rel="stylesheet" type="text/css" href="https://app.the-tournament.jp/assets/css/tournament.css">
     </head>
   */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
