@@ -82,16 +82,31 @@
     /***********************************************
     * Firebase Initialization
     ***********************************************/
-    var config = {
-      apiKey: "AIzaSyBpJ93PBOR6cr-PeM74vYiylQcq1QpcWFI",
-      authDomain: "tournament-7e3b7.firebaseapp.com",
-      databaseURL: "https://tournament-7e3b7.firebaseio.com",
-      projectId: "tournament-7e3b7",
-      storageBucket: "tournament-7e3b7.appspot.com",
-      messagingSenderId: "670551703759"
-    };
-    firebase.initializeApp(config);
-    var db = firebase.firestore();
+    if(location.hostname=='localhost' || location.hostname=='tournament-staging.firebaseapp.com') {
+      /* Staging */
+      const ENV = 'staging'
+      var config = {
+        apiKey: "AIzaSyB6fOdlYBhEmSD-VoyiO1t88DxBZHlnhUI",
+        authDomain: "tournament-staging.firebaseapp.com",
+        databaseURL: "https://tournament-staging.firebaseio.com",
+        projectId: "tournament-staging",
+        storageBucket: "tournament-staging.appspot.com",
+        messagingSenderId: "327887248230"
+      }
+    }else {
+      /* Production */
+      const ENV = 'production'
+      var config = {
+        apiKey: "AIzaSyBpJ93PBOR6cr-PeM74vYiylQcq1QpcWFI",
+        authDomain: "tournament-7e3b7.firebaseapp.com",
+        databaseURL: "https://tournament-7e3b7.firebaseio.com",
+        projectId: "tournament-7e3b7",
+        storageBucket: "tournament-7e3b7.appspot.com",
+        messagingSenderId: "670551703759"
+      }
+    }
+    firebase.initializeApp(config)
+    var db = firebase.firestore()
     var obs = riot.observable()
 
 
