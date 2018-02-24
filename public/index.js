@@ -3,10 +3,12 @@ const admin = require('firebase-admin');
 const riot = require('riot');
 const bracket = require('./tags/shared/bracket.tag');
 
-var serviceAccount = require("./cert.json");
+const ENV = (process.env.GCLOUD_PROJECT == 'tournament-staging') ? 'staging' : 'production'
+
+var serviceAccount = require("./cert_"+ ENV +".json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://tournament-7e3b7.firebaseio.com",
+  databaseURL: "https://"+ process.env.GCLOUD_PROJECT +".firebaseio.com",
   storageBucket: "notsobad-1332.appspot.com"
 });
 var db = admin.firestore();
@@ -70,7 +72,8 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   container += '<h1><a target="_blank" href="https://tournament-7e3b7.firebaseapp.com/tournaments/'+ id +'">'+ tournament.title;
   container += '</a><small> powered by <a href="https://tournament-7e3b7.firebaseapp.com/" target="_blank">THE TOURNAMENT</a> </small></h1></div><div id="emb-body">';
 
-  var file = bucket.file('embed/v1/' + id + '.html');
+  var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
+  var file = bucket.file(storage_root +'/v1/' + id + '.html');
   file.save(header + container + html + '</div></div></body></html>', {
     metadata: { contentType: 'text/html' },
     gzip: true
