@@ -14,6 +14,8 @@
         <i class="chevron right icon"></i>
         トーナメント表を作成する
       </button>
+      <br>
+      <small>（ログインなしでも利用できます）</small>
     </div>
     <br><br>
   </div>

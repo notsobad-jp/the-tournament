@@ -18,7 +18,10 @@
             </button>
           </div>
           <br>
-          <p><small>入力したメールアドレスに、ログイン用URLが届きます。</small></p>
+          <p><small>
+            入力したメールアドレスに、ログイン用URLが届きます。
+            もし10分以上経っても届かない場合は、運営にお問い合わせください。
+          </small></p>
           <div if={ message } class="ui visible left aligned basic segment { message.type } message">{ message.text }</div>
         </div>
       </div>
