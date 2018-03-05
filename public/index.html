@@ -291,14 +291,17 @@
     route('/mypage', function(){
       riot.mount('content', 'mypage')
     })
-    route('/tournaments/*', function(id){
-      riot.mount('content', 'show', {id: id})
+    route('/tournaments', function() {
+      riot.mount('content', 'index')
     })
     route('/tournaments/*/edit', function(id){
       riot.mount('content', 'edit', {id: id})
     })
-    route('/tournaments', function() {
-      riot.mount('content', 'index')
+    route('/tournaments/*', function(id){
+      riot.mount('content', 'show', {id: id})
+    })
+    route('/tournaments/*/*', function(id){
+      riot.mount('content', 'show', {id: id})
     })
     route('/auth..', function(){
       obs.trigger("dimmerChanged", 'active')
