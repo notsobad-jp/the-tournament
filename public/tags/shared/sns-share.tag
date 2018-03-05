@@ -15,7 +15,7 @@
 
   <script>
     var that = this
-    that.shareURL = 'https://tournament-7e3b7.firebaseapp.com/'
+    that.shareURL = 'https://the-tournament.jp/'
     if(opts.id) {
       that.shareURL += 'tournaments/' + opts.id
     }

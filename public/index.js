@@ -39,7 +39,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     <head>
       <meta charset="utf-8" />
       <title>{{title}} | THE TOURNAMENT</title>
-      <link rel="canonical" href="https://tournament-7e3b7.firebaseapp.com/tournaments/{{tournamentId}}">
+      <link rel="canonical" href="https://the-tournament.jp/tournaments/{{tournamentId}}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -69,8 +69,8 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
 
   var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
-  container += '<h1><a target="_blank" href="https://tournament-7e3b7.firebaseapp.com/tournaments/'+ id +'">'+ tournament.title;
-  container += '</a><small> powered by <a href="https://tournament-7e3b7.firebaseapp.com/" target="_blank">THE TOURNAMENT</a> </small></h1></div><div id="emb-body">';
+  container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
+  container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> </small></h1></div><div id="emb-body">';
 
   var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
   var file = bucket.file(storage_root +'/v1/' + id + '.html');

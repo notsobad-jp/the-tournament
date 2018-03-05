@@ -11,7 +11,6 @@
     <sns-share type="circular"></sns-share>
     <br>
     <div class="ui horizontal inverted small link list">
-      <a class="item" href="/about">About</a>
       <a class="item" href="https://notsobad.jp/" target="_blank">運営</a>
       <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">お問い合わせ</a>
       <a class="item" href="http://blog.the-tournament.jp/" target="_blank">公式ブログ</a>

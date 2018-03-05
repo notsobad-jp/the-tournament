@@ -2,8 +2,8 @@
   <div>
     <h5 class="ui small header">公開URL</h5>
     <div class="ui small basic message">
-      <a href="https://tournament-7e3b7.firebaseapp.com/tournaments/{ parent.opts.id }" target="_blank">
-        https://tournament-7e3b7.firebaseapp.com/tournaments/{ parent.opts.id }
+      <a href="https://the-tournament.jp/tournaments/{ parent.opts.id }" target="_blank">
+        https://the-tournament.jp/tournaments/{ parent.opts.id }
       </a>
       <i class="icon external small"></i>
     </div>
@@ -64,7 +64,7 @@
     that.id = that.parent.opts.id
     that.embedHeight = 1000 //クリックされてからbracketのサイズに合わせて修正
     that.downloading = false
-    that.shareURL = 'https://tournament-7e3b7.firebaseapp.com/tournaments/' + that.id
+    that.shareURL = 'https://the-tournament.jp/tournaments/' + that.id
     that.shareText = that.tournament.title + 'のトーナメント表 - THE TOURNAMENT(ザ・トーナメント) 簡単・便利な無料トーナメント表作成ツール',
 
 

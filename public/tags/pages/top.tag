@@ -17,143 +17,467 @@
     </div>
     <br><br>
   </div>
-  <br><br>
 
 
-  <div class="ui stackable centered grid">
-    <div class="twelve wide column">
-      <div class="ui warning icon message">
-        <i class="icon warning circle"></i>
-        <div class="header">
-          【注意】これは開発中のベータ版です！
-        </div>
-      </div>
-
-      <div class="ui basic segment">
-        <p>
-          このサイトは、トーナメント表作成サービス「<a href="" target="_blank">THE TOURNAMENT</a>」の、絶賛開発中の新バージョンです。
-        </p>
-        <p>
-          正式リリース前に「ベータ版」として先行公開しています。
-          そのため色々制約や不具合がありますので、以下の注意をよく読んでご利用ください。
-        </p>
-      </div>
-      <div class="ui basic segment">
-        安定版を利用したい方は、現行のTHE TOURNAMENTをご利用ください。
-        <br><br>
-        <a href="https://the-tournament.jp">
-          THE TOURNAMENT
-          <i class="icon external"></i>
+  <div class="ui stackable centered secondary basic segment grid">
+    <div class="twelve wide computer only column">
+      <div class="ui fluid five item secondary menu">
+        <a href="#feature" class="ui item">
+          <i class="icon options"></i>主な機能
+        </a>
+        <a href="#usecase" class="ui item">
+          <i class="icon building outline"></i>ご利用実績
+        </a>
+        <a href="#price" class="ui item">
+          <i class="icon dollar"></i>料金プラン
+        </a>
+        <a href="#faq" class="ui item">
+          <i class="icon comments"></i>よくある質問
+        </a>
+        <a href="#contact" class="ui item">
+          <i class="icon mail outline"></i>お問い合わせ
         </a>
       </div>
     </div>
+    <div class="twelve wide mobile tablet only column">
+      <div class="ui fluid five item secondary menu">
+        <a href="#feature" class="ui item">機能</a>
+        <a href="#usecase" class="ui item">実績</a>
+        <a href="#price" class="ui item">料金</a>
+        <a href="#faq" class="ui item">FAQ</a>
+        <a href="#contact" class="ui item">お問合せ</a>
+      </div>
+    </div>
   </div>
-  <br><br>
 
 
-  <div class="ui basic segment">
-    <div class="ui stackable centered grid">
-      <div class="twelve wide column">
-        <h3 class="ui horizontal divider header">
-          <i class="icon warning circle"></i>
-          ベータ版の制限事項
-        </h3>
+  <div class="ui stackable centered grid">
+    <br><br>
+    <div class="twelve wide column">
+      <div class="ui basic center aligned segment">
         <p>
-          ※新バージョンの開発進捗と既知のバグ一覧は、こちらで最新の状況を確認できます。
+          THE TOURNAMENT（ザ・トーナメント）は、シンプルな操作で直感的に使える、トーナメント表作成サービスの決定版です。
           <br>
-          <a href="https://trello.com/b/qlpAbvEI/" target="_blank">
-            https://trello.com/b/qlpAbvEI/
-          </a>
+          基本機能はすべて、いつまでも無料で利用することができます。
         </p>
-        <br><br>
-
-        <div class="">
-          <h5 class="ui medium red header">現行版の一部機能がまだ使えません</h5>
-          <p>
-            ベータ版では、現行版で提供している機能の一部がまだ使えません。
-            現行版で提供されている機能のうち、現在ベータ版で未実装の機能は以下のとおりです。
-          </p>
-          <ul>
-            <li>画像ダウンロード機能</li>
-            <li>国旗表示機能（利用はできるが、スマホでの表示に一部不具合あり）</li>
-          </ul>
-          <p>
-            これらの機能は正式版リリースまでに順次実装していきますが、
-            いますぐこうした機能が必要な場合は現行版をご利用ください。
-          </p>
-        </div>
-        <br><br>
-
-        <div class="">
-          <h5 class="ui medium red header">いろいろ不具合があると思います</h5>
-          <p>
-            このベータ版は、現行版にない操作性があるので、用途が合えばすでに現行版より便利にお使いいただけます。
-          </p>
-          <p>
-            しかしまだサービスとして動作保証はされておりませんので、予期しない不具合なども想定されます。
-          </p>
-          <p>
-            現在絶賛開発・修正中ですので、もしお気づきのバグや不具合などあれば、ぜひお問い合わせフォームかinfo@notsobad.jpまでご一報ください。
-          </p>
-          <p>
-            不具合情報をいただけるとそれだけデバッグがはかどり、正式リリースまでのスケジュールが短縮できると思います！
-          </p>
-        </div>
-        <br><br>
+      </div>
+    </div>
+    <div class="ui eight wide column">
+      <bracket editable={ false } tournament={ tournament } if={ tournament }></bracket>
+      <small>※タップすると試合詳細を表示します。</small>
+    </div>
+    <div class="four wide center aligned computer only column">
+      <div class="ui small icon header">
+        <i class="icon sitemap pink"></i>
+        きれいで見やすいトーナメント表
+      </div>
+      <div class="ui small icon header">
+        <i class="icon smile pink"></i>
+        初めてでも簡単！直感的な操作方法
+      </div>
+      <div class="ui small icon header">
+        <i class="icon code pink"></i>
+        ブログやHPにも簡単に埋め込み可能！
+      </div>
+    </div>
+    <div class="four wide center aligned mobile tablet only column">
+      <div class="ui small header">
+        <i class="icon sitemap pink"></i>
+        きれいで見やすいトーナメント表
+      </div>
+      <div class="ui small header">
+        <i class="icon smile pink"></i>
+        初めてでも簡単！直感的な操作方法
+      </div>
+      <div class="ui small header">
+        <i class="icon code pink"></i>
+        ブログやHPにも簡単に埋め込み可能！
       </div>
     </div>
   </div>
+  <div class="ui hidden divider"></div>
   <br><br>
 
 
-  <div class="ui basic segment">
-    <div class="ui stackable centered grid">
-      <div class="twelve wide column">
-        <h3 class="ui horizontal divider header">
-          <i class="icon calendar"></i>
-          今後のスケジュール
-        </h3>
-        <div class="">
-          すべてのスケジュールは予定ですので、この通りに進まなかったとしても責めないでください。精一杯がんばっています。
-        </div>
-        <br><br>
+  <!--
+  <div class="ui stackable centered grid">
+    <div class="twelve wide column">
+      <h3 class="ui horizontal divider header">
+        <i class="icon feed"></i>
+        新着トーナメント表
+      </h3>
+      <div class="ui basic center aligned segment">
+        ほげほげ
+      </div>
+    </div>
+  </div>
+  <div class="ui hidden divider"></div>
+  <br><br>
+  -->
 
-        <div class="">
-          <h5 class="ui medium header">
-            アルファ版リリース
-            <span class="ui mini left pointing label">2017年12月</span>
-          </h5>
-          とりあえず最低限使えるバージョンです。
-        </div>
-        <br>
-        <i class="icon arrow down"></i>
-        <br><br>
 
-        <div class="">
-          <h5 class="ui medium header">
-            ベータ版リリース
-            <span class="ui pink mini left pointing label">イマココ</span>
-          </h5>
-          ひととおりの機能が大きな問題なく利用できるようになっています。
-          <br><br>
-          残りの機能開発を続けながら、しばらく運用してバグを洗い出し、問題ないことを確認できた時点で正式版をリリースします。
+  <div id="feature" class="ui stackable centered grid">
+    <div class="twelve wide column">
+      <h3 class="ui horizontal divider header">
+        <i class="icon options"></i>
+        主な機能
+      </h3>
+      <div class="ui basic center aligned segment">
+        THE TOURNAMENTは現在も活発に機能追加を続けています。
+        今後の開発予定は「<a href="https://trello.com/b/G9vXQ1rT" target="_blank">開発ロードマップ</a>」で確認可能です。
+      </div>
+      <div class="ui three doubling cards">
+        <div class="card">
+          <div class="image">
+            <img src="img/top/feature/multi-seed.png">
+          </div>
+          <div class="content">
+            <div class="header">自由なシード設定</div>
+            <div class="description">
+              3回戦以降からの参加選手がいる複雑なシードも、直感的に設定可能です。
+            </div>
+          </div>
         </div>
-        <br>
-        <i class="icon arrow down"></i>
-        <br><br>
-
-        <div class="">
-          <h5 class="ui medium header">
-            正式版リリース
-            <span class="ui mini left pointing label">2018年4月頃?</span>
-          </h5>
-          新バージョンを正式版リリースし、現行のTHE TOURNAMENTを新バージョンに完全に切り替えます。
-          <br><br>
-          現行版で過去に作成していたトーナメントも新バージョンに自動で移管される予定です。
+        <div class="card">
+          <div class="image">
+            <img src="img/top/feature/country-flag.png">
+          </div>
+          <div class="content">
+            <div class="header">国旗表示</div>
+            <div class="description">
+              参加者名に国旗を表示できます。国際大会などで便利です。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="image">
+            <img src="img/top/feature/match-comment.png">
+          </div>
+          <div class="content">
+            <div class="header">試合詳細コメント</div>
+            <div class="description">
+              各試合ごとにコメントを登録できます。URLを登録することも可能です。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="image">
+            <img src="img/top/feature/text-score.png">
+          </div>
+          <div class="content">
+            <div class="header">文字でのスコア登録</div>
+            <div class="description">
+              スコアは数字だけでなく、「一本」などの文字でも登録可能です。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="image">
+            <img src="img/top/feature/double-mountain.png">
+          </div>
+          <div class="content">
+            <div class="header">
+              両山レイアウト
+              <span class="ui orange mini label">PRO</span>
+              <span class="ui mini label">開発中…</span>
+            </div>
+            <div class="description">
+              左右両サイドから勝ち上がり、中央に優勝者が来る両山レイアウトを選択できます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="image">
+            <img src="img/top/feature/profile-image.png">
+          </div>
+          <div class="content">
+            <div class="header">
+              選手の顔写真表示
+              <span class="ui orange mini label">PRO</span>
+            </div>
+            <div class="description">
+              各選手ごとに顔写真を登録して表示することができます。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui three doubling cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              参加者シャッフル
+            </div>
+            <div class="description">
+              何度でもランダムで参加者の配置をシャッフルできます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              外部サイト埋め込み
+            </div>
+            <div class="description">
+              コードをコピペするだけで、外部のブログやHPに埋め込めます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              スコアなし（勝敗のみ記録）
+            </div>
+            <div class="description">
+              トーナメント表からスコア表示をなくし、勝敗のみ記録することもできます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">3位決定戦</div>
+            <div class="description">
+              3位決定戦の有無を簡単に切り替え可能です。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              画像ダウンロード
+              <span class="ui mini label">開発中…</span>
+            </div>
+            <div class="description">
+              トーナメント表を画像でダウンロードできます。SNSでのシェアに便利です。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">参加者・スコアの表示幅調整</div>
+            <div class="description">
+              参加者名・スコアの表示幅を変更できます。長い名前のときでも安心です。
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="ui hidden divider"></div>
+  <br><br>
+
+
+  <div id="usecase" class="ui stackable centered grid">
+    <div class="twelve wide column">
+      <h3 class="ui horizontal divider header">
+        <i class="icon building outline"></i>
+        ご利用実績
+      </h3>
+      <div class="ui basic center aligned segment">
+        各種スポーツの全日本連盟や、TV・新聞などの大手メディア他、多数の法人にご利用いただいています。
+        <br>
+        詳しい利用実績をご希望の方はお問い合わせください。
+      </div>
+    </div>
+  </div>
+  <div class="ui hidden divider"></div>
+  <br><br>
+
+
+  <div id="price" class="ui stackable centered grid">
+    <div class="twelve wide column">
+      <h3 class="ui horizontal divider header">
+        <i class="icon dollar"></i>
+        料金プラン
+      </h3>
+    </div>
+    <div class="fourteen wide column">
+      <div class="ui three stackable cards">
+        <div class="ui card">
+          <div class="ui secondary center aligned attached segment">
+            <h5 class="ui small header">FREEプラン</h5>
+          </div>
+          <div class="content">
+            <div class="description">
+              <div class="ui huge center aligned red header">
+                <img src="img/top/price/free.png" alt="FREEプラン">
+                <br>
+                無料
+                <div class="sub header">基本機能はうれしいずっと無料！</div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                すべての基本機能
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                参加者数：〜128名
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                通常サポート（チャット・メール）
+              </div>
+            </div>
+          </div>
+          <div class="ui bottom attached red button" onclick={ createAndRedirectToTournament }>
+            <i class="add icon"></i>
+            トーナメント表を作成する
+          </div>
+        </div>
+
+        <div class="ui card">
+          <div class="ui secondary center aligned attached segment">
+            <h5 class="ui small header">STANDARDプラン</h5>
+          </div>
+          <div class="content">
+            <div class="description">
+              <div class="ui huge center aligned red header">
+                <img src="img/top/price/standard.png" alt="STANDARDプラン">
+                <br>
+                5,000円/回
+                <div class="sub header">お手軽価格で大規模大会にも対応！</div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                すべての基本機能
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                参加者数：〜1,024名
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                全力サポート（電話・チャット・メール）
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                広告非表示
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                両山スタイル
+              </div>
+            </div>
+          </div>
+          <div class="ui bottom attached basic segment">
+            <p>トーナメントを複数作成したい場合の割引も可能です。お気軽にご相談ください。</p>
+          </div>
+          <a class="ui bottom attached primary button" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
+            <i class="icon mail"></i>
+            お問い合わせ
+          </a>
+        </div>
+
+        <div class="ui card">
+          <div class="ui secondary center aligned attached segment">
+            <h5 class="ui small header">PROプラン</h5>
+          </div>
+          <div class="content">
+            <div class="description">
+              <div class="ui huge center aligned red header">
+                <img src="img/top/price/pro.png" alt="PROプラン">
+                <br>
+                個別見積り
+                <div class="sub header">カスタム開発で（ほぼ）何でも対応！</div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                すべての基本機能
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                参加者数：1,024名〜
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                全力サポート（電話・チャット・メール）
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                特殊なトーナメント形式
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                選手の顔写真表示
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                自社システム連携
+              </div>
+              <div class="ui small header">
+                <i class="icon green check"></i>
+                大会現地サポート
+              </div>
+            </div>
+          </div>
+          <div class="ui bottom attached basic segment">
+            <p>その他、大抵のことは対応可能です。お気軽にご相談ください。</p>
+          </div>
+          <a class="ui bottom attached primary button" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
+            <i class="icon mail"></i>
+            お問い合わせ
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui hidden divider"></div>
+  <br><br>
+
+
+  <div id="faq" class="ui stackable centered grid">
+    <div class="twelve wide column">
+      <h3 class="ui horizontal divider header">
+        <i class="icon comments"></i>
+        よくある質問
+      </h3>
+      <br>
+      <div class="ui relaxed items">
+        <div class="item">
+          <div class="content">
+            <div class="header">サービスの利用にログインは必要ですか？</div>
+            <div class="description">
+              <p>
+                ログインせずに、ゲストユーザーとして利用することも可能です。ゲストでもFREEプランのすべての機能を利用できます。
+                ただしゲストユーザーで作成したトーナメントは、セッションが切れると編集できなくなってしまいます（トーナメント表が見られなくなるわけではありません）。
+                ずっと管理したい場合は、ログインしてください。
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="item">
+          <div class="content">
+            <div class="header">ゲストで作成したトーナメント表を、ログインしてアカウントに引き継ぎたい</div>
+            <div class="description">
+              <p>
+                ゲストユーザーで作成したトーナメント表は、アカウントを登録（初ログイン）した際に、自動的にそのアカウントに引き継がれます。
+                ただし、<span class="ui small red header">すでに登録済みのアカウントに、ゲストユーザーからデータを引き継ぐことはできません</span>。
+                もし間違えてゲストで作成したデータを引き継ぎたい場合は、運営までお問い合わせください。
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="item">
+          <div class="content">
+            <div class="header">どうしても思い通りにトーナメント表が作れません。。</div>
+            <div class="description">
+              <p>
+                人生なかなかうまくいかないときもあるものです。
+                もしどうしてもうまくトーナメント表が作れない場合、
+                <span class="ui small red header">ご連絡いただければこちらで作成代行いたします（無料）</span>。
+                お気軽にお問い合わせください。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui hidden divider"></div>
   <br><br>
 
 
@@ -169,7 +493,7 @@
             メール：info@notsobad.jp
           </p>
           <a class="ui primary button" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
-            問い合わせフォームはこちら
+            お問い合わせフォームはこちら
           </a>
         </div>
       </div>
@@ -181,6 +505,16 @@
   <style>
     #top { background:#2D3E4F; }
     h1 img { max-width: 90% !important; }
+    .ui.secondary.basic.segment.grid { margin: 0; }
+    .ui.secondary.basic.segment.grid .column { padding: 0.5rem !important; }
+    .ui.secondary.basic.segment.grid .ui.item { font-weight: bold; }
+
+    .ui.bottom.attached.basic.segment {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .ui.three.stackable.cards .card { margin-bottom: 30px; }
   </style>
 
 
@@ -189,9 +523,10 @@
     * Settings
     ***********************************************/
     var that = this
+    var sampleData = {"consolationRound":false,"createdAt":"2018-01-26T10:50:51.425Z","detail":null,"nameWidth":100,"results":{"0":[{"bye":false,"comment":"第1試合：1-2\n第2試合：2-4","score":{"0":"3","1":"6"},"winner":1},{"bye":false,"comment":"第1試合：1-0\n第2試合：1-1","score":{"0":"2","1":"1"},"winner":0},{"bye":false,"comment":"第1試合：2-3\n第2試合：1-3","score":{"0":"3","1":"6"},"winner":1},{"bye":false,"comment":"第1試合：3-0\n第2試合：0-0","score":{"0":"3","1":"0"},"winner":0}],"1":[{"bye":false,"comment":"第1試合：3-0\n第2試合：1-2","score":{"0":"4","1":"2"},"winner":0},{"bye":false,"comment":"第1試合：0-2\n第2試合：1-2","score":{"0":"1","1":"4"},"winner":1}],"2":[{"bye":false,"comment":null,"score":{"0":"4","1":"1"},"winner":0},{"comment":null,"score":{"0":null,"1":null},"winner":null}]},"scoreWidth":40,"teams":[{"country":"de","name":"Bミュンヘン"},{"country":"es","name":"Rマドリード"},{"country":"es","name":"Aマドリード"},{"country":"gb","name":"レスター"},{"country":"de","name":"ドルトムント"},{"country":"fr","name":"モナコ"},{"country":"it","name":"ユベントス"},{"country":"es","name":"バルセロナ"}],"title":"UEFAチャンピオンズリーグ2016/2017","updatedAt":"2018-02-01T09:10:26.748Z","userId":"5bbqXPvhrteZkxb9ogvsSrcBg6S2"}
 
-    /* metatag setting */
-    that.setMetatags()
+    that.tournament = sampleData
+    that.update()
 
 
     /***********************************************
