@@ -27,6 +27,8 @@ var autoLink = function(str) {
 
 /* トーナメント更新時に、riotでSSRしてstorageに静的HTMLをアップ */
 exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(event => {
+  if(!event.data.exists) { return false; }  //削除時など、データがないときは終了
+
   var tournament = event.data.data();
   var id = event.params.id;
 
