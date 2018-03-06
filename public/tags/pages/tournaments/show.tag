@@ -41,7 +41,7 @@
           <bracket editable={ false } tournament={ tournament }></bracket>
           <div class="ui divider"></div>
           <sns-share tournament={ tournament } id={ opts.id }></sns-share>
-          <a href="#" target="_blank" download={ opts.id } class="ui icon primary basic small right floated button" onclick={ imageDownload }>
+          <a id="download-btn" href="#" target="_blank" download={ opts.id } class="ui icon primary basic tiny button" onclick={ imageDownload }>
             <i class="icon download"></i>
             画像ダウンロード
           </a>
@@ -90,6 +90,7 @@
     }
     .detail { margin: 20px 0; }
     .edit-buttons { margin-top: 10px; }
+    #download-btn { margin-left: 10px; }
   </style>
 
 
