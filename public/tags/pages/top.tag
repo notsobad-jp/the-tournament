@@ -181,7 +181,6 @@
             <div class="header">
               両山レイアウト
               <span class="ui orange mini label">PRO</span>
-              <span class="ui mini label">開発中…</span>
             </div>
             <div class="description">
               左右両サイドから勝ち上がり、中央に優勝者が来る両山レイアウトを選択できます。
@@ -246,7 +245,6 @@
           <div class="content">
             <div class="header">
               画像ダウンロード
-              <span class="ui mini label">開発中…</span>
             </div>
             <div class="description">
               トーナメント表を画像でダウンロードできます。SNSでのシェアに便利です。
@@ -336,7 +334,7 @@
               <div class="ui huge center aligned red header">
                 <img src="img/top/price/standard.png" alt="STANDARDプラン">
                 <br>
-                5,000円/回
+                5,000円/<small>大会</small>
                 <div class="sub header">お手軽価格で大規模大会にも対応！</div>
               </div>
               <div class="ui divider"></div>
@@ -355,10 +353,6 @@
               <div class="ui small header">
                 <i class="icon green check"></i>
                 広告非表示
-              </div>
-              <div class="ui small header">
-                <i class="icon green check"></i>
-                両山スタイル
               </div>
             </div>
           </div>
@@ -406,7 +400,7 @@
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
-                自社システム連携
+                自社システム連携・OEM提供
               </div>
               <div class="ui small header">
                 <i class="icon green check"></i>
