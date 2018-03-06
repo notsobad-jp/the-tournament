@@ -9,16 +9,12 @@
           <h1 class="ui large title header">
             { tournament.title }
           </h1>
-          <div if={ true || tournament.userId == user.uid } class="edit-buttons">
+          <div if={ tournament.userId == user.uid } class="edit-buttons">
             <a class="ui icon primary basic button" href="/tournaments/{ opts.id }/edit" data-tooltip="編集する" data-inverted="">
               <i class="icon setting"></i>
               編集
             </a>
             <div class="ui icon red basic button" data-tooltip="削除する" data-inverted="" onclick={ removeTournament }><i class="icon trash"></i></div>
-            <a href="#" download={ opts.id } class="ui icon basic button" onclick={ imageDownload }>
-              <i class="icon download"></i>
-              画像で保存
-            </a>
           </div>
           <div class="detail" data-is="raw" content={ tournament.detail }></div>
         </div>
@@ -45,6 +41,10 @@
           <bracket editable={ false } tournament={ tournament }></bracket>
           <div class="ui divider"></div>
           <sns-share tournament={ tournament } id={ opts.id }></sns-share>
+          <a href="#" download={ opts.id } class="ui icon primary basic small right floated button" onclick={ imageDownload }>
+            <i class="icon download"></i>
+            画像ダウンロード
+          </a>
         </div>
 
         <div class="ui tab { active: tabSelected('results') }">
