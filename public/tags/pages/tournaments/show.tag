@@ -9,12 +9,16 @@
           <h1 class="ui large title header">
             { tournament.title }
           </h1>
-          <div if={ tournament.userId == user.uid } class="edit-buttons">
+          <div if={ true || tournament.userId == user.uid } class="edit-buttons">
             <a class="ui icon primary basic button" href="/tournaments/{ opts.id }/edit" data-tooltip="編集する" data-inverted="">
               <i class="icon setting"></i>
               編集
             </a>
             <div class="ui icon red basic button" data-tooltip="削除する" data-inverted="" onclick={ removeTournament }><i class="icon trash"></i></div>
+            <a href="#" download={ opts.id } class="ui icon basic button" onclick={ imageDownload }>
+              <i class="icon download"></i>
+              画像で保存
+            </a>
           </div>
           <div class="detail" data-is="raw" content={ tournament.detail }></div>
         </div>
@@ -37,30 +41,30 @@
         <br>
 
 
-          <div class="ui tab { active: tabSelected('bracket') }">
-            <bracket editable={ false } tournament={ tournament }></bracket>
-            <div class="ui divider"></div>
-            <sns-share tournament={ tournament } id={ opts.id }></sns-share>
-          </div>
+        <div id="bracketTab" class="ui tab { active: tabSelected('bracket') }">
+          <bracket editable={ false } tournament={ tournament }></bracket>
+          <div class="ui divider"></div>
+          <sns-share tournament={ tournament } id={ opts.id }></sns-share>
+        </div>
 
-          <div class="ui tab { active: tabSelected('results') }">
-            <results tournament={ tournament } editable={ false }></results>
-          </div>
+        <div class="ui tab { active: tabSelected('results') }">
+          <results tournament={ tournament } editable={ false }></results>
+        </div>
 
-          <div class="ui tab { active: tabSelected('teams') }">
-            <div>
-              <div class="ui segments">
-                <div class="ui segment" each={ team, teamIndex in tournament.teams }>
-                  <i class="flag { team.country }" if={ team.country }></i>
-                  { team.name || '--' }
-                  <span if={ team.group }>（{ team.group }）</span>
-                  <a href={ team.url } target="_blank" if={ team.url && team.url != '' }>
-                    <i class="icon external"></i>
-                  </a>
-                </div>
+        <div class="ui tab { active: tabSelected('teams') }">
+          <div>
+            <div class="ui segments">
+              <div class="ui segment" each={ team, teamIndex in tournament.teams }>
+                <i class="flag { team.country }" if={ team.country }></i>
+                { team.name || '--' }
+                <span if={ team.group }>（{ team.group }）</span>
+                <a href={ team.url } target="_blank" if={ team.url && team.url != '' }>
+                  <i class="icon external"></i>
+                </a>
               </div>
             </div>
           </div>
+        </div>
       </div>
 
       <div class="ui four wide computer only column">
@@ -153,6 +157,28 @@
       if(that.selectedTab != tab) {
         that.selectedTab = tab
       }
+    }
+
+    imageDownload(e) {
+      // 2回目以降（hrefにセット済みなので通常のdownload処理のみ）
+      let downloadButton = e.currentTarget
+      if(downloadButton.getAttribute('href')!='#') { return true }
+
+      // 初回（html2canvasで画像データ生成）
+      e.preventDefault()
+      downloadButton.classList.add('loading')
+
+      let bracket = document.getElementById('bracket')
+      bracket.style.paddingRight = '40px'
+      bracket.style.paddingBottom = '10px'
+      document.getElementById("bracketTab").style.width = 'max-content'
+
+      html2canvas(document.querySelector("#bracket")).then(canvas => {
+        downloadButton.setAttribute('href', canvas.toDataURL())
+        downloadButton.click()
+        downloadButton.classList.remove('loading')
+        document.getElementById("bracketTab").style.width = '100%'
+      })
     }
 
     removeTournament(e) {
