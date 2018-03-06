@@ -8,11 +8,14 @@
         <div>
           <h1 class="ui large title header">
             { tournament.title }
-            <a class="ui primary right floated button { (isMobile) ? 'tiny' : 'small' }" href="/tournaments/{ opts.id }/edit" if={ tournament.userId == user.uid }>
+          </h1>
+          <div if={ tournament.userId == user.uid } class="edit-buttons">
+            <a class="ui icon primary basic button" href="/tournaments/{ opts.id }/edit" data-tooltip="編集する" data-inverted="">
               <i class="icon setting"></i>
               編集
             </a>
-          </h1>
+            <div class="ui icon red basic button" data-tooltip="削除する" data-inverted="" onclick={ removeTournament }><i class="icon trash"></i></div>
+          </div>
           <div class="detail" data-is="raw" content={ tournament.detail }></div>
         </div>
         <br>
@@ -81,10 +84,8 @@
       margin-bottom: 5px;
       word-break: break-all;
     }
-
-    .detail {
-      margin: 20px 0;
-    }
+    .detail { margin: 20px 0; }
+    .edit-buttons { margin-top: 10px; }
   </style>
 
 
@@ -152,6 +153,18 @@
       if(that.selectedTab != tab) {
         that.selectedTab = tab
       }
+    }
+
+    removeTournament(e) {
+      var ok = confirm('データを削除します。本当によろしいですか？')
+      if(!ok) { return false }
+
+      obs.trigger("dimmerChanged", 'active')
+      db.collection("tournaments").doc(opts.id).delete().then(function() {
+        obs.trigger("dimmerChanged", '')
+        obs.trigger("flashChanged", {type:'success',text:'データを削除しました！'})
+        route('/mypage')
+      })
     }
 
     tabSelected(tab) {
