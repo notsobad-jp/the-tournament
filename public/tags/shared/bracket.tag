@@ -2,20 +2,20 @@
   <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
-        <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] ? false : 0 } style="flex: { matchFlex(roundIndex, matchIndex) }">
-          <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
+        <div class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] ? false : 0 }>
+          <div class="teamContainer { teamContainerPosition(roundIndex, matchIndex) }">
             <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
               <span class="winnerSelect" if={ editable }>
                 <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
               </span>
 
-              <div class="name { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.nameWidth}px;">
+              <div class="name { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : nameWidth() }>
                 <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
                 <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName } disabled={ teamIndex == null }>
                 <span if={ !editable }>{ teamName(teamIndex) }</span>
               </div>
 
-              <div class="score { (editable) ? 'ui transparent input' : '' }" style="width:{tournament.scoreWidth}px;">
+              <div class="score { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : scoreWidth() }>
                 <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore }>
                 <span if={ !editable }>{ match.score[i] }</span>
               </div>
@@ -25,11 +25,11 @@
           </div>
 
           <div class="lineContainer">
-            <div style="flex-grow:{ lineFlex(roundIndex, matchIndex)[0] }">
+            <div class="line-flex-{ lineFlex(roundIndex, matchIndex)[0] }">
               <div></div>
               <div></div>
             </div>
-            <div style="flex-grow:{ lineFlex(roundIndex, matchIndex)[1] }">
+            <div class="line-flex-{ lineFlex(roundIndex, matchIndex)[1] }">
               <div></div>
               <div></div>
             </div>
@@ -137,6 +137,13 @@
       return roundIndex == Object.keys(that.tournament.results).length - 1
     }
 
+    nameWidth() {
+      return 'width: ' + that.tournament.nameWidth + 'px'
+    }
+    scoreWidth() {
+      return 'width: ' + that.tournament.scoreWidth + 'px'
+    }
+
     matchTeamIndexes(roundIndex, matchIndex) {
       return {
         0: that.getTeamIndex(that.tournament, roundIndex, matchIndex, 0),
@@ -222,7 +229,7 @@
     matchFlex(roundIndex, matchIndex) {
       /* １回戦と決勝ラウンドはスキップ */
       if(roundIndex==0 || roundIndex==Object.keys(that.tournament.results).length-1) {
-        return "0 0 auto"
+        return 'match-flex-0'
       }
 
       var start = matchIndex * Math.pow(2, roundIndex)
@@ -233,7 +240,7 @@
         var res = that.tournament.results[0][i]
         if(!res['bye'] || res['winner']!=null) { count += 1 }
       }
-      return count + " 1 " + count * 65 + "px"
+      return 'match-flex-' + count
     }
 
     /* 配列で、上半分・下半分のlineContainerのflex-grow値を返す */
@@ -293,7 +300,7 @@
 
     teamContainerPosition(roundIndex, matchIndex) {
       var position = that.calcMatchPosition(roundIndex, matchIndex)
-      return position * 32
+      return 'team-position-' + position
     }
 
     teamClass(match, teamOrder) {
