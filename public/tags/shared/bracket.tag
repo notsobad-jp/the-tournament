@@ -2,7 +2,7 @@
   <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
-        <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } onclick={ (roundIndex != 0 && match['bye']) ? "" : "this.classList.toggle('selected');" } style="flex: { matchFlex(roundIndex, matchIndex) }">
+        <div class="match { matchClass(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex="0" style="flex: { matchFlex(roundIndex, matchIndex) }">
           <div class="teamContainer" style="top: { teamContainerPosition(roundIndex, matchIndex) }px;">
             <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
               <span class="winnerSelect" if={ editable }>
@@ -36,7 +36,7 @@
           </div>
 
           <div class="popupContainer" if={ !editable }>
-            <div class="popupContent" onclick="event.stopPropagation();">
+            <div class="popupContent">
               <h3 class="popupTitle">
                 { (roundIndex == Object.keys(tournament.results).length-1) ? '' : roundName(Number(roundIndex)) }
                 { matchName(Number(roundIndex), Number(matchIndex)) }
