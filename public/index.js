@@ -59,16 +59,23 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   html = html.replace(/\r?\n/g, '<br>')
   html = autoLink(html)
 
+  var css = []
+  minifyCss().then(function(output){
+    css = output;
+  })
+
   var header = function(){/*
-    <html>
+    <!doctype html>
+    <html ⚡>
     <head>
-      <meta charset="utf-8" />
+      <meta charset="utf-8">
       <title>{{title}} | THE TOURNAMENT</title>
       <link rel="canonical" href="https://the-tournament.jp/tournaments/{{tournamentId}}">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+      <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+      <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-      <style>
+      <style amp-custom>
         * { font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif; }
         body { margin: 0; }
         a { text-decoration: none; }
@@ -84,14 +91,9 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
         #emb-body .bracket{margin-bottom:20px; overflow: auto;}
         #emb-body #emb-footer{margin-left:10px}
         #emb-ad{margin-bottom:5px}
-      </style>
-
-      <title>THE TOURNAMENT</title>
-
-      <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Semantic-Org/UI-Flag/d9e1c3ec/flag.min.css">
-      <link rel="stylesheet" type="text/css" href="https://app.the-tournament.jp/assets/css/tournament.css">
-    </head>
   */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
+  header += css[0] + ' ' + css[1];
+  header += '</style></head>';
 
   var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
   container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
