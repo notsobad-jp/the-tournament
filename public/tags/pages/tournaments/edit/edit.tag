@@ -134,6 +134,9 @@
     }
 
     video { max-width: 100%; }
+
+    /* FIXME: なぜかfocus時にafter要素がここに追加されてしまう問題対応 */
+    .ui.fifteen.wide.bracket.column:after { display: none !important; }
   </style>
 
 

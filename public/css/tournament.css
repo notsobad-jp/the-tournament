@@ -365,10 +365,6 @@
   padding: 25px 0;
   color: #fff;
  }
-.bracket:not(.embed) .popupContent {
-  width: 90vw;
-  max-width: 450px;
-}
 
 .popupContainer h3 {
   font-size: 14px;
@@ -400,6 +396,7 @@
   border: 1px solid #EFEFEF;
   padding: 20px 0;
   position: relative;
+  word-break: break-all;
 }
 .popupTeam.winner {
   border: 2px solid #DA0;

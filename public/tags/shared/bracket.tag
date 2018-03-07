@@ -79,7 +79,7 @@
     }
 
     /* ポップアップ非表示 */
-    .editable.bracket .match.selected:after { display: none; }
+    .editable.bracket:focus-within:after { display: none; }
     .editable.bracket .match { cursor: default; }
 
     /* team削除ボタン */
