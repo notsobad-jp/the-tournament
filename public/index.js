@@ -97,6 +97,8 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   var file = bucket.file(storage_root +'/v1/' + id + '.html');
 
   return minifyCss().then(function(css){
+    header += '.name { width: ' + tournament.nameWidth + 'px; }';
+    header += '.score { width: ' + tournament.scoreWidth + 'px; }';
     header += css[0]['styles'] + ' ' + css[1]['styles'];
     header += '</style></head>';
 

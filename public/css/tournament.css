@@ -535,6 +535,39 @@
 .team-position-31 { top: calc(31 * var(--team-position)); }
 .team-position-32 { top: calc(32 * var(--team-position)); }
 
+.team-position--1 { top: calc(-1 * var(--team-position)); }
+.team-position--2 { top: calc(-2 * var(--team-position)); }
+.team-position--3 { top: calc(-3 * var(--team-position)); }
+.team-position--4 { top: calc(-4 * var(--team-position)); }
+.team-position--5 { top: calc(-5 * var(--team-position)); }
+.team-position--6 { top: calc(-6 * var(--team-position)); }
+.team-position--7 { top: calc(-7 * var(--team-position)); }
+.team-position--8 { top: calc(-8 * var(--team-position)); }
+.team-position--9 { top: calc(-9 * var(--team-position)); }
+.team-position--10 { top: calc(-10 * var(--team-position)); }
+.team-position--11 { top: calc(-11 * var(--team-position)); }
+.team-position--12 { top: calc(-12 * var(--team-position)); }
+.team-position--13 { top: calc(-13 * var(--team-position)); }
+.team-position--14 { top: calc(-14 * var(--team-position)); }
+.team-position--15 { top: calc(-15 * var(--team-position)); }
+.team-position--16 { top: calc(-16 * var(--team-position)); }
+.team-position--17 { top: calc(-17 * var(--team-position)); }
+.team-position--18 { top: calc(-18 * var(--team-position)); }
+.team-position--19 { top: calc(-19 * var(--team-position)); }
+.team-position--20 { top: calc(-20 * var(--team-position)); }
+.team-position--21 { top: calc(-21 * var(--team-position)); }
+.team-position--22 { top: calc(-22 * var(--team-position)); }
+.team-position--23 { top: calc(-23 * var(--team-position)); }
+.team-position--24 { top: calc(-24 * var(--team-position)); }
+.team-position--25 { top: calc(-25 * var(--team-position)); }
+.team-position--26 { top: calc(-26 * var(--team-position)); }
+.team-position--27 { top: calc(-27 * var(--team-position)); }
+.team-position--28 { top: calc(-28 * var(--team-position)); }
+.team-position--29 { top: calc(-29 * var(--team-position)); }
+.team-position--30 { top: calc(-30 * var(--team-position)); }
+.team-position--31 { top: calc(-31 * var(--team-position)); }
+.team-position--32 { top: calc(-32 * var(--team-position)); }
+
 
 /* lineFlex */
 .line-flex-0 { flex-grow: 0; }
