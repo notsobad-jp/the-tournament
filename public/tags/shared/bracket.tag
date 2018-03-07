@@ -92,6 +92,28 @@
     /* 敗者うすくしない */
     .editable.bracket .match:not(.final):not(.consolation) .team.loser:not(.highlight) { opacity: 1; }
 
+    /* 空白試合を表示 */
+    .bracket.showBye .match.skip { display: flex; }
+    .bracket.showBye .match {
+      flex: 1 1 auto !important;
+    }
+    .bracket.showBye .round:not(:first-child) .match.bye .teamContainer { display: block; }
+    .bracket.showBye .teamContainer { top: unset !important; }
+    .bracket.showBye .lineContainer div { flex-grow: 1 !important; }
+    .bracket.showBye .lineContainer > div > div { width: 20px !important; }
+    .bracket.showBye .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:first-child,
+    .bracket.showBye .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:first-child {
+      border-right: 2px solid #999 !important;
+    }
+    .bracket.showBye .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:last-child {
+      border-bottom: 1px solid #999;
+      border-top: none !important;
+    }
+    .bracket.showBye .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:last-child {
+      border-top: 1px solid #999;
+      border-bottom: none !important;
+    }
+
     /* その他 */
     small { margin-left: 10px; }
   </style>

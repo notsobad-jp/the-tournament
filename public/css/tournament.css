@@ -44,7 +44,7 @@
 .team:last-child {
   margin-top: 1px;
 }
-.match:not(.final):not(.consolation) .team.loser:not(.highlight) {
+.match:not(.final):not(.consolation) .team.loser {
   opacity: 0.5;
 }
 
@@ -103,7 +103,6 @@
 /* z-index */
 .match.highlightSecond { z-index: 100; }
 .match.highlightFirst  { z-index: 101; }
-.match.highlight   { z-index: 102; }
 .match:hover { z-index: 103; }
 
 
@@ -320,13 +319,6 @@
 .consolation.match .team.loser:before { border-right-color: #678; }
 
 
-/* チームハイライト */
-.team.highlight { background-color: #3C0 !important; }
-.match.highlight .lineContainer > div > div, .match.highlight:before {
-   border-color: #3C0 !important;
- }
-
-
 /* ポップアップ表示 */
 .bracket:focus-within:after {
   display: block;
@@ -456,8 +448,8 @@
 
 /* next-bye: 次の試合もbyeのときは、lineをまっすぐ次に伸ばす  */
 .bracket .match.next-bye:nth-child(even) { margin-top: 0px; }
-.bracket .left.block .match.next-bye .lineContainer > div > div {
-  border-right: none !important;
+.bracket .left.block .match:nth-child(n).next-bye .lineContainer > div > div {
+  border-right: none;
 }
 .bracket .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:last-child {
   border-bottom: none;
@@ -468,27 +460,4 @@
   border-top: none;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-}
-
-/* 空白試合を表示 */
-.bracket.showBye .match.skip { display: flex; }
-.bracket.showBye .match {
-  flex: 1 1 auto !important;
-}
-.bracket.showBye .round:not(:first-child) .match.bye .teamContainer { display: block; }
-.bracket.showBye .teamContainer { top: unset !important; }
-.bracket.showBye .lineContainer div { flex-grow: 1 !important; }
-.bracket.showBye .lineContainer > div > div { width: 20px !important; }
-
-.bracket.showBye .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:first-child,
-.bracket.showBye .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:first-child {
-  border-right: 2px solid #999 !important;
-}
-.bracket.showBye .left.block .match.next-bye:nth-child(odd) .lineContainer > div:last-child > div:last-child {
-  border-bottom: 1px solid #999;
-  border-top: none !important;
-}
-.bracket.showBye .left.block .match.next-bye:nth-child(even) .lineContainer > div:first-child > div:last-child {
-  border-top: 1px solid #999;
-  border-bottom: none !important;
 }
