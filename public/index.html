@@ -322,6 +322,9 @@
         })
       }
     })
+    route('/..', function() {
+      route('/', 'Not Found', true)
+    })
 
     route.start(true)
   </script>
