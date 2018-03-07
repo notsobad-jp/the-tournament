@@ -1,9 +1,14 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const riot = require('riot');
+const fetch = require('node-fetch');
+const fs = require('fs');
+const CleanCSS = require('clean-css');
+
 const bracket = require('./tags/shared/bracket.tag');
 
 const ENV = (process.env.GCLOUD_PROJECT == 'tournament-staging') ? 'staging' : 'production'
+
 
 var serviceAccount = require("./cert_"+ ENV +".json");
 admin.initializeApp({
@@ -22,6 +27,24 @@ var autoLink = function(str) {
     return '<a href="h' + href + '" target="_blank">' + url + '</a>';
   }
   return str.replace(regexp_url, regexp_makeLink);
+}
+
+
+var minifyCss = function() {
+  return Promise.all([
+    new Promise(function(fulfilled, rejected){
+      fs.readFile('./css/tournament.css', 'utf8', function (err, text) {
+        var tnmtCss = new CleanCSS({}).minify(text);
+        fulfilled(tnmtCss);
+      })
+    }),
+    new Promise(function(fulfilled, rejected){
+      fs.readFile('./css/flag.min.css', 'utf8', function (err, text) {
+        var flagCss = new CleanCSS({ level: 0 }).minify(text);
+        fulfilled(flagCss);
+      })
+    })
+  ])
 }
 
 
