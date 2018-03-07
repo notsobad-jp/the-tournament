@@ -7,7 +7,7 @@ const CleanCSS = require('clean-css');
 
 const bracket = require('./tags/shared/bracket.tag');
 
-const ENV = (process.env.GCLOUD_PROJECT == 'tournament-staging') ? 'staging' : 'production'
+const ENV = (process.env.GCLOUD_PROJECT == 'tournament-staging') ? 'staging' : 'production';
 
 
 var serviceAccount = require("./cert_"+ ENV +".json");
@@ -56,13 +56,9 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   var id = event.params.id;
 
   var html = riot.render(bracket, {tournament: tournament, editable: false, embed: true});
-  html = html.replace(/\r?\n/g, '<br>')
-  html = autoLink(html)
-
-  var css = []
-  minifyCss().then(function(output){
-    css = output;
-  })
+  html = html.replace(/\r?\n/g, '<br>');
+  html = html.replace(/<\/?bracket>/g, '');
+  html = autoLink(html);
 
   var header = function(){/*
     <!doctype html>
@@ -92,8 +88,6 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
         #emb-body #emb-footer{margin-left:10px}
         #emb-ad{margin-bottom:5px}
   */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
-  header += css[0] + ' ' + css[1];
-  header += '</style></head>';
 
   var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
   container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
@@ -101,11 +95,17 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
 
   var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
   var file = bucket.file(storage_root +'/v1/' + id + '.html');
-  file.save(header + container + html + '</div></div></body></html>', {
-    metadata: { contentType: 'text/html' },
-    gzip: true
-  });
+
+  return minifyCss().then(function(css){
+    header += css[0]['styles'] + ' ' + css[1]['styles'];
+    header += '</style></head>';
+
+    file.save(header + container + html + '</div></div></body></html>', {
+      metadata: { contentType: 'text/html' },
+      gzip: true
+    });
+    return true;
+  })
 
   process.on('unhandledRejection', console.dir);
-  return true;
 });
