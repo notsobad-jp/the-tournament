@@ -68,8 +68,6 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
       <title>{{title}} | THE TOURNAMENT</title>
       <link rel="canonical" href="https://the-tournament.jp/tournaments/{{tournamentId}}">
       <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-      <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-      <script async src="https://cdn.ampproject.org/v0.js"></script>
 
       <style amp-custom>
         * { font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif; }
@@ -89,19 +87,24 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
         #emb-ad{margin-bottom:5px}
   */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
 
-  var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
-  container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
-  container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> </small></h1></div><div id="emb-body">';
-
-  var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
-  var file = bucket.file(storage_root +'/v1/' + id + '.html');
-
   return minifyCss().then(function(css){
     header += '.name { width: ' + tournament.nameWidth + 'px; }';
     header += '.score { width: ' + tournament.scoreWidth + 'px; }';
-    header += css[0]['styles'] + ' ' + css[1]['styles'];
-    header += '</style></head>';
+    header += css[0]['styles'] + ' ' + css[1]['styles'] + '</style>';
+    header += '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>';
+    header += '<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>';
+    header += '<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>';
+    header += '<script async src="https://cdn.ampproject.org/v0.js"></script></head>';
 
+    var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
+    container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
+    container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> </small></h1></div><div id="emb-body">';
+    container += '<amp-analytics type="googleanalytics"> <script type="application/json"> { "vars": { "account": "UA-30867542-19" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script> </amp-analytics> ';
+
+    html += '<div id="emb-ad"> <amp-ad width="300" height="250" type="fluct" data-g="1000084085" data-u="1000125738"> </amp-ad></div>';
+
+    var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
+    var file = bucket.file(storage_root +'/v1/' + id + '.html');
     file.save(header + container + html + '</div></div></body></html>', {
       metadata: { contentType: 'text/html' },
       gzip: true
