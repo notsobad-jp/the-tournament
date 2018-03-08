@@ -101,7 +101,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> </small></h1></div><div id="emb-body">';
     container += '<amp-analytics type="googleanalytics"> <script type="application/json"> { "vars": { "account": "UA-30867542-19" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script> </amp-analytics> ';
 
-    html += '<div id="emb-ad"> <amp-ad width="300" height="250" type="fluct" data-g="1000084085" data-u="1000125738"> </amp-ad></div>';
+    html += '<div id="emb-ad"> <amp-ad width="320" height="100" type="fluct" data-g="1000084085" data-u="1000125738"> </amp-ad></div>';
 
     var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
     var file = bucket.file(storage_root +'/v1/' + id + '.html');
