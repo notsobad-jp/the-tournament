@@ -319,7 +319,8 @@
 
 
 /* ポップアップ表示 */
-.bracket:focus-within:after {
+.bracket:focus { outline-style: none; }
+.bracket:not(:focus):focus-within:after {
   display: block;
   content: '';
   background-color: rgba(255,255,255,0.7);
