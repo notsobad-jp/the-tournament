@@ -81,7 +81,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
         #emb-header h1{font-size:14px;margin:0;padding:5px}
         #emb-header h1 small{margin-left:15px;}
         #emb-header a{color:#fff}
-        #emb-body{background:#fff;padding:10px;border:1px dotted #333;}
+        #emb-body{background:#fff;padding:10px;border:1px solid #ddd;}
         #emb-body .bracket{margin-bottom:20px; overflow: auto;}
         #emb-body #emb-footer{margin-left:10px}
         #emb-ad{margin-bottom:5px}
@@ -105,11 +105,10 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
 
     var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
     var file = bucket.file(storage_root +'/v1/' + id + '.html');
-    file.save(header + container + html + '</div></div></body></html>', {
+    return file.save(header + container + html + '</div></div></body></html>', {
       metadata: { contentType: 'text/html' },
       gzip: true
     });
-    return true;
   })
 
   process.on('unhandledRejection', console.dir);
