@@ -29,6 +29,7 @@
   <meta id="twitter-card" name="twitter:card" content="summary" />
   <meta id="twitter-site" name="twitter:site" content="@tournament_jp" />
   <meta id="robots" name="robots" content="">
+  <link id="amp-url" rel="amphtml">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.3/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="/css/tournament.css">
@@ -213,6 +214,10 @@
         document.getElementById('og-description').setAttribute('content', description)
         document.getElementById('og-url').setAttribute('content', location.href)
         document.getElementById('robots').setAttribute('content', noindex)
+
+        if(meta && meta.ampURL) {
+          document.getElementById('amp-url').setAttribute('href', meta.ampURL)
+        }
       },
 
 

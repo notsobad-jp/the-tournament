@@ -2,7 +2,7 @@
   <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable }">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
-        <div class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] ? false : 0 }>
+        <div class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
           <div class="teamContainer { teamContainerPosition(roundIndex, matchIndex) }">
             <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
               <span class="winnerSelect" if={ editable }>

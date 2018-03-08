@@ -116,6 +116,7 @@
 
     that.on('unmount', function(){
       authUnsubscribe()
+      document.getElementById('amp-url').removeAttribute('href')
     })
 
     // 画面リサイズ時にPC/SPメニュー切替
@@ -140,7 +141,8 @@
         let meta = {
           title: that.tournament.title,
           description: that.tournament.detail || that.tournament.title + 'のトーナメント表',
-          keyword: that.tournament.title
+          keyword: that.tournament.title,
+          ampURL: 'https://app.the-tournament.jp/embed/v1/' + opts.id + '.html'
         }
         that.setMetatags(meta)
       }else {
