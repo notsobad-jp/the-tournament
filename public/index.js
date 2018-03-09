@@ -68,6 +68,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
       <title>{{title}} | THE TOURNAMENT</title>
       <link rel="canonical" href="https://the-tournament.jp/tournaments/{{tournamentId}}">
       <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+      <link rel="icon" type="image/x-icon" href="https://app.the-tournament.jp/assets/img/favicon.ico">
 
       <style amp-custom>
         * { font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif; }
