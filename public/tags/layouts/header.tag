@@ -59,10 +59,6 @@
             <img class="ui image" src="/img/logo_w.png">
           </h2>
         </a>
-        <a href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b" class="item" target="_blank">
-          <i class="icon question circle"></i>
-          使い方
-        </a>
         <div class="item menu-title"></div>
         <div class="right menu">
           <div class="ui dropdown item { active: menuOpened, visible: menuOpened }" onclick={ toggleMenu }>
@@ -90,6 +86,15 @@
               <a class="item" href='/signin' if={ !user || user.isAnonymous }>
                 <i class="icon sign in"></i>
                 ログイン
+              </a>
+              <div class="divider"></div>
+              <a href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b" class="item" target="_blank">
+                <i class="icon question"></i>
+                使い方
+              </a>
+              <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
+                <i class="icon mail"></i>
+                お問い合わせ
               </a>
             </div>
           </div>
