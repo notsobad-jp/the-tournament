@@ -105,7 +105,7 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
     container += '<amp-analytics type="googleanalytics"> <script type="application/json"> { "vars": { "account": "UA-30867542-19" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script> </amp-analytics> ';
 
     if(!tournament.noAds) {
-      html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="fluct" data-g="1000084085" data-u="1000125738"> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
+      html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="fluct" data-g="1000084085" data-u="1000125738"></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
     }
 
     var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
