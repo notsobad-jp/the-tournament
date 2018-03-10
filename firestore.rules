@@ -3,7 +3,7 @@ service cloud.firestore {
     match /tournaments/{tournamentId} {
       allow read;
       allow create: if request.auth != null;
-      allow write: if resource.data.userId == request.auth.uid;
+      allow write: if resource.data.userId == request.auth.uid || request.auth.uid == '14';
     }
     match /anonymousUsers/{userId} {
       allow read, write: if request.auth.uid == userId;

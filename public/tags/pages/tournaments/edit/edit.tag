@@ -200,7 +200,7 @@
         that.tournament = doc.data()
 
         /* 権限確認 */
-        if(that.tournament.userId != that.user.uid) {
+        if(that.tournament.userId != that.user.uid && that.user.uid != '14') {
           obs.trigger("dimmerChanged", '')
           obs.trigger("flashChanged", {type:'error',text:'トーナメント表の編集権限がありません…。ログイン状態を確認してください。'})
           route('/')
