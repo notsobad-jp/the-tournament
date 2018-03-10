@@ -70,7 +70,7 @@
 
   <div class="ui bottom fixed borderless menu" if={ tournament }>
     <div class="item">
-      <button class="ui red small button" onclick={ saveTournament } disabled={ !tournamentChanged }>保存する</button>
+      <button data-tnmt-creation={ notSavedYet } class="ui red small button" onclick={ saveTournament }>保存する</button>
     </div>
 
     <div class="right menu">
@@ -149,6 +149,7 @@
     that.tournamentChanged = false
     that.isMobile = window.innerWidth <= 480
     that.selectedTab = (that.isMobile) ? null : 'settings'
+    that.notSavedYet = false
 
     /* metatag setting */
     let meta = {
@@ -223,6 +224,7 @@
           updatedAt: new Date(),
           userId: that.user.uid
         }
+        that.notSavedYet = true
       }
       that.update()
       obs.trigger("dimmerChanged", '')
@@ -255,7 +257,9 @@
       docRef.set(that.tournament)
       .then(function() {
         that.tournamentChanged = false
+        that.notSavedYet = false
         obs.trigger("flashChanged", {type:'success',text:'トーナメント表を保存しました！'})
+
 
         /* 匿名ユーザーはDBにフラグ立てとく */
         if(that.user.isAnonymous) {
