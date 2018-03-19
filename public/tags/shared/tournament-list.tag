@@ -1,7 +1,7 @@
 <tournament-list>
   <table class="ui basic table" if={ items && items.length!=0 }>
     <tbody>
-      <tr each={ item, index in items } if={ deletedList.indexOf(item.id) < 0 }>
+      <tr each={ item, index in items }>
         <td>
           <a href={ '/tournaments/'+item.id }>
             { item.data().title }
@@ -18,7 +18,7 @@
             編集
           </a>
           <div class="ui icon basic button" data-tournament-index={ index } data-tooltip="コピーする" data-inverted="" onclick={ copyTournament }><i class="icon copy"></i></div>
-          <div class="ui icon red basic button" data-tournament-id={ item.id } data-tooltip="削除する" data-inverted="" onclick={ removeTournament }><i class="icon trash"></i></div>
+          <div class="ui icon red basic button" data-tournament-id={ item.id } data-tournament-index={ index } data-tooltip="削除する" data-inverted="" onclick={ removeTournament }><i class="icon trash"></i></div>
         </td>
       </tr>
     </tbody>
@@ -62,7 +62,6 @@
     var that = this
     that.editable = opts.editable
     that.user = opts.user
-    that.deletedList = []
 
     /* paging */
     that.items = null
@@ -193,10 +192,11 @@
 
       obs.trigger("dimmerChanged", 'active')
       var tournamentId = e.currentTarget.dataset.tournamentId
+      var tournamentIndex = e.currentTarget.dataset.tournamentIndex
 
       db.collection("tournaments").doc(tournamentId).delete().then(function() {
         obs.trigger("dimmerChanged", '')
-        that.deletedList.push(tournamentId)
+        that.items.splice(tournamentIndex, 1)
         that.update()
       })
     }
