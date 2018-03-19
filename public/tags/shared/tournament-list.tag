@@ -88,6 +88,7 @@
       let tournamentIndex = e.currentTarget.dataset.tournamentIndex
       let tournament = that.items[tournamentIndex].data()
       tournament.title = tournament.title + 'のコピー'
+      tournament.noAds = false
       tournament.createdAt = new Date()
       tournament.updatedAt = new Date()
 
