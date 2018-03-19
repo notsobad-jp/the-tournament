@@ -17,6 +17,7 @@
             <i class="icon setting"></i>
             編集
           </a>
+          <div class="ui icon basic button" data-tournament-index={ index } data-tooltip="コピーする" data-inverted="" onclick={ copyTournament }><i class="icon copy"></i></div>
           <div class="ui icon red basic button" data-tournament-id={ item.id } data-tooltip="削除する" data-inverted="" onclick={ removeTournament }><i class="icon trash"></i></div>
         </td>
       </tr>
@@ -82,6 +83,34 @@
     /***********************************************
     * Functions
     ***********************************************/
+    copyTournament(e) {
+      obs.trigger("dimmerChanged", 'active')
+
+      let tournamentIndex = e.currentTarget.dataset.tournamentIndex
+      let tournament = that.items[tournamentIndex].data()
+      tournament.title = tournament.title + 'のコピー'
+      tournament.createdAt = new Date()
+      tournament.updatedAt = new Date()
+
+      for(var i=0; i < Object.keys(tournament.results).length; i++){
+        for(var j=0; j < tournament.results[i].length; j++){
+          if(!tournament.results[i][j].bye) {
+            tournament.results[i][j] = {"score":{0:null,1:null},"comment":null,"winner":null}
+          }
+        }
+      }
+
+      db.collection("tournaments").add(tournament).then(function(docRef){
+        obs.trigger("dimmerChanged", '')
+        obs.trigger("flashChanged", {type:'success',text:'トーナメント表をコピーしました！'})
+        route('/tournaments/'+ docRef.id + '/edit')
+      }).catch(function(){
+        obs.trigger("flashChanged", {type:'error',text:'トーナメント表のコピーに失敗しました…(´；ω；｀)'})
+        obs.trigger("dimmerChanged", '')
+        console.error("Error adding document: ", error);
+      })
+    }
+
     /* トーナメントのIDだけ取得して新規作成画面に遷移 */
     createAndRedirectToTournament() {
       let newTnmtRef = db.collection("tournaments").doc()
