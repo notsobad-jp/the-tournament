@@ -31,6 +31,9 @@
   position: relative;
   margin: auto 0;
   padding: 7px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .team {
   display: flex;
@@ -230,7 +233,6 @@
 }
 
 .final.round { margin: auto 0; }
-.final.match { flex-grow: unset; }
 
 
 /* 両山対応 */

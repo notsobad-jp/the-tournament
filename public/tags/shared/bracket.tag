@@ -227,10 +227,10 @@
 
     /*  matchのflex = (round:0でskipじゃない子試合の数) を算出 */
     matchFlex(roundIndex, matchIndex) {
-      /* １回戦と決勝ラウンドはスキップ */
-      if(roundIndex==0 || roundIndex==Object.keys(that.tournament.results).length-1) {
-        return 'match-flex-0'
-      }
+      /* １回戦 */
+      if( roundIndex == 0 ) { return 'match-flex-0' }
+      /* 決勝ラウンド */
+      if( roundIndex == Object.keys(that.tournament.results).length-1 ) { return '' }
 
       var start = matchIndex * Math.pow(2, roundIndex)
       var end = start + Math.pow(2, roundIndex) - 1
