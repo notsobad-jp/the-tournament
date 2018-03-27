@@ -16,7 +16,14 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ]
+    ],
+    "headers": [{
+      "source": "**/*.tag",
+      "headers": [{
+        "key": "Content-Type",
+        "value": "text/javascript; charset=UTF-8"
+      }]
+    }]
   },
   "firestore": {
     "rules": "firestore.rules",
