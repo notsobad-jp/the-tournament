@@ -13,6 +13,7 @@
     <div class="ui horizontal inverted small link list">
       <a class="item" href="https://notsobad.jp/" target="_blank">運営</a>
       <a class="item" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">お問い合わせ</a>
+      <a class="item" href="/tournaments">新着一覧</a>
       <a class="item" href="http://blog.the-tournament.jp/" target="_blank">公式ブログ</a>
       <a class="item" href="https://trello.com/b/G9vXQ1rT/" target="_blank">開発ロードマップ</a>
       <a class="item" href="https://tayori.com/faq/8ffbdba0a70dcacc24ed64550dfa39a4332ac44b" target="_blank">使い方ガイド</a>

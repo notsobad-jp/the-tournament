@@ -96,26 +96,15 @@
         ブログやHPにも簡単に埋め込み可能！
       </div>
     </div>
-  </div>
-  <div class="ui hidden divider"></div>
-  <br><br>
-
-
-  <!--
-  <div class="ui stackable centered grid">
-    <div class="twelve wide column">
-      <h3 class="ui horizontal divider header">
-        <i class="icon feed"></i>
-        新着トーナメント表
-      </h3>
-      <div class="ui basic center aligned segment">
-        ほげほげ
-      </div>
+    <div class="twelve wide center aligned column">
+      <a class="ui icon button" href="/tournaments">
+        <i class="icon search"></i>
+        新着トーナメント一覧を見る
+      </a>
     </div>
   </div>
   <div class="ui hidden divider"></div>
   <br><br>
-  -->
 
 
   <div id="feature" class="ui stackable centered grid">
@@ -474,6 +463,48 @@
     </div>
   </div>
   <div class="ui hidden divider"></div>
+  <br><br>
+
+
+  <div id="system" class="ui basic segment">
+    <div class="ui stackable centered grid">
+      <div class="twelve wide column">
+        <h3 class="ui horizontal divider header">
+          <i class="desktop icon"></i>
+          動作環境
+        </h3>
+        <div class="ui basic center aligned segment">
+          <div>
+            以下ブラウザの最新版をサポートしています。
+            <br>
+            <small>（これ以外の環境でも動作する可能性はありますが、公式に保証するものではありません）</small>
+          </div>
+          <div class="ui horizontal huge list">
+            <div class="item">
+              <i class="icon chrome"></i>
+              Chrome
+            </div>
+            <div class="item">
+              <i class="icon firefox"></i>
+              Firefox
+            </div>
+            <div class="item">
+              <i class="icon safari"></i>
+              Safari
+            </div>
+            <div class="item">
+              <i class="icon edge"></i>
+              Edge
+            </div>
+          </div>
+          <br><br>
+          <small>
+            ※Internet Explorerは残念ながらサポート対象外です。。
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
   <br><br>
 
 
