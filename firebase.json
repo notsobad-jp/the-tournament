@@ -13,6 +13,10 @@
     ],
     "rewrites": [
       {
+        "source": "/tournaments/*",
+        "function": "renderWithOGP"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

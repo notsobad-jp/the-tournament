@@ -3,11 +3,14 @@ const admin = require('firebase-admin');
 const riot = require('riot');
 const fetch = require('node-fetch');
 const fs = require('fs');
+const xss = require('xss');
 const CleanCSS = require('clean-css');
-
 const bracket = require('./tags/shared/bracket.tag');
 
 const ENV = (process.env.GCLOUD_PROJECT == 'tournament-staging') ? 'staging' : 'production';
+const bucketName = 'app.the-tournament.jp'
+const version = 'v1'
+const storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
 
 
 var serviceAccount = require("./cert_"+ ENV +".json");
@@ -16,8 +19,6 @@ admin.initializeApp({
   databaseURL: "https://"+ process.env.GCLOUD_PROJECT +".firebaseio.com",
   storageBucket: "notsobad-1332.appspot.com"
 });
-var db = admin.firestore();
-var bucket = admin.storage().bucket('app.the-tournament.jp');
 
 
 
@@ -108,8 +109,8 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
       html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="fluct" data-g="1000084085" data-u="1000125738"></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
     }
 
-    var storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
-    var file = bucket.file(storage_root +'/v1/' + id + '.html');
+
+    var file = admin.storage().bucket(bucketName).file(storage_root +'/'+ version +'/' + id + '.html');
     return file.save(header + container + html + '</div></div></body></html>', {
       metadata: { contentType: 'text/html' },
       gzip: true
@@ -117,4 +118,37 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
   })
 
   process.on('unhandledRejection', console.dir);
+});
+
+
+
+exports.renderWithOGP = functions.https.onRequest((req, res) => {
+  res.set('Cache-Control', 'public, max-age=0, s-maxage=0');
+  res.set('Vary', 'Accept-Encoding, X-My-Custom-Header');
+
+  const path = req.params[0].split('/');
+  const id = path[path.length - 1];
+  const domain = 'https://the-tournament.jp';
+  const ampDomain = 'https://app.the-tournament.jp/embed/v1/';
+
+  fs.readFile('./index.html', 'utf8', function (err, templateHtml) {
+    admin.firestore().collection('tournaments').doc(id).get().then(doc => {
+      const tournament = doc.data();
+      const title = xss(tournament.title) + 'のトーナメント表 | THE TOURNAMENT';
+      const description = (tournament.detail && tournament.detail != '') ? xss(tournament.detail.replace(/\r?\n/g,"")) : title;
+      const responseHtml = templateHtml
+        .replace(/\<title>.*<\/title>/g, '<title>'+ title +'</title>')
+        .replace(/(<meta id="description" .* content=")(.*)" \/>/g, '$1'+ description +'" />')
+        .replace(/(<meta id="keywords" .* content=")(.*)" \/>/g, '$1'+ tournament.title +' $2" />')
+        .replace(/(<meta id="og-title" .* content=")(.*)" \/>/g, '$1'+ title +'" />')
+        .replace(/(<meta id="og-url" .* content=")(.*)" \/>/g, '$1'+ domain + '/tournaments/' + id +'" />')
+        .replace(/(<meta id="og-description" .* content=")(.*)" \/>/g, '$1'+ description +'" />')
+        .replace(/(<link id="canonical" .* href=")(.*)" \/>/g, '$1'+ domain + '/tournaments/'+ id +'" />')
+        .replace(/(<link id="amp-url" rel="amphtml") \/>/g, '$1 href="'+ ampDomain + id +'.html" />');
+      res.status(200).send(responseHtml);
+    }).catch(error => {
+      console.log(error);
+      res.status(200).send(templateHtml);
+    });
+  })
 });
