@@ -7,6 +7,7 @@
     "firebase-functions": "0.7.3",
     "node-fetch": "^2.1.1",
     "riot": "3.7.4",
+    "rss": "^1.2.2",
     "xss": "^0.3.7"
   },
   "private": true

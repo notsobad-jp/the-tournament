@@ -14,7 +14,11 @@
     "rewrites": [
       {
         "source": "/tournaments/*",
-        "function": "renderWithOGP"
+        "function": "returnWithOGP"
+      },
+      {
+        "source": "/feed",
+        "function": "returnRSS"
       },
       {
         "source": "**",

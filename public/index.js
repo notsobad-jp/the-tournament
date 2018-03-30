@@ -5,6 +5,8 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const xss = require('xss');
 const CleanCSS = require('clean-css');
+const RSS = require('rss');
+
 const bracket = require('./tags/shared/bracket.tag');
 
 const ENV = (process.env.GCLOUD_PROJECT == 'tournament-staging') ? 'staging' : 'production';
@@ -50,7 +52,7 @@ var minifyCss = function() {
 
 
 /* トーナメント更新時に、riotでSSRしてstorageに静的HTMLをアップ */
-exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(event => {
+exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWrite(event => {
   if(!event.data.exists) { return false; }  //削除時など、データがないときは終了
 
   var tournament = event.data.data();
@@ -122,9 +124,10 @@ exports.renderHTML = functions.firestore.document('tournaments/{id}').onWrite(ev
 
 
 
-exports.renderWithOGP = functions.https.onRequest((req, res) => {
-  res.set('Cache-Control', 'public, max-age=0, s-maxage=0');
-  res.set('Vary', 'Accept-Encoding, X-My-Custom-Header');
+/* Trigger: /tournaments/xxxx  */
+/* トーナメント詳細ページへの直接アクセスは、metaタグを埋め込んでからindex.htmlを返す */
+exports.returnWithOGP = functions.https.onRequest((req, res) => {
+  res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
 
   const path = req.params[0].split('/');
   const id = path[path.length - 1];
@@ -132,6 +135,8 @@ exports.renderWithOGP = functions.https.onRequest((req, res) => {
   const ampDomain = 'https://app.the-tournament.jp/embed/v1/';
 
   fs.readFile('./index.html', 'utf8', function (err, templateHtml) {
+    if(err) { res.status(500).send(err); }
+
     admin.firestore().collection('tournaments').doc(id).get().then(doc => {
       const tournament = doc.data();
       const title = xss(tournament.title) + 'のトーナメント表 | THE TOURNAMENT';
@@ -148,7 +153,44 @@ exports.renderWithOGP = functions.https.onRequest((req, res) => {
       res.status(200).send(responseHtml);
     }).catch(error => {
       console.log(error);
-      res.status(200).send(templateHtml);
+      res.status(404).send(templateHtml);
     });
   })
+});
+
+
+
+/* Trigger: /feed  */
+/* /feed にアクセスが来たら、動的にrssフィードを作って返す */
+exports.returnRSS = functions.https.onRequest((req, res) => {
+  res.set('Cache-Control', 'public, max-age=18000, s-maxage=36000');
+  const feedItemCount = 20;
+
+  let feed = new RSS({
+    title: 'THE TOURNAMENT',
+    feed_url: 'https://the-tournament.jp/feed',
+    site_url: 'https://the-tournament.jp/',
+    language: 'ja',
+  })
+
+  let docRef = admin.firestore().collection("tournaments").orderBy('updatedAt', 'desc').limit(feedItemCount);
+  docRef.get().then(function(querySnapshot){
+    let items = querySnapshot.docs;
+    for(var i=0; i < items.length; i++ ) {
+      let item = items[i].data();
+      let title = item.title + 'のトーナメント表';
+      let description = (item.detail && item.detail != '') ? item.detail : title;
+
+      feed.item({
+        title: title,
+        description: description,
+        url: 'https://the-tournament.jp/tournaments/'+ items[i].id,
+        date: item.createdAt, // any format that js Date can parse.
+      });
+    }
+    res.status(200).send(feed.xml());
+  }).catch(error => {
+    console.log(error);
+    res.status(500).send(error);
+  });
 });
