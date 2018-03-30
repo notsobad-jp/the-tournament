@@ -164,6 +164,7 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
 /* /feed にアクセスが来たら、動的にrssフィードを作って返す */
 exports.returnRSS = functions.https.onRequest((req, res) => {
   res.set('Cache-Control', 'public, max-age=18000, s-maxage=36000');
+  res.set('Content-Type', 'application/xml');
   const feedItemCount = 20;
 
   let feed = new RSS({
