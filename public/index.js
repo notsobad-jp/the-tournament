@@ -95,6 +95,12 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
     header += '.name { width: ' + tournament.nameWidth + 'px; }';
     header += '.score { width: ' + tournament.scoreWidth + 'px; }';
     header += css[0]['styles'] + ' ' + css[1]['styles'];
+
+    // 柔道対応
+    if(tournament.userId == '2652') {
+      header += '#emb-body { border-style: none; } #emb-body .bracket { padding-bottom: 300px; }'
+    }
+
     header =  header.replace(/assets\/images\/flags.png/, 'https://app.the-tournament.jp/assets/img/flags.png');
     header += '</style>';
     header += '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>';
