@@ -92,9 +92,9 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
   */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
 
   return minifyCss().then(function(css){
+    header += css[0]['styles'] + ' ' + css[1]['styles'];
     header += '.name { width: ' + tournament.nameWidth + 'px; }';
     header += '.score { width: ' + tournament.scoreWidth + 'px; }';
-    header += css[0]['styles'] + ' ' + css[1]['styles'];
 
     // 柔道対応
     if(tournament.userId == '2652') {
