@@ -96,7 +96,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
     header += '.name { width: ' + tournament.nameWidth + 'px; }';
     header += '.score { width: ' + tournament.scoreWidth + 'px; }';
 
-    // 柔道対応
+    //FIXME: 柔道対応
     if(tournament.userId == '2652') {
       header += '#emb-body { border-style: none; } #emb-body .bracket { padding-bottom: 300px; }'
     }
