@@ -134,6 +134,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
 /* トーナメント詳細ページへの直接アクセスは、metaタグを埋め込んでからindex.htmlを返す */
 exports.returnWithOGP = functions.https.onRequest((req, res) => {
   res.set('Cache-Control', 'public, max-age=86400, s-maxage=2592000');
+  res.set('Vary', 'Accept-Encoding');
 
   const path = req.params[0].split('/');
   const id = path[path.length - 1];
@@ -171,6 +172,7 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
 exports.returnRSS = functions.https.onRequest((req, res) => {
   res.set('Cache-Control', 'public, max-age=21600, s-maxage=43200');
   res.set('Content-Type', 'application/xml');
+  res.set('Vary', 'Accept-Encoding');
   const feedItemCount = 20;
 
   let feed = new RSS({
