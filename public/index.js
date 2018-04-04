@@ -114,7 +114,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
     container += '<amp-analytics type="googleanalytics"> <script type="application/json"> { "vars": { "account": "UA-30867542-19" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script> </amp-analytics> ';
 
     if(!tournament.noAds) {
-      html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="fluct" data-g="1000084085" data-u="1000125738"></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
+      html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
     }
 
 
@@ -159,7 +159,7 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
         .replace(/(<link id="amp-url" rel="amphtml") \/>/g, '$1 href="'+ ampDomain + id +'.html" />');
       res.status(200).send(responseHtml);
     }).catch(error => {
-      console.log(error);
+      console.error(error);
       res.status(404).send(templateHtml);
     });
   })
@@ -199,7 +199,7 @@ exports.returnRSS = functions.https.onRequest((req, res) => {
     }
     res.status(200).send(feed.xml());
   }).catch(error => {
-    console.log(error);
+    console.error(error);
     res.status(500).send(error);
   });
 });
