@@ -349,7 +349,7 @@
   position: absolute;
   top: 50%;
   left: 10px;
-  width: 400px;
+  width: 350px;
   margin-right: 30px;
   margin-bottom: 30px;
 }
@@ -359,6 +359,10 @@
   background-color: rgba(0,0,0,0.9);
   padding: 25px 0;
   color: #fff;
+ }
+ .popupContent a {
+   color: #efefef;
+   text-decoration: underline;
  }
 
 .popupContainer h3 {
@@ -371,7 +375,7 @@
   display: flex;
   justify-content: space-between;
   text-align: center;
-  margin: 35px 5%;
+  margin: 25px 5%;
 }
 .popupName, .popupScore {
   padding: 10px;
@@ -389,7 +393,7 @@
 .popupTeamContainer .popupTeam {
   width: 45%;
   border: 1px solid #EFEFEF;
-  padding: 20px 0;
+  padding: 12px 0;
   position: relative;
   word-break: break-all;
 }
