@@ -11,6 +11,12 @@
       "index.js",
       "package.json"
     ],
+    "redirects": [ {
+      "source" : "/about",
+      "destination" : "/",
+      "type" : 301
+      }
+    ],
     "rewrites": [
       {
         "source": "/tournaments/*",
