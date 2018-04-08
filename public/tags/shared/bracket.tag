@@ -190,6 +190,8 @@
     }
 
     matchClass(roundIndex, matchIndex) {
+      var roundIndex = Number(roundIndex)
+      var matchIndex = Number(matchIndex)
       var matchClass = ""
 
       // 決勝ラウンド
