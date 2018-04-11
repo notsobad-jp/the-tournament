@@ -412,6 +412,62 @@
   <br><br>
 
 
+  <div id="corporate" class="ui stackable centered grid">
+    <div class="twelve wide column">
+      <h3 class="ui horizontal divider header">
+        <i class="icon medkit"></i>
+        法人サポート
+      </h3>
+      <div class="ui basic center aligned segment">
+        <p>法人のご利用向けに、各種サポートを無料で提供しております。お気軽にお問い合わせください。</p>
+        <div class="ui hidden divider"></div>
+        <div class="ui three column stackable grid">
+          <div class="ui column">
+            <h5 class="ui medium icon header">
+              <i class="icon circular book"></i>
+              操作マニュアル配布
+              <span class="ui yellow mini label">無料</span>
+            </h5>
+            <p>
+              THE TOURNAMENTの操作方法をまとめたマニュアル資料をPDFでご提供いたします。
+              大会運営時、印刷してスタッフに配布するなどでご活用ください。
+            </p>
+          </div>
+          <div class="ui column">
+            <h5 class="ui medium icon header">
+              <i class="icon circular users"></i>
+              導入相談
+              <span class="ui yellow mini label">無料</span>
+            </h5>
+            <p>
+              都内であれば代表が直接お伺いして、導入にあたっての疑問点や仕様の確認などにお答えいたします。
+              遠方の場合、電話やSkypeなどによるお打ち合わせも可能です。
+            </p>
+          </div>
+          <div class="ui column">
+            <h5 class="ui medium icon header">
+              <i class="icon circular trophy"></i>
+              トーナメント作成代行
+              <span class="ui yellow mini label">無料</span>
+            </h5>
+            <p>
+              うまくトーナメント表が作れない場合、エクセルなどで完成形をご共有いただければこちらで作成代行いたします。
+              代行完了後に操作方法などもご共有いたします。
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="ui basic center aligned segment">
+        <a class="ui primary button" href="https://goo.gl/forms/xqvYet0AAsQUalI52" target="_blank">
+          お問い合わせフォームはこちら
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="ui hidden divider"></div>
+  <br><br>
+
+
   <div id="faq" class="ui stackable centered grid">
     <div class="twelve wide column">
       <h3 class="ui horizontal divider header">
@@ -441,20 +497,6 @@
                 ゲストユーザーで作成したトーナメント表は、アカウントを登録（初ログイン）した際に、自動的にそのアカウントに引き継がれます。
                 ただし、<span class="ui small red header">すでに登録済みのアカウントに、ゲストユーザーからデータを引き継ぐことはできません</span>。
                 もし間違えてゲストで作成したデータを引き継ぎたい場合は、運営までお問い合わせください。
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="ui hidden divider"></div>
-        <div class="item">
-          <div class="content">
-            <div class="header">どうしても思い通りにトーナメント表が作れません。。</div>
-            <div class="description">
-              <p>
-                人生なかなかうまくいかないときもあるものです。
-                もしどうしてもうまくトーナメント表が作れない場合、
-                <span class="ui small red header">ご連絡いただければこちらで作成代行いたします（無料）</span>。
-                お気軽にお問い合わせください。
               </p>
             </div>
           </div>
