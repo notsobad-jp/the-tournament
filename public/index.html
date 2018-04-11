@@ -36,6 +36,8 @@
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.3/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="/css/tournament.css">
+
+  <script src="//j.wovn.io/1" data-wovnio="key=We0CPb" async></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -88,18 +90,7 @@
     /***********************************************
     * Firebase Initialization
     ***********************************************/
-    if(location.hostname=='localhost' || location.hostname=='tournament-staging.firebaseapp.com') {
-      /* Staging */
-      const ENV = 'staging'
-      var config = {
-        apiKey: "AIzaSyB6fOdlYBhEmSD-VoyiO1t88DxBZHlnhUI",
-        authDomain: "tournament-staging.firebaseapp.com",
-        databaseURL: "https://tournament-staging.firebaseio.com",
-        projectId: "tournament-staging",
-        storageBucket: "tournament-staging.appspot.com",
-        messagingSenderId: "327887248230"
-      }
-    }else {
+    if(location.hostname=='the-tournament.jp') {
       /* Production */
       const ENV = 'production'
       var config = {
@@ -109,6 +100,17 @@
         projectId: "tournament-7e3b7",
         storageBucket: "tournament-7e3b7.appspot.com",
         messagingSenderId: "670551703759"
+      }
+    }else {
+      /* Staging */
+      const ENV = 'staging'
+      var config = {
+        apiKey: "AIzaSyB6fOdlYBhEmSD-VoyiO1t88DxBZHlnhUI",
+        authDomain: "tournament-staging.firebaseapp.com",
+        databaseURL: "https://tournament-staging.firebaseio.com",
+        projectId: "tournament-staging",
+        storageBucket: "tournament-staging.appspot.com",
+        messagingSenderId: "327887248230"
       }
     }
     firebase.initializeApp(config)
