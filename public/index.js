@@ -136,8 +136,7 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
   res.set('Cache-Control', 'public, max-age=86400, s-maxage=2592000');
   res.set('Vary', 'Accept-Encoding');
 
-  const path = req.params[0].split('/');
-  const id = path[path.length - 1];
+  const id = req.path.match(/\/tournaments\/([^\/\?]*)/)[1]
   const domain = 'https://the-tournament.jp';
   const ampDomain = 'https://app.the-tournament.jp/embed/v1/';
 
