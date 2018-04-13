@@ -1,5 +1,5 @@
 <raw>
-  <span></span>
+  <span class="no-translation"></span>
 
   <script>
     /***********************************************

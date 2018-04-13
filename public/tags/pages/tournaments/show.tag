@@ -6,7 +6,7 @@
     <div class="ui stackable padded centered grid" if={ tournament }>
       <div class="ui eleven wide column">
         <div>
-          <h1 class="ui large title header">
+          <h1 class="ui large title header no-translation">
             { tournament.title }
           </h1>
           <div if={ tournament.userId == user.uid } class="edit-buttons">
@@ -37,7 +37,7 @@
         <br>
 
 
-        <div id="bracketTab" class="ui tab { active: tabSelected('bracket') }">
+        <div id="bracketTab" class="ui tab no-translation { active: tabSelected('bracket') }">
           <bracket editable={ false } tournament={ tournament }></bracket>
           <div class="ui divider"></div>
           <sns-share tournament={ tournament } id={ opts.id }></sns-share>
@@ -47,11 +47,11 @@
           </a>
         </div>
 
-        <div class="ui tab { active: tabSelected('results') }">
+        <div class="ui tab no-translation { active: tabSelected('results') }">
           <results tournament={ tournament } editable={ false }></results>
         </div>
 
-        <div class="ui tab { active: tabSelected('teams') }">
+        <div class="ui tab no-translation { active: tabSelected('teams') }">
           <div>
             <div class="ui segments">
               <div class="ui segment" each={ team, teamIndex in tournament.teams }>

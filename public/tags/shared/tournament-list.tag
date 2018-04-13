@@ -2,14 +2,14 @@
   <table class="ui basic table" if={ items && items.length!=0 }>
     <tbody>
       <tr each={ item, index in items }>
-        <td>
+        <td class="no-translation">
           <a href={ '/tournaments/'+item.id }>
             { item.data().title }
           </a>
           <br>
           <small>
             <i class="icon clock"></i>
-            最終更新: { (item.data().updatedAt) ? formatDate(item.data().updatedAt, 'YYYY年MM月DD日 hh:mm') : '--' }
+            { (item.data().updatedAt) ? formatDate(item.data().updatedAt, 'YYYY-MM-DD hh:mm') : '--' }
           </small>
         </td>
         <td class="right aligned" if={ editable }>
