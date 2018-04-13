@@ -249,6 +249,14 @@
           </div>
         </div>
       </div>
+      <div class="ui basic center aligned segment">
+        もしほしい機能がない場合は、ぜひ匿名の新機能アンケートにご投票お願いします！要望が多いものは優先的に開発に取り組みます。
+        <br><br>
+        <a class="ui icon button" href="https://goo.gl/forms/cQ53xQ2tWKys0m0x1" target="_blank">
+          <i class="tasks icon"></i>
+          新機能アンケート
+        </a>
+      </div>
     </div>
   </div>
   <div class="ui hidden divider"></div>
