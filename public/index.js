@@ -1,7 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const riot = require('riot');
-const fetch = require('node-fetch');
 const fs = require('fs');
 const xss = require('xss');
 const CleanCSS = require('clean-css');
@@ -14,14 +13,7 @@ const bucketName = 'app.the-tournament.jp'
 const version = 'v1'
 const storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
 
-
-var serviceAccount = require("./cert_"+ ENV +".json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://"+ process.env.GCLOUD_PROJECT +".firebaseio.com",
-  storageBucket: "notsobad-1332.appspot.com"
-});
-
+admin.initializeApp();
 
 
 var autoLink = function(str) {
@@ -52,11 +44,11 @@ var minifyCss = function() {
 
 
 /* トーナメント更新時に、riotでSSRしてstorageに静的HTMLをアップ */
-exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWrite(event => {
-  if(!event.data.exists) { return false; }  //削除時など、データがないときは終了
+exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWrite((change, context) => {
+  if(!change.after.data()) { return false; }  //削除時など、データがないときは終了
 
-  var tournament = event.data.data();
-  var id = event.params.id;
+  var tournament = change.after.data();
+  var id = context.params.id;
 
   var html = riot.render(bracket, {tournament: tournament, editable: false, embed: true});
   html = html.replace(/\r?\n/g, '<br>');
@@ -134,7 +126,6 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
 /* トーナメント詳細ページへの直接アクセスは、metaタグを埋め込んでからindex.htmlを返す */
 exports.returnWithOGP = functions.https.onRequest((req, res) => {
   res.set('Cache-Control', 'public, max-age=86400, s-maxage=2592000');
-  res.set('Vary', 'Accept-Encoding');
 
   const id = req.path.match(/\/tournaments\/([^\/\?]*)/)[1]
   const domain = 'https://the-tournament.jp';
@@ -171,7 +162,6 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
 exports.returnRSS = functions.https.onRequest((req, res) => {
   res.set('Cache-Control', 'public, max-age=21600, s-maxage=43200');
   res.set('Content-Type', 'application/xml');
-  res.set('Vary', 'Accept-Encoding');
   const feedItemCount = 20;
 
   let feed = new RSS({
