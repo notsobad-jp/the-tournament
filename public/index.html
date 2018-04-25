@@ -320,12 +320,7 @@
       var q = route.query()
       if(q.mode == 'resetPassword') {
         firebase.auth().verifyPasswordResetCode(q.oobCode).then(function(email) {
-          //FIXME: 柔道対応
-          if(email=='taikai@judo.or.jp') {
-            var newPassword = q.oobCode
-          }else {
-            var newPassword = Math.random().toString(36).slice(-12)
-          }
+          var newPassword = Math.random().toString(36).slice(-12)
           firebase.auth().confirmPasswordReset(q.oobCode, newPassword).then(function(){
             firebase.auth().signInWithEmailAndPassword(email, newPassword)
             obs.trigger("flashChanged", {type:'success',text:'ログインしました'})
