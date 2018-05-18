@@ -9,5 +9,8 @@
     "rss": "^1.2.2",
     "xss": "^0.3.7"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "spritesmith-cli": "^1.1.2"
+  }
 }
