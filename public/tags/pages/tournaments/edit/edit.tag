@@ -22,7 +22,7 @@
       <div class="ui basic segment">
         <bracket-header tournament={ tournament }></bracket-header>
         <div class="ui hidden divider"></div>
-        <bracket name="bracket" tournament={ tournament } editable={ true }></bracket>
+        <bracket name="bracket" tournament={ tournament } editable={ true } id={ opts.id }></bracket>
         <br><br>
 
         <div class="ui stackable centered secondary segment grid" if={ user.isAnonymous }>

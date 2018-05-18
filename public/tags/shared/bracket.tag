@@ -9,6 +9,8 @@
                 <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
               </span>
 
+              <div class="profileImage { profileIconClass(teamIndex) }" style="background-image:url('{profileImageUrl}');" if={ tournament.profileImages }></div>
+
               <div class="name { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : nameWidth() }>
                 <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
                 <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName } disabled={ teamIndex == null }>
@@ -128,6 +130,7 @@
     that.editable = opts.editable
     that.embed = opts.embed
     that.showBye = false
+    that.profileImageUrl = 'https://app.the-tournament.jp/embed/v1/' + opts.id + '.png'
 
 
     /***********************************************
@@ -148,6 +151,14 @@
       return {
         0: that.getTeamIndex(that.tournament, roundIndex, matchIndex, 0),
         1: that.getTeamIndex(that.tournament, roundIndex, matchIndex, 1)
+      }
+    }
+
+    profileIconClass(teamIndex) {
+      if(teamIndex != null) {
+        return "icon-" + ('000' + Number(teamIndex+1)).slice(-3)
+      }else {
+        return "icon-dummy"
       }
     }
 

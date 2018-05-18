@@ -38,7 +38,7 @@
 
 
         <div id="bracketTab" class="ui tab no-translation { active: tabSelected('bracket') }">
-          <bracket editable={ false } tournament={ tournament }></bracket>
+          <bracket editable={ false } tournament={ tournament } id={ opts.id }></bracket>
           <div class="ui divider"></div>
           <sns-share tournament={ tournament } id={ opts.id }></sns-share>
           <a id="download-btn" href="#" target="_blank" download={ opts.id } class="ui icon primary basic tiny button" onclick={ imageDownload }>

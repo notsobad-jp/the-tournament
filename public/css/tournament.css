@@ -83,8 +83,8 @@
 }
 /* シードと勝ち上がり未定のところは画像なし */
 .profileImages .match.bye .team.loser .profileImage,
-.profileImages .profileImage.ico_ {
-  background-image: none;
+.profileImages .profileImage.icon-dummy {
+  background-image: none !important;
 }
 
 /* bye */
@@ -643,3 +643,72 @@
 .lineContainer > .line-flex-62 { flex-grow: 62; }
 .lineContainer > .line-flex-63 { flex-grow: 63; }
 .lineContainer > .line-flex-64 { flex-grow: 64; }
+
+
+
+/* profileImages */
+.profileImage { background-image: url('https://app.the-tournament.jp/embed/v1/gMXcokQE4APwdDX9cyBV.png'); }
+.icon-001 { background-position: 0px 0px; }
+.icon-002 { background-position: 0px -50px; }
+.icon-003 { background-position: 0px -100px; }
+.icon-004 { background-position: 0px -150px; }
+.icon-005 { background-position: 0px -200px; }
+.icon-006 { background-position: 0px -250px; }
+.icon-007 { background-position: 0px -300px; }
+.icon-008 { background-position: 0px -350px; }
+.icon-009 { background-position: 0px -400px; }
+.icon-010 { background-position: 0px -450px; }
+.icon-011 { background-position: 0px -500px; }
+.icon-012 { background-position: 0px -550px; }
+.icon-013 { background-position: 0px -600px; }
+.icon-014 { background-position: 0px -650px; }
+.icon-015 { background-position: 0px -700px; }
+.icon-016 { background-position: 0px -750px; }
+.icon-017 { background-position: 0px -800px; }
+.icon-018 { background-position: 0px -850px; }
+.icon-019 { background-position: 0px -900px; }
+.icon-020 { background-position: 0px -950px; }
+.icon-021 { background-position: 0px -1000px; }
+.icon-022 { background-position: 0px -1050px; }
+.icon-023 { background-position: 0px -1100px; }
+.icon-024 { background-position: 0px -1150px; }
+.icon-025 { background-position: 0px -1200px; }
+.icon-026 { background-position: 0px -1250px; }
+.icon-027 { background-position: 0px -1300px; }
+.icon-028 { background-position: 0px -1350px; }
+.icon-029 { background-position: 0px -1400px; }
+.icon-030 { background-position: 0px -1450px; }
+.icon-031 { background-position: 0px -1500px; }
+.icon-032 { background-position: 0px -1550px; }
+.icon-033 { background-position: 0px -1600px; }
+.icon-034 { background-position: 0px -1650px; }
+.icon-035 { background-position: 0px -1700px; }
+.icon-036 { background-position: 0px -1750px; }
+.icon-037 { background-position: 0px -1800px; }
+.icon-038 { background-position: 0px -1850px; }
+.icon-039 { background-position: 0px -1900px; }
+.icon-040 { background-position: 0px -1950px; }
+.icon-041 { background-position: 0px -2000px; }
+.icon-042 { background-position: 0px -2050px; }
+.icon-043 { background-position: 0px -2100px; }
+.icon-044 { background-position: 0px -2150px; }
+.icon-045 { background-position: 0px -2200px; }
+.icon-046 { background-position: 0px -2250px; }
+.icon-047 { background-position: 0px -2300px; }
+.icon-048 { background-position: 0px -2350px; }
+.icon-049 { background-position: 0px -2400px; }
+.icon-050 { background-position: 0px -2450px; }
+.icon-051 { background-position: 0px -2500px; }
+.icon-052 { background-position: 0px -2550px; }
+.icon-053 { background-position: 0px -2600px; }
+.icon-054 { background-position: 0px -2650px; }
+.icon-055 { background-position: 0px -2700px; }
+.icon-056 { background-position: 0px -2750px; }
+.icon-057 { background-position: 0px -2800px; }
+.icon-058 { background-position: 0px -2850px; }
+.icon-059 { background-position: 0px -2900px; }
+.icon-060 { background-position: 0px -2950px; }
+.icon-061 { background-position: 0px -3000px; }
+.icon-062 { background-position: 0px -3050px; }
+.icon-063 { background-position: 0px -3100px; }
+.icon-064 { background-position: 0px -3150px; }
