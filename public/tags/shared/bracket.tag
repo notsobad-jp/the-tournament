@@ -1,5 +1,5 @@
 <bracket>
-  <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable, embed: embed, profileImages: tournament.profileImages }" tabindex="0">
+  <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable, embed: embed, profileImages: embed && tournament.profileImages }" tabindex="0">
     <div class="block left">
       <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
@@ -9,7 +9,7 @@
                 <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
               </span>
 
-              <div class="profileImage { profileIconClass(teamIndex) }" style="background-image:url('{profileImageUrl}');" if={ tournament.profileImages }></div>
+              <div class="profileImage { profileIconClass(teamIndex) }" if={ embed && tournament.profileImages }></div>
 
               <div class="name { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : nameWidth() }>
                 <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
@@ -130,7 +130,6 @@
     that.editable = opts.editable
     that.embed = opts.embed
     that.showBye = false
-    that.profileImageUrl = 'https://app.the-tournament.jp/embed/v1/' + opts.id + '.png'
 
 
     /***********************************************
