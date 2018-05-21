@@ -84,7 +84,7 @@
 /* シードと勝ち上がり未定のところは画像なし */
 .profileImages .match.bye .team.loser .profileImage,
 .profileImages .profileImage.icon-dummy {
-  background-image: none !important;
+  background-image: none;
 }
 
 /* bye */
