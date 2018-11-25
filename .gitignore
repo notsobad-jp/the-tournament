@@ -6,7 +6,6 @@
 firebase-debug.log
 node_modules
 cert*.json
-.spritesmith.js
 spritesmith
 
 # Icon must ends with two \r.
