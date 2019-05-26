@@ -3,8 +3,8 @@
   "description": "Cloud Functions for Firebase",
   "dependencies": {
     "clean-css": "^4.1.11",
-    "firebase-admin": "^5.12.0",
-    "firebase-functions": "^1.0.1",
+    "firebase-admin": "^7.0.0",
+    "firebase-functions": "^2.3.1",
     "riot": "3.7.4",
     "rss": "^1.2.2",
     "xss": "^0.3.7"
