@@ -19,6 +19,17 @@
     <sns-share tournament={ tournament } id={ id }></sns-share>
 
     <h5 class="ui small header">
+      データエクスポート
+      <span class="sub header">トーナメントデータを汎用的なJSONファイルとしてダウンロードします。</span>
+    </h5>
+    <div>
+      <a href="{ jsonStr }" download="{ parent.opts.id }.json" class="ui black basic icon button">
+        <i class="icon download"></i>
+        ダウンロード
+      </a>
+    </div>
+
+    <h5 class="ui small header">
       画像ダウンロード
     </h5>
     <div class="ui info message">
@@ -51,7 +62,8 @@
     that.id = that.parent.opts.id
     that.embedHeight = 1000 //クリックされてからbracketのサイズに合わせて修正
     that.shareURL = 'https://the-tournament.jp/tournaments/' + that.id
-    that.shareText = that.tournament.title + 'のトーナメント表 - THE TOURNAMENT(ザ・トーナメント) 簡単・便利な無料トーナメント表作成ツール',
+    that.shareText = that.tournament.title + 'のトーナメント表 - THE TOURNAMENT(ザ・トーナメント) 簡単・便利な無料トーナメント表作成ツール'
+    that.jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(that.tournament))
 
 
     /***********************************************
