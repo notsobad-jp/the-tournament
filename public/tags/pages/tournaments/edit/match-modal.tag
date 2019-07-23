@@ -125,6 +125,12 @@
       return matchName
     }
 
+    removeResult() {
+      that.tournament.results[that.roundIndex][that.matchIndex]['winner'] = null
+      that.match = null
+      obs.trigger("tournamentChanged", that.tournament)
+    }
+
     roundName() {
       var roundName = ''
       if(that.roundIndex == Object.keys(that.tournament.results).length-1) {
