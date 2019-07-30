@@ -26,6 +26,7 @@
 }
 .round:not(:first-child) .match.bye { cursor: default; }
 .right.block .match { flex-direction: row-reverse; }
+.match.hidden { display: none; }
 
 .teamContainer {
   position: relative;
