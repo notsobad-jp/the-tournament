@@ -8,6 +8,7 @@ node_modules
 cert*.json
 spritesmith
 .firebase
+*.log
 
 # Icon must ends with two \r.
 Icon
