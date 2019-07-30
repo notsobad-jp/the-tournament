@@ -15,29 +15,8 @@ const bucketName = 'app.the-tournament.jp'
 const version = 'v1'
 const storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
 
-if(ENV == 'production') {
-  /* Production */
-  var config = {
-    apiKey: "AIzaSyBpJ93PBOR6cr-PeM74vYiylQcq1QpcWFI",
-    authDomain: "tournament-7e3b7.firebaseapp.com",
-    databaseURL: "https://tournament-7e3b7.firebaseio.com",
-    projectId: "tournament-7e3b7",
-    storageBucket: "tournament-7e3b7.appspot.com",
-    messagingSenderId: "670551703759"
-  }
-}else {
-  /* Staging */
-  var config = {
-    apiKey: "AIzaSyB6fOdlYBhEmSD-VoyiO1t88DxBZHlnhUI",
-    authDomain: "tournament-staging.firebaseapp.com",
-    databaseURL: "https://tournament-staging.firebaseio.com",
-    projectId: "tournament-staging",
-    storageBucket: "tournament-staging.appspot.com",
-    messagingSenderId: "327887248230"
-  }
-}
+var config = require('../cert_'+ ENV +'.json');
 admin.initializeApp(config);
-
 
 var autoLink = function(str) {
   var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
