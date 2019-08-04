@@ -98,6 +98,11 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
       header += '#emb-body { border-style: none; } #emb-body .bracket { padding-bottom: 300px; }'
     }
 
+    // カスタムCSS反映
+    if(tournament.css) {
+      header += tournament.css
+    }
+
     header =  header.replace(/assets\/images\/flags.png/, 'https://app.the-tournament.jp/assets/img/flags.png');
     header += '</style>';
     header += '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>';
