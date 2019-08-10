@@ -137,12 +137,21 @@
         that.update()
         obs.trigger("dimmerChanged", '')
 
+        /* 権限確認 */
+        if(that.tournament.private && that.tournament.userId != that.user.uid && that.user.uid != '14') {
+          obs.trigger("dimmerChanged", '')
+          obs.trigger("flashChanged", {type:'error',text:'権限がありません…。ログイン状態を確認してください。'})
+          route('/')
+          return false
+        }
+
         /* metatag setting */
         let meta = {
           title: that.tournament.title,
           description: that.tournament.detail || that.tournament.title + 'のトーナメント表',
           keyword: that.tournament.title,
-          ampURL: 'https://app.the-tournament.jp/embed/v1/' + opts.id + '.html'
+          ampURL: 'https://app.the-tournament.jp/embed/v1/' + opts.id + '.html',
+          noindex: that.tournament.private
         }
         that.setMetatags(meta)
       }else {

@@ -105,6 +105,12 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
 
     header =  header.replace(/assets\/images\/flags.png/, 'https://app.the-tournament.jp/assets/img/flags.png');
     header += '</style>';
+
+    // privateトーナメントはnoindex
+    if(tournament.private) {
+      header += '<meta name="robots" content="noindex" />';
+    }
+
     header += '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>';
     header += '<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>';
     header += '<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>';
@@ -156,7 +162,8 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
         .replace(/(<meta id="og-url" .* content=")(.*)" \/>/g, '$1'+ domain + '/tournaments/' + id +'" />')
         .replace(/(<meta id="og-description" .* content=")(.*)" \/>/g, '$1'+ description +'" />')
         .replace(/(<link id="canonical" .* href=")(.*)" \/>/g, '$1'+ domain + '/tournaments/'+ id +'" />')
-        .replace(/(<link id="amp-url" rel="amphtml") \/>/g, '$1 href="'+ ampDomain + id +'.html" />');
+        .replace(/(<link id="amp-url" rel="amphtml") \/>/g, '$1 href="'+ ampDomain + id +'.html" />')
+        .replace(/(<meta id="robots" .* content=")(.*)" \/>/g, '$1'+ description +'" />');
       res.status(200).send(responseHtml);
     }).catch(error => {
       console.error(error);

@@ -1,10 +1,12 @@
 <tournament-list>
   <table class="ui basic table" if={ items && items.length!=0 }>
     <tbody>
-      <tr each={ item, index in items }>
+      <!-- マイページはすべて表示、一覧画面ではprivateじゃないものだけ表示 -->
+      <tr each={ item, index in items } if={ user || item.data().private != true }>
         <td class="no-translation">
           <a href={ '/tournaments/'+item.id }>
             { item.data().title }
+            <i class="icon black lock" if={ item.data().private }></i>
           </a>
           <br>
           <small>
