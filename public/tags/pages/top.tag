@@ -248,6 +248,39 @@
             </div>
           </div>
         </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              API連携
+              <span class="ui orange mini label">PRO</span>
+            </div>
+            <div class="description">
+              API経由でトーナメントデータの取得・更新ができます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              デザインカスタマイズ
+              <span class="ui orange mini label">PRO</span>
+            </div>
+            <div class="description">
+              トーナメント表のCSSをある程度カスタマイズすることができます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">
+              非表示オプション
+              <span class="ui orange mini label">PRO</span>
+            </div>
+            <div class="description">
+              トーナメント表を一覧画面から非表示にし、詳細画面も作成者のみ閲覧できるようにできます。
+            </div>
+          </div>
+        </div>
       </div>
       <div class="ui basic center aligned segment">
         もしほしい機能がない場合は、ぜひ匿名の新機能アンケートにご投票お願いします！要望が多いものは優先的に開発に取り組みます。
