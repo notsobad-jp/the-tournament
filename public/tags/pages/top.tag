@@ -117,7 +117,7 @@
         THE TOURNAMENTは現在も活発に機能追加を続けています。
         今後の開発予定は「<a href="https://trello.com/b/G9vXQ1rT" target="_blank">開発ロードマップ</a>」で確認可能です。
       </div>
-      <div class="ui three doubling cards">
+      <div class="ui four doubling cards">
         <div class="card">
           <div class="image">
             <img src="img/top/feature/multi-seed.png">
@@ -187,6 +187,20 @@
             </div>
             <div class="description">
               各選手ごとに顔写真を登録して表示することができます。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="image">
+            <img src="img/top/feature/redraw.png">
+          </div>
+          <div class="content">
+            <div class="header">
+              再抽選対応
+              <span class="ui orange mini label">PRO</span>
+            </div>
+            <div class="description">
+              甲子園など再抽選を行うトーナメント表の表示にも対応しています。
             </div>
           </div>
         </div>
