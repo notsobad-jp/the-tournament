@@ -40,8 +40,7 @@
           <div class="popupContainer" if={ !editable }>
             <div class="popupContent">
               <h3 class="popupTitle">
-                { (roundIndex == Object.keys(tournament.results).length-1) ? '' : roundName(Number(roundIndex)) }
-                { matchName(Number(roundIndex), Number(matchIndex)) }
+                { roundMatchLabel(roundIndex, matchIndex) }
               </h3>
               <div class="popupTeamContainer">
                 <virtual each={ i in [0,1] }>
@@ -394,6 +393,19 @@
         matchName = '第' + (matchIndex+1) + '試合'
       }
       return matchName
+    }
+
+    roundMatchLabel(roundIndex, matchIndex) {
+      let roundMatchLabel = ""
+      let match = that.tournament.results[Number(roundIndex)][Number(matchIndex)]
+      if(match.label && match.label != "") {
+        roundMatchLabel = match.label
+      }else {
+        let roundLabel = (Number(roundIndex) == Object.keys(that.tournament.results).length-1) ? '' : that.roundName(Number(roundIndex))
+        let matchLabel = that.matchName(Number(roundIndex), Number(matchIndex))
+        roundMatchLabel = roundLabel + matchLabel
+      }
+      return roundMatchLabel
     }
 
     removeTeam(e) {

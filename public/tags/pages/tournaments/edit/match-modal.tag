@@ -10,7 +10,7 @@
       <div class="content">
         <div class="ui center aligned grid form">
           <div class="row">
-            【{ roundName() + matchName() }】
+            <input type="text" value={ match.label || roundName() + matchName() } onchange={ updateLabel }>
           </div>
 
           <div class="row">
@@ -165,6 +165,12 @@
     updateScore(e) {
       var teamOrder = Number(e.currentTarget.getAttribute('data-team-order'))
       that.match.score[teamOrder] = e.currentTarget.value
+    }
+
+    updateLabel(e) {
+      that.match.label = e.currentTarget.value
+      console.log(that.match.label)
+      console.log(e.currentTarget.value)
     }
 
     updateWinner(e) {
