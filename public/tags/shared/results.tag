@@ -10,7 +10,7 @@
             <div class="ui tiny center aligned header">
               【{ matchName(Number(roundIndex), Number(matchIndex)) }】
             </div>
-            <div class="ui top right attached mini blue label" if={ editable && !match.bye } onclick={ showMatchModal.bind(this, Number(roundIndex), Number(matchIndex)) }>
+            <div class="ui top right attached mini blue label" if={ editable } onclick={ showMatchModal.bind(this, Number(roundIndex), Number(matchIndex)) }>
               編集
             </div>
             <div class="ui center aligned grid">
