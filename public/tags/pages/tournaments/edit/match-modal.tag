@@ -169,8 +169,6 @@
 
     updateLabel(e) {
       that.match.label = e.currentTarget.value
-      console.log(that.match.label)
-      console.log(e.currentTarget.value)
     }
 
     updateWinner(e) {
