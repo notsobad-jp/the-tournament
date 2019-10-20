@@ -237,9 +237,7 @@
 
 
 /* 両山対応 */
-.center.block {
-  z-index: 150;
-}
+.center.block { z-index: 150; }
 .center.block .final.round { margin: 0; }
 .center.block .match .teamContainer {
   margin: 0;
@@ -258,6 +256,9 @@
   flex-direction: column-reverse;
   justify-content: flex-end;
 }
+.bracket .right.block .round:not(:last-child) .match.bye .teamContainer { display: none; }
+.bracket .right.block .round:not(:last-child) .match.bye .lineContainer { width: 100%; }
+.bracket .right.block .round:not(:last-child) .match.bye .lineContainer div div:first-child { width: calc(100% - 20px); }
 
 
 /* 順位表示 */
@@ -450,9 +451,9 @@
 /* シード表示 */
 .bracket { min-height: unset; }
 .bracket .match.skip { display: none; }
-.bracket .round:not(:first-child) .match.bye .teamContainer { display: none; }
-.bracket .round:not(:first-child) .match.bye .lineContainer { width: 100%; }
-.bracket .round:not(:first-child) .match.bye .lineContainer div div:first-child { width: calc(100% - 20px); }
+.bracket .block:not(.right) .round:not(:first-child) .match.bye .teamContainer { display: none; }
+.bracket .block:not(.right) .round:not(:first-child) .match.bye .lineContainer { width: 100%; }
+.bracket .block:not(.right) .round:not(:first-child) .match.bye .lineContainer div div:first-child { width: calc(100% - 20px); }
 
 /* next-bye: 次の試合もbyeのときは、lineをまっすぐ次に伸ばす  */
 .bracket .match.next-bye:nth-child(even) { margin-top: 0px; }
