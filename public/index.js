@@ -7,6 +7,7 @@ const CleanCSS = require('clean-css');
 const RSS = require('rss');
 
 const bracket = require('./tags/shared/bracket.tag');
+const doubleBracket = require('./tags/shared/double-bracket.tag');
 
 const ENV = (process.env.GCLOUD_PROJECT == 'tournament-staging') ? 'staging' : 'production';
 const bucketName = 'app.the-tournament.jp'
@@ -49,8 +50,9 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
 
   var tournament = change.after.data();
   var id = context.params.id;
+  var bracketType = (tournament.doubleBracket == true) ? doubleBracket : bracket;
 
-  var html = riot.render(bracket, {tournament: tournament, editable: false, embed: true});
+  var html = riot.render(bracketType, {tournament: tournament, editable: false, embed: true});
   html = html.replace(/\r?\n/g, '<br>');
   html = html.replace(/<\/?bracket>/g, '');
   html = autoLink(html);
