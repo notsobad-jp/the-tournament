@@ -1,0 +1,40 @@
+adingo.jp, 18703, DIRECT
+pubmatic.com, 156313, RESELLER, 5d62403b186f2ace
+google.com, pub-3859050685269056, RESELLER
+rubiconproject.com, 19064, RESELLER, 0bfd66d529a55807
+adingo.jp, 20070, RESELLER
+openx.com, 540397708, RESELLER, 6a698e2ec38604c6
+pubmatic.com, 157589, RESELLER, 5d62403b186f2ace
+appnexus.com, 7044, RESELLER
+ad-generation.jp, 12283, RESELLER
+indexexchange.com, 189076, RESELLER
+adm.shinobi.jp,21957,DIRECT
+openx.com, 539294033, RESELLER, 6a698e2ec38604c6
+pubmatic.com, 156851, RESELLER, 5d62403b186f2ace
+pubmatic.com, 157741, RESELLER, 5d62403b186f2ace
+openx.com, 540679900, RESELLER, 6a698e2ec38604c6
+webeyemob.com, 70080, RESELLER
+appnexus.com, 7597, RESELLER, f5ab79cb980f11d1
+tremorhub.com, q017o-78mlk, RESELLER, 1a4e959a1b50034a
+teads.tv, 15429, RESELLER, 15a9c44f6d26cbe1
+advertising.com, 26154, RESELLER
+spotxchange.com, 225721, RESELLER
+Freewheel.tv, 741650, RESELLER
+rubiconproject.com, 17130, RESELLER, 0bfd66d529a55807
+lkqd.net, 450, RESELLER, 59c49fa9598a0117
+openx.com, 540393169, RESELLER, 6a698e2ec38604c6
+spotx.tv, 238936, RESELLER, 7842df1d2fe2db34
+spotxchange.com, 238936, RESELLER, 7842df1d2fe2db34
+advertising.com, 28038, RESELLER
+rubiconproject.com, 19668, RESELLER, 0bfd66d529a55807
+mintegral.com, 16124, RESELLER
+rubiconproject.com, 15794, RESELLER, 0bfd66d529a55807
+pubnative.net, 1007243, RESELLER, d641df8625486a7b
+pubmatic.com, 155975, RESELLER, 5d62403b186f2ace
+openx.com, 537152826, RESELLER, 6a698e2ec38604c6
+appnexus.com, 8178, RESELLER, f5ab79cb980f11d1
+rubiconproject.com, 17328, RESELLER, 0bfd66d529a55807
+adcolony.com, 1efc6603710003ea, RESELLER, 1ad675c9de6b5176
+contextweb.com, 561884, RESELLER, 89ff185a4c4e857c
+tapjoy.com, 58de38e72c93457696e53fc6e52295c3, DIRECT, 29e595b1aeb5904d
+rubiconproject.com, 12286, RESELLER, 0bfd66d529a55807
