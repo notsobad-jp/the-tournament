@@ -1,5 +1,5 @@
 <double-bracket>
-  <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable, embed: embed, profileImages: embed && tournament.profileImages }" tabindex="0">
+  <div id="bracket" class="bracket doubleBracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable, embed: embed, profileImages: embed && tournament.profileImages }" tabindex="0">
     <div class="block left">
       <div if={ !isFinalRound(roundIndex) }  class="round" each={ round, roundIndex in tournament.results }>
         <div if={ matchIndex < Math.ceil(round.length / 2) } class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
