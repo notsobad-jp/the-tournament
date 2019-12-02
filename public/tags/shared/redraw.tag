@@ -2,7 +2,7 @@
   <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable, embed: embed, profileImages: embed && tournament.profileImages }" tabindex="0">
     <div class="block left">
       <!-- 再抽選前のround（roundにclass追加） -->
-      <div class="round { final: isFinalRound(roundIndex) || roundIndex == 2, hidden: roundIndex > 2 }" each={ round, roundIndex in tournament.results }>
+      <div class="round { final: isFinalRound(roundIndex), hidden: roundIndex > 2 }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
           <div class="teamContainer { teamContainerPosition(roundIndex, matchIndex) }">
             <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
@@ -71,8 +71,8 @@
 
 
       <!-- 再抽選後のround（通常まま。tournamentが2になってる） -->
-      <div class="round { final: isFinalRound(roundIndex) }" each={ round, roundIndex in tournament2.results }>
-        <div class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
+      <div class="round { final: isFinalRound(roundIndex), hidden: roundIndex > 0 }" each={ round, roundIndex in tournament2.results }>
+        <div class="match { matchClass(roundIndex, matchIndex) } match-flex-4" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
           <div class="teamContainer { teamContainerPosition(roundIndex, matchIndex) }">
             <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
               <span class="winnerSelect" if={ editable }>
@@ -135,6 +135,77 @@
         </div>
       </div>
 
+
+      <div class="round spacer">再 抽 選</div>
+
+
+      <!-- 再抽選後のround（通常まま。tournamentが3になってる） -->
+      <div class="round { final: roundIndex == 1 }" each={ round, roundIndex in tournament3.results }>
+        <div class="match { final: (roundIndex==1 && matchIndex==0), consolation: (roundIndex==1 && matchIndex==1) } match-flex-8" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
+          <div class="teamContainer { teamContainerPosition(roundIndex, matchIndex) }">
+            <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
+              <span class="winnerSelect" if={ editable }>
+                <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
+              </span>
+
+              <div class="profileImage { profileIconClass(teamIndex) }" if={ embed && tournament.profileImages }></div>
+
+              <div class="name { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : nameWidth() }>
+                <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
+                <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName } disabled={ teamIndex == null }>
+                <span if={ !editable }>{ teamName(teamIndex) }</span>
+              </div>
+
+              <div class="score { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : scoreWidth() }>
+                <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore }>
+                <span if={ !editable }>{ match.score[i] }</span>
+              </div>
+
+              <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
+            </div>
+          </div>
+
+          <div class="lineContainer">
+            <div class="line-flex-{ lineFlex(roundIndex, matchIndex)[0] }">
+              <div></div>
+              <div></div>
+            </div>
+            <div class="line-flex-{ lineFlex(roundIndex, matchIndex)[1] }">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+
+          <div class="popupContainer" if={ !editable }>
+            <div class="popupContent">
+              <h3 class="popupTitle">
+                { (roundIndex == Object.keys(tournament.results).length-1) ? '' : roundName(Number(roundIndex)) }
+                { matchName(Number(roundIndex), Number(matchIndex)) }
+              </h3>
+              <div class="popupTeamContainer">
+                <virtual each={ i in [0,1] }>
+                  <div class="popupTeam { teamClass(match, i) }" each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
+                    <div class="popupName">
+                      { teamName(teamIndex) }
+                    </div>
+                    <div class="popupScore">
+                      { match.score[i] }
+                    </div>
+                  </div>
+                  <div class="popupSpacer" if={ i == 0 }>
+                    -
+                  </div>
+                </virtual>
+              </div>
+              <div data-is="raw" class="popupComment" if={ !embed } content={ match.comment }></div>
+              <div if={ embed } class="popupComment">{ match.comment }</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
   </div>
 
@@ -147,6 +218,7 @@
     var that = this
     that.tournament = opts.tournament
     that.tournament2 = opts.tournament2
+    that.tournament3 = opts.tournament3
     that.editable = opts.editable
     that.embed = opts.embed
     that.showBye = false
