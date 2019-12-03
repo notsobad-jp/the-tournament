@@ -49,6 +49,10 @@
                   <div class="popupTeam { teamClass(match, i) }" each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
                     <div class="popupName">
                       { teamName(teamIndex) }
+                      <small if={ teamGroup(teamIndex) }>
+                        <br>
+                        （{ teamGroup(teamIndex) }）
+                      </small>
                     </div>
                     <div class="popupScore">
                       { match.score[i] }
@@ -289,6 +293,12 @@
 
     teamName(teamIndex) {
       return (teamIndex==null) ? '--' : that.tournament.teams[teamIndex]['name']
+    }
+
+    teamGroup(teamIndex) {
+      if(teamIndex==null) { return null; }
+      var group = that.tournament.teams[teamIndex]['group'];
+      return (group && group != '') ? group : null;
     }
 
     matchClass(roundIndex, matchIndex) {
