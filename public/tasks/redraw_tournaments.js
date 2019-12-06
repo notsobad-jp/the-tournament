@@ -7,7 +7,7 @@ const CleanCSS = require('clean-css');
 const RSS = require('rss');
 
 const bracket = require('../tags/shared/bracket.tag');
-const redraw = require('../tags/tmp/rugby/redraw.tag');
+const redraw = require('../tags/tmp/redraw_rugby.tag');
 
 // const ENV = 'production';
 const ENV = 'staging';
