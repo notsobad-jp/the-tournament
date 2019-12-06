@@ -9,8 +9,8 @@ const RSS = require('rss');
 const bracket = require('../tags/shared/bracket.tag');
 const redraw = require('../tags/tmp/redraw_rugby.tag');
 
-// const ENV = 'production';
-const ENV = 'staging';
+const ENV = 'production';
+// const ENV = 'staging';
 const bucketName = 'app.the-tournament.jp'
 const version = 'v1'
 const storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
@@ -47,14 +47,14 @@ var minifyCss = function() {
 
 
 // 本番用(production)
-// let id1 = 'ghzEs7dZG66QMGQQbwB3'
-// let id2 = 'dXgn0F8WBYXpFYnlGWam'
-// let id3 = '0cF3NmjAceIkMEbmQpY0'
+let id1 = 'ghzEs7dZG66QMGQQbwB3'
+let id2 = 'dXgn0F8WBYXpFYnlGWam'
+let id3 = '0cF3NmjAceIkMEbmQpY0'
 
 // 検証用(staging)
-let id1 = 'rlOcfVPvkZP6CN7XjLRs'
-let id2 = 'kwjI5I4r63VtNQDyzIlC'
-let id3 = 'qBXKkYedpDckPjIx1bQn'
+// let id1 = 'rlOcfVPvkZP6CN7XjLRs'
+// let id2 = 'kwjI5I4r63VtNQDyzIlC'
+// let id3 = 'qBXKkYedpDckPjIx1bQn'
 
 
 let id = id1 + id2 + id3
@@ -138,27 +138,7 @@ admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
         var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
         container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
         container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;</small></h1></div><div id="emb-body">';
-        // container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;<a id="downloadButton" href="#" download="tournament" target="_blank">Download</a></small></h1></div><div id="emb-body">';
         container += '<amp-analytics type="googleanalytics"> <script type="application/json"> { "vars": { "account": "UA-30867542-19" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script> </amp-analytics> ';
-
-        if(!tournament.noAds) {
-          // html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
-        }
-
-        // 画像ダウンロード処理
-        html += `
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-          <script>
-            var downloadButton = document.getElementById('downloadButton');
-            window.onload = function(){
-              html2canvas(document.getElementById("bracket"),{
-                onrendered: function(canvas){
-                  downloadButton.setAttribute('href', canvas.toDataURL());
-                }
-              });
-            }
-          </script>
-        `;
 
         var file = admin.storage().bucket(bucketName).file(storage_root +'/'+ version +'/' + id + '.html');
         return file.save(header + container + html + '</div></div></body></html>', {
