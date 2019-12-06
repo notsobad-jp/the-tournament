@@ -16,6 +16,19 @@
   display: flex;
   flex-direction: column;
 }
+.round.hidden { display: none; }
+.round.spacer {
+  justify-content: center;
+  text-align: center;
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  background: #efefef;
+  border: 3px solid #ddd;
+  margin: 0 15px 0 0;
+  padding: 0 10px;
+  width: 15px;
+}
 
 .match {
   position: relative;

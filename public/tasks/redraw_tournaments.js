@@ -7,7 +7,7 @@ const CleanCSS = require('clean-css');
 const RSS = require('rss');
 
 const bracket = require('../tags/shared/bracket.tag');
-const redraw = require('../tags/shared/redraw.tag');
+const redraw = require('../tags/tmp/rugby/redraw.tag');
 
 // const ENV = 'production';
 const ENV = 'staging';
@@ -46,9 +46,17 @@ var minifyCss = function() {
 
 
 
+// 本番用(production)
+// let id1 = 'ghzEs7dZG66QMGQQbwB3'
+// let id2 = 'dXgn0F8WBYXpFYnlGWam'
+// let id3 = '0cF3NmjAceIkMEbmQpY0'
+
+// 検証用(staging)
 let id1 = 'rlOcfVPvkZP6CN7XjLRs'
 let id2 = 'kwjI5I4r63VtNQDyzIlC'
 let id3 = 'qBXKkYedpDckPjIx1bQn'
+
+
 let id = id1 + id2 + id3
 admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
   const tournament = doc.data();
@@ -66,7 +74,7 @@ admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
 
       var header = function(){/*
         <!doctype html>
-        <html ⚡>
+        <html>
         <head>
           <meta charset="utf-8">
           <title>{{title}} | THE TOURNAMENT</title>
@@ -89,20 +97,6 @@ admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
             #emb-body .bracket{margin-bottom:20px; overflow: auto;}
             #emb-body #emb-footer{margin-left:10px}
             #emb-ad{margin-bottom:5px}
-
-            .hidden.round { display: none; }
-            .round.spacer {
-              justify-content: center;
-              text-align: center;
-              -webkit-writing-mode: vertical-rl;
-              -ms-writing-mode: tb-rl;
-              writing-mode: vertical-rl;
-              background: #efefef;
-              border: 3px solid #ddd;
-              margin: 0 15px 0 0;
-              padding: 0 10px;
-              width: 15px;
-            }
       */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
 
       return minifyCss().then(function(css){
@@ -128,6 +122,9 @@ admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
         header =  header.replace(/assets\/images\/flags.png/, 'https://app.the-tournament.jp/assets/img/flags.png');
         header += '</style>';
 
+        // rugby対応：外部カスタムCSSを読み込み
+        header += '<link rel="stylesheet" type="text/css" href="https://www.mbs.jp/rugby/css/the-tournament.css">';
+
         // privateトーナメントはnoindex
         if(tournament.private) {
           header += '<meta name="robots" content="noindex" />';
@@ -140,11 +137,12 @@ admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
 
         var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
         container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
-        container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;<a id="downloadButton" href="#" download="tournament" target="_blank">Download</a></small></h1></div><div id="emb-body">';
+        container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;</small></h1></div><div id="emb-body">';
+        // container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;<a id="downloadButton" href="#" download="tournament" target="_blank">Download</a></small></h1></div><div id="emb-body">';
         container += '<amp-analytics type="googleanalytics"> <script type="application/json"> { "vars": { "account": "UA-30867542-19" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script> </amp-analytics> ';
 
         if(!tournament.noAds) {
-          html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
+          // html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
         }
 
         // 画像ダウンロード処理

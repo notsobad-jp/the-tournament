@@ -75,51 +75,40 @@
 
 
       <!-- 再抽選後のround（通常まま。tournamentが2になってる） -->
-      <div class="round { final: isFinalRound(roundIndex), hidden: roundIndex > 0 }" each={ round, roundIndex in tournament2.results }>
-        <div class="match { matchClass(roundIndex, matchIndex) } match-flex-4" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
-          <div class="teamContainer { teamContainerPosition(roundIndex, matchIndex) }">
-            <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
-              <span class="winnerSelect" if={ editable }>
-                <input type="radio" name="winner_{ roundIndex }_{ matchIndex }" data-round-index={ roundIndex } data-match-index={ matchIndex } value={ i } checked={ i == match['winner'] } onclick={ updateWinner } disabled={ match.bye }>
-              </span>
-
-              <div class="profileImage { profileIconClass(teamIndex) }" if={ embed && tournament.profileImages }></div>
-
-              <div class="name { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : nameWidth() }>
-                <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
-                <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName } disabled={ teamIndex == null }>
-                <span if={ !editable }>{ teamName(teamIndex) }</span>
+      <div class="round">
+        <div class="match match-flex-4" tabindex=0 each={ matchIndex in [0,1,2,3] }>
+          <div class="teamContainer">
+            <div class="team" data-teamid={ 2 * matchIndex + i } each={ i in [0, 1] }>
+              <div class="name">
+                <span>{ teamName2(2*matchIndex + i) }</span>
               </div>
 
-              <div class="score { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : scoreWidth() }>
-                <input type="text" if={ editable } data-round-index={ roundIndex } data-match-index={ matchIndex } data-team-order={ i } value={ match.score[i] } onchange={ updateScore }>
-                <span if={ !editable }>{ match.score[i] }</span>
+              <div class="score">
+                <span>{ score2(matchIndex,i) }</span>
               </div>
-
-              <i class="icon link remove circle" if={ editable && roundIndex==0 && teamName(teamIndex)!='' } onclick={ removeTeam } data-teamid={ teamIndex }></i>
             </div>
           </div>
 
           <div class="lineContainer">
-            <div class="line-flex-{ lineFlex(roundIndex, matchIndex)[0] }">
+            <div class="line-flex-1">
               <div></div>
               <div></div>
             </div>
-            <div class="line-flex-{ lineFlex(roundIndex, matchIndex)[1] }">
+            <div class="line-flex-1">
               <div></div>
               <div></div>
             </div>
           </div>
 
-          <div class="popupContainer" if={ !editable }>
+          <div class="popupContainer">
             <div class="popupContent">
               <h3 class="popupTitle">
-                { (roundIndex == Object.keys(tournament.results).length-1) ? '' : roundName(Number(roundIndex)) }
-                { matchName(Number(roundIndex), Number(matchIndex)) }
+                準々決勝
+                第{ matchIndex + 1 }試合
               </h3>
               <div class="popupTeamContainer">
                 <virtual each={ i in [0,1] }>
-                  <div class="popupTeam { teamClass(match, i) }" each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
+                  <div class="popupTeam" each={ teamIndex in [getTeamIndex(tournament, roundIndex, matchIndex, i)] }>
                     <div class="popupName">
                       { teamName(teamIndex) }
                     </div>
@@ -132,8 +121,7 @@
                   </div>
                 </virtual>
               </div>
-              <div data-is="raw" class="popupComment" if={ !embed } content={ match.comment }></div>
-              <div if={ embed } class="popupComment">{ match.comment }</div>
+              <div class="popupComment">{ match.comment }</div>
             </div>
           </div>
         </div>
@@ -291,8 +279,14 @@
       obs.trigger("tournamentChanged", that.tournament)
     }
 
-    teamName(teamIndex) {
-      return (teamIndex==null) ? '--' : that.tournament.teams[teamIndex]['name']
+    teamName(teamIndex, tournament=that.tournament) {
+      return (teamIndex==null) ? '--' : tournament.teams[teamIndex]['name']
+    }
+    teamName2(teamIndex) {
+      return (teamIndex==null) ? '--' : that.tournament2.teams[teamIndex]['name']
+    }
+    score2(matchIndex, index) {
+      return that.tournament2.results[0][matchIndex].score[index]
     }
 
     teamGroup(teamIndex) {
