@@ -9,8 +9,8 @@ const RSS = require('rss');
 const bracket = require('../tags/shared/bracket.tag');
 const redraw = require('../tags/tmp/redraw_rugby.tag');
 
-const ENV = 'production';
-// const ENV = 'staging';
+// const ENV = 'production';
+const ENV = 'staging';
 const bucketName = 'app.the-tournament.jp'
 const version = 'v1'
 const storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
@@ -47,14 +47,14 @@ var minifyCss = function() {
 
 
 // 本番用(production)
-let id1 = 'ghzEs7dZG66QMGQQbwB3'
-let id2 = 'dXgn0F8WBYXpFYnlGWam'
-let id3 = '0cF3NmjAceIkMEbmQpY0'
+// let id1 = 'ghzEs7dZG66QMGQQbwB3'
+// let id2 = 'dXgn0F8WBYXpFYnlGWam'
+// let id3 = '0cF3NmjAceIkMEbmQpY0'
 
 // 検証用(staging)
-// let id1 = 'rlOcfVPvkZP6CN7XjLRs'
-// let id2 = 'kwjI5I4r63VtNQDyzIlC'
-// let id3 = 'qBXKkYedpDckPjIx1bQn'
+let id1 = 'rlOcfVPvkZP6CN7XjLRs'
+let id2 = 'kwjI5I4r63VtNQDyzIlC'
+let id3 = 'qBXKkYedpDckPjIx1bQn'
 
 
 let id = id1 + id2 + id3

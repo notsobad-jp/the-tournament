@@ -16,6 +16,7 @@
                 <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
                 <input type="text" if={ editable } data-teamid={ teamIndex } value={ teamName(teamIndex) } onchange={ updateTeamName } disabled={ teamIndex == null }>
                 <span if={ !editable }>{ teamName(teamIndex) }</span>
+                <span if={ teamGroup(teamIndex) }>（{ teamGroup(teamIndex) }）</span>
               </div>
 
               <div class="score { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : scoreWidth() }>
@@ -87,6 +88,7 @@
               <div class="name { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : nameWidth() }>
                 <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
                 <span>{ teamName(teamIndex, tournament2) }</span>
+                <span if={ teamGroup(teamIndex, tournament2) }>（{ teamGroup(teamIndex, tournament2) }）</span>
               </div>
 
               <div class="score { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : scoreWidth() }>
@@ -116,6 +118,10 @@
                   <div class="popupTeam { teamClass(match, i) }" each={ teamIndex in [getTeamIndex(tournament2, roundIndex, matchIndex, i)] }>
                     <div class="popupName">
                       { teamName(teamIndex, tournament2) }
+                      <small if={ teamGroup(teamIndex, tournament2) }>
+                        <br>
+                        （{ teamGroup(teamIndex, tournament2) }）
+                      </small>
                     </div>
                     <div class="popupScore">
                       { match.score[i] }
@@ -150,6 +156,7 @@
               <div class="name { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : nameWidth() }>
                 <i class="flag { tournament.teams[teamIndex]['country'] }" if={ teamIndex != null && tournament.teams[teamIndex]['country'] }></i>
                 <span>{ teamName(teamIndex, tournament3) }</span>
+                <span if={ teamGroup(teamIndex, tournament3) }>（{ teamGroup(teamIndex, tournament3) }）</span>
               </div>
 
               <div class="score { (editable) ? 'ui transparent input' : '' }" style={ (embed) ? false : scoreWidth() }>
@@ -179,6 +186,10 @@
                   <div class="popupTeam { teamClass(match, i) }" each={ teamIndex in [getTeamIndex(tournament3, roundIndex, matchIndex, i)] }>
                     <div class="popupName">
                       { teamName(teamIndex, tournament3) }
+                      <small if={ teamGroup(teamIndex, tournament3) }>
+                        <br>
+                        （{ teamGroup(teamIndex, tournament3) }）
+                      </small>
                     </div>
                     <div class="popupScore">
                       { match.score[i] }
@@ -282,9 +293,9 @@
       return (teamIndex==null) ? '--' : tournament.teams[teamIndex]['name']
     }
 
-    teamGroup(teamIndex) {
+    teamGroup(teamIndex, tournament=that.tournament) {
       if(teamIndex==null) { return null; }
-      var group = that.tournament.teams[teamIndex]['group'];
+      var group = tournament.teams[teamIndex]['group'];
       return (group && group != '') ? group : null;
     }
 
