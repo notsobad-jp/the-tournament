@@ -19,9 +19,10 @@ var config = require('../cert_'+ ENV +'.json');
 admin.initializeApp(config);
 
 var autoLink = function(str) {
-  var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
-  var regexp_makeLink = function(all, url, h, href) {
-    return '<a href="h' + href + '" target="_blank">' + url + '</a>';
+  // [text](url)のフォーマットで、テキストリンク化
+  var regexp_url = /\[([^\]]+)\]\(([^)]+)\)/g; // ']))/;
+  var regexp_makeLink = function(all, text, url) {
+    return `<a href="${url}" target="_blank">${text}</a>`;
   }
   return str.replace(regexp_url, regexp_makeLink);
 }
