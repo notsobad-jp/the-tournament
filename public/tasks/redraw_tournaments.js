@@ -7,7 +7,7 @@ const CleanCSS = require('clean-css');
 const RSS = require('rss');
 
 const bracket = require('../tags/shared/bracket.tag');
-const redraw = require('../tags/tmp/redraw_rugby.tag');
+const redraw = require('../tags/custom/redraw_rugby.tag');
 
 // const ENV = 'production';
 const ENV = 'staging';
@@ -97,6 +97,13 @@ admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
             #emb-body .bracket{margin-bottom:20px; overflow: auto;}
             #emb-body #emb-footer{margin-left:10px}
             #emb-ad{margin-bottom:5px}
+            .closePopupBtn {
+              position: absolute;
+              top: -25px;
+              right: 0;
+              color: black;
+              cursor: pointer;
+            }
       */}.toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").replace("{{tournamentId}}", id).replace("{{title}}", tournament.title);
 
       return minifyCss().then(function(css){
@@ -133,6 +140,11 @@ admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
         header += '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>';
         header += '<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>';
         header += '<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>';
+        header += `<script type="text/javascript">
+          function closePopup(elm) {
+            document.getElementById("bracket").focus();
+          }
+        </script>`;
         header += '<script async src="https://cdn.ampproject.org/v0.js"></script></head>';
 
         var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';

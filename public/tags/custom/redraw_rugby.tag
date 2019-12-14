@@ -66,6 +66,7 @@
               <div data-is="raw" class="popupComment" if={ !embed } content={ match.comment }></div>
               <div if={ embed } class="popupComment">{ match.comment }</div>
             </div>
+            <div class="closePopupBtn" tabindex="0" onclick="closePopup(this)">✕ 閉じる</div>
           </div>
         </div>
       </div>
@@ -134,6 +135,7 @@
               </div>
               <div class="popupComment">{ match.comment }</div>
             </div>
+            <div class="closePopupBtn" tabindex="0" onclick="closePopup(this)">✕ 閉じる</div>
           </div>
         </div>
       </div>
@@ -202,6 +204,7 @@
               </div>
               <div class="popupComment">{ match.comment }</div>
             </div>
+            <div class="closePopupBtn" tabindex="0" onclick="closePopup(this)">✕ 閉じる</div>
           </div>
         </div>
       </div>
