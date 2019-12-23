@@ -135,7 +135,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
       html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
     }
 
-    // TMP: ラグビー再抽選対応
+    // // TMP: ラグビー再抽選対応
     if(redrawIds.indexOf(id) >= 0) {
       redrawRugby();
     }
