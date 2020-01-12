@@ -491,7 +491,8 @@
 /* matchFlex */
 :root { --match-flex: 65px; }
 .match-flex-0 { flex: 0 0 auto; }
-.match-flex-1 { flex: 1 1 calc(1px * var(--match-flex)); }  /* Safariで崩れるバグ対応 */
+.match-flex-1 { flex: 1 1 calc(1 * var(--match-flex)); }
+.doubleBracket .match-flex-1 { flex: 1 1 calc(1px * var(--match-flex)); } /* 両山時のSafari表示崩れ対応 */
 .match-flex-2 { flex: 2 1 calc(2 * var(--match-flex)); }
 .match-flex-3 { flex: 3 1 calc(3 * var(--match-flex)); }
 .match-flex-4 { flex: 4 1 calc(4 * var(--match-flex)); }
