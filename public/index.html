@@ -313,6 +313,9 @@
     route('/tournaments/*', function(id){
       riot.mount('content', 'show', {id: id})
     })
+    route('/tournaments/*?..', function(id){
+      riot.mount('content', 'show', {id: id})
+    })
     route('/tournaments/*/*', function(id){
       riot.mount('content', 'show', {id: id})
     })
