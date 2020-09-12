@@ -160,6 +160,7 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
   const id = req.path.match(/\/tournaments\/([^\/\?]*)/)[1]
   const domain = 'https://the-tournament.jp';
   const ampDomain = 'https://app.the-tournament.jp/embed/v1/';
+  const scaasUrl = 'https://scaas.vercel.app/api/screenshot?url=' + ampDomain + id + '.html';
 
   fs.readFile('./index.html', 'utf8', function (err, templateHtml) {
     if(err) { res.status(500).send(err); }
@@ -173,6 +174,7 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
         .replace(/(<meta id="description" .* content=")(.*)" \/>/g, '$1'+ description +'" />')
         .replace(/(<meta id="keywords" .* content=")(.*)" \/>/g, '$1'+ tournament.title +' $2" />')
         .replace(/(<meta id="og-title" .* content=")(.*)" \/>/g, '$1'+ title +'" />')
+        .replace(/(<meta id="og-image" .* content=")(.*)" \/>/g, '$1'+ scaasUrl + '" />')
         .replace(/(<meta id="og-url" .* content=")(.*)" \/>/g, '$1'+ domain + '/tournaments/' + id +'" />')
         .replace(/(<meta id="og-description" .* content=")(.*)" \/>/g, '$1'+ description +'" />')
         .replace(/(<link id="canonical" .* href=")(.*)" \/>/g, '$1'+ domain + '/tournaments/'+ id +'" />')
