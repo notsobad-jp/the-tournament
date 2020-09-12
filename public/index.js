@@ -160,7 +160,7 @@ exports.returnWithOGP = functions.https.onRequest((req, res) => {
   const id = req.path.match(/\/tournaments\/([^\/\?]*)/)[1]
   const domain = 'https://the-tournament.jp';
   const ampDomain = 'https://app.the-tournament.jp/embed/v1/';
-  const scaasUrl = 'https://scaas.vercel.app/api/screenshot?url=' + ampDomain + id + '.html';
+  const scaasUrl = 'https://scaas.vercel.app/api/?url=' + ampDomain + id + '.html&slowMo=150&maxAge=3600';
 
   fs.readFile('./index.html', 'utf8', function (err, templateHtml) {
     if(err) { res.status(500).send(err); }
