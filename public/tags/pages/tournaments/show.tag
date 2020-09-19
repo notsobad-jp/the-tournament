@@ -68,10 +68,14 @@
       </div>
 
       <div class="ui four wide computer only column">
-        <div class="ui half page test ad" data-text="広告枠"></div>
+        <a href="https://bit.ly/2RAbNX0" target="_blank" rel="noopener">
+          <img class="ui image" src="/img/banner/300_600.png" alt="ads" />
+        </a>
       </div>
       <div class="ui four wide mobile tablet only column">
-        <div class="ui medium rectangle centered test ad" data-text="広告枠"></div>
+        <a href="https://bit.ly/2RAbNX0" target="_blank" rel="noopener">
+          <img class="ui image" src="/img/banner/300_100.png" alt="ads" />
+        </a>
       </div>
     </div>
     <br><br>
