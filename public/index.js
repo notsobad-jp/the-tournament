@@ -133,7 +133,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
     // 広告表示
     if(!tournament.noAds) {
       // html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
-      html += '<amp-img alt="ads" src="https://app.the-tournament.jp/assets/img/banner/320_100.png" width="320" height="100" srcset="https://app.the-tournament.jp/assets/img/banner/320_100.png 320w, https://app.the-tournament.jp/assets/img/banner/780_100.png 640w"></amp-img>';
+      html += '<img alt="ads" src="https://app.the-tournament.jp/assets/img/banner/320_100.png" srcset="https://app.the-tournament.jp/assets/img/banner/320_100.png 1000w, https://app.the-tournament.jp/assets/img/banner/780_100.png" sizes="(max-width: 1000w) 320px, 728px" />';
     }
 
     // // TMP: ラグビー再抽選対応
