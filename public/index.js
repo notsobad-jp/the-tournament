@@ -133,8 +133,8 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
     // 広告表示
     if(!tournament.noAds) {
       // html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
-      html += '<amp-img media="(max-width: 1000px)" alt="ads" src="https://app.the-tournament.jp/assets/img/banner/320_100.png" width="320" height="100"></amp-img>';
-      html += '<amp-img media="(min-width: 1000px)" alt="ads" src="https://app.the-tournament.jp/assets/img/banner/780_100.png" width="728" height="100"></amp-img>';
+      html += '<a href="https://bit.ly/2RAbNX0" target="_blank" rel="noopener"><amp-img media="(max-width: 1000px)" alt="ads" src="https://app.the-tournament.jp/assets/img/banner/320_100.png" width="320" height="100"></amp-img></a>';
+      html += '<a href="https://bit.ly/2RAbNX0" target="_blank" rel="noopener"><amp-img media="(min-width: 1000px)" alt="ads" src="https://app.the-tournament.jp/assets/img/banner/780_100.png" width="728" height="100"></amp-img></a>';
     }
 
     // // TMP: ラグビー再抽選対応
@@ -142,9 +142,10 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
       redrawRugby();
     }
 
+    var cacheControl = tournament.cacheControl || 'public, max-age=300';
     var file = admin.storage().bucket(bucketName).file(storage_root +'/'+ version +'/' + id + '.html');
     return file.save(header + container + html + '</div></div></body></html>', {
-      metadata: { contentType: 'text/html' },
+      metadata: { contentType: 'text/html', cacheControl: cacheControl },
       gzip: true
     });
   })
