@@ -74,7 +74,7 @@
       </div>
       <div class="ui four wide mobile tablet only column">
         <a href="https://bit.ly/2RAbNX0" target="_blank" rel="noopener">
-          <img class="ui image" src="/img/banner/300_100.png" alt="ads" />
+          <img class="ui image" src="/img/banner/300_100.png?t=20200924" alt="ads" />
         </a>
       </div>
     </div>
