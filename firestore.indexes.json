@@ -13,6 +13,20 @@
         { "fieldPath": "userId", "mode": "ASCENDING" },
         { "fieldPath": "updatedAt", "mode": "ASCENDING" }
       ]
+    },
+    {
+      "collectionId": "leagues",
+      "fields": [
+        { "fieldPath": "userId", "mode": "ASCENDING" },
+        { "fieldPath": "updatedAt", "mode": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionId": "leagues",
+      "fields": [
+        { "fieldPath": "userId", "mode": "ASCENDING" },
+        { "fieldPath": "updatedAt", "mode": "ASCENDING" }
+      ]
     }
   ]
 }
