@@ -1,4 +1,11 @@
 <top>
+  <div class="ui info message attached">
+    <span class="ui red small label">NEW</span>
+    &nbsp;
+    <a href="https://the-league.vercel.app" target="_blank">
+      総当りのリーグ表を作成できる機能をベータ版で公開しました🎉ぜひお試しください！
+    </a>
+  </div>
   <div id="top" class="ui inverted attached center aligned basic segment">
     <br><br>
     <h1 class="ui huge inverted header">
