@@ -132,9 +132,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
 
     // 広告表示
     if(!tournament.noAds) {
-      // html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
-      html += '<a href="https://bit.ly/2RAbNX0" target="_blank" rel="noopener"><amp-img media="(max-width: 1000px)" alt="ads" src="https://app.the-tournament.jp/assets/img/banner/320_100.png?t=20200924" width="320" height="100"></amp-img></a>';
-      html += '<a href="https://bit.ly/2RAbNX0" target="_blank" rel="noopener"><amp-img media="(min-width: 1000px)" alt="ads" src="https://app.the-tournament.jp/assets/img/banner/780_100.png?t=20200924" width="728" height="100"></amp-img></a>';
+      html += '<div id="emb-ad"> <amp-ad media="(max-width: 768px)" width="320" height="100" type="nend" data-nend_params=\'{"media":41572,"site":225241,"spot":641487,"type":1,"oriented":1}\'></amp-ad> <amp-ad media="(min-width: 769px)" width="728" height="90" type="fluct" data-g="1000084096" data-u="1000125758"> </amp-ad></div>';
     }
 
     // // TMP: ラグビー再抽選対応
