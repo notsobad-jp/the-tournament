@@ -4,6 +4,8 @@
     &nbsp;
     <a href="https://the-league.vercel.app" target="_blank">
       総当りのリーグ表を作成できる機能をベータ版で公開しました🎉ぜひお試しください！
+      https://the-league.vercel.app
+      <i class="icon external link small"></i>
     </a>
   </div>
   <div id="top" class="ui inverted attached center aligned basic segment">
@@ -26,7 +28,6 @@
     </div>
     <br><br>
   </div>
-
 
   <div class="ui stackable centered secondary basic segment grid">
     <div class="twelve wide computer only column">
@@ -111,6 +112,43 @@
     </div>
   </div>
   <div class="ui hidden divider"></div>
+  <br><br>
+  <br><br>
+
+
+  <div class="ui basic secondary segment stackable centered grid">
+    <div class="ui row">
+      <div class="eight wide center aligned column">
+        <br><br>
+        <h3 class="ui header">
+          <span class="ui orange mini label">NEW!</span>
+          リーグ表作成機能（ベータ版）
+        </h3>
+        <div>
+          総当りのリーグ表を作成できる新機能をベータ公開しました。
+          よければぜひお試しください。
+        </div>
+        <br><br>
+        <div>
+          <a href="https://the-league.vercel.app" target="_blank" class="ui primary large button">
+            リーグ表を作成する
+            <i class="icon external link small"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ui row">
+      <div class="eight wide column">
+        <div class="ui basic segment">
+          <a href="https://the-league.vercel.app" target="_blank">
+            <img src="img/top/league.png" class="ui image" />
+          </a>
+        </div>
+        <br><br>
+      </div>
+    </div>
+  </div>
+  <br><br>
   <br><br>
 
 
