@@ -16,7 +16,8 @@ const storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
 
 // 再抽選対応
 const redraw = require('./tags/custom/redraw_rugby.tag');
-const redrawIds = (ENV=='production') ? ['ghzEs7dZG66QMGQQbwB3', 'dXgn0F8WBYXpFYnlGWam', '0cF3NmjAceIkMEbmQpY0'] : ['rlOcfVPvkZP6CN7XjLRs', 'kwjI5I4r63VtNQDyzIlC', 'qBXKkYedpDckPjIx1bQn'];
+// const redrawIds = (ENV=='production') ? ['ghzEs7dZG66QMGQQbwB3', 'dXgn0F8WBYXpFYnlGWam', '0cF3NmjAceIkMEbmQpY0'] : ['rlOcfVPvkZP6CN7XjLRs', 'kwjI5I4r63VtNQDyzIlC', 'qBXKkYedpDckPjIx1bQn'];
+const redrawIds = (ENV=='production') ? [] : ['U0EkpMpYEiYXUS2vY7vY', 'gR8WaIWwHgkwED32DJnw', 'Hcb1n3Mjv0NZ7IEKO0Wn'];
 
 admin.initializeApp();
 
