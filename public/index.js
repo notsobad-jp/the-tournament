@@ -329,8 +329,10 @@ var redrawRugby = function() {
           header += '<script async src="https://cdn.ampproject.org/v0.js"></script></head>';
 
           var container = '<body id="embed"><div id="emb-container"><div id="emb-header">';
-          container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
-          container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;</small></h1></div><div id="emb-body">';
+          // container += '<h1><a target="_blank" href="https://the-tournament.jp/tournaments/'+ id +'">'+ tournament.title;
+          container += '<h1>'+ tournament.title;
+          // container += '</a><small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;</small></h1></div><div id="emb-body">';
+          container += '<small> powered by <a href="https://the-tournament.jp/" target="_blank">THE TOURNAMENT</a> &nbsp;&nbsp;</small></h1></div><div id="emb-body">';
           container += '<amp-analytics type="googleanalytics"> <script type="application/json"> { "vars": { "account": "UA-30867542-19" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script> </amp-analytics> ';
 
           var file = admin.storage().bucket(bucketName).file(storage_root +'/'+ version +'/' + id + '.html');
