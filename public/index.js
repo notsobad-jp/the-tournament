@@ -15,9 +15,10 @@ const version = 'v1'
 const storage_root = (ENV=='production') ? 'embed' : 'embed_stg';
 
 // 再抽選対応
-const redraw = require('./tags/custom/redraw_rugby.tag');
+const redraw = require('./tags/custom/redraw_rugby_2.tag');
 // const redrawIds = (ENV=='production') ? ['ghzEs7dZG66QMGQQbwB3', 'dXgn0F8WBYXpFYnlGWam', '0cF3NmjAceIkMEbmQpY0'] : ['rlOcfVPvkZP6CN7XjLRs', 'kwjI5I4r63VtNQDyzIlC', 'qBXKkYedpDckPjIx1bQn'];
-const redrawIds = (ENV=='production') ? ['qChLxhSeoI6F7oRpEGvH', 'RPyYEwuKIIAQPEKbtrQo', 'BnMgudbFMwrDRTw3hXXS'] : ['U0EkpMpYEiYXUS2vY7vY', 'gR8WaIWwHgkwED32DJnw', 'Hcb1n3Mjv0NZ7IEKO0Wn'];
+// const redrawIds = (ENV=='production') ? ['qChLxhSeoI6F7oRpEGvH', 'RPyYEwuKIIAQPEKbtrQo', 'BnMgudbFMwrDRTw3hXXS'] : ['U0EkpMpYEiYXUS2vY7vY', 'gR8WaIWwHgkwED32DJnw', 'Hcb1n3Mjv0NZ7IEKO0Wn'];
+const redrawIds = (ENV=='production') ? ['7KiYrvKJrZEIM3nPeng1', 'G5R94tIRbsnb200EXnO2'] : ['y5SAFTmuhobQzeerABvm', 'sCJIlCEJ5YacjmUt8WfR'];
 
 admin.initializeApp();
 
@@ -231,20 +232,23 @@ exports.returnRSS = functions.https.onRequest((req, res) => {
 
 var redrawRugby = function() {
   let id1 = redrawIds[0];
-  let id2 = redrawIds[1];
-  let id3 = redrawIds[2];
+  // let id2 = redrawIds[1];
+  // let id3 = redrawIds[2];
+  let id3 = redrawIds[1];
 
-  let id = id1 + id2 + id3
+  // let id = id1 + id2 + id3
+  let id = id1 + id3
   admin.firestore().collection('tournaments').doc(id1).get().then(doc => {
     const tournament = doc.data();
 
-    admin.firestore().collection('tournaments').doc(id2).get().then(doc2 => {
-      const tournament2 = doc2.data();
+    // admin.firestore().collection('tournaments').doc(id2).get().then(doc2 => {
+    //   const tournament2 = doc2.data();
 
       admin.firestore().collection('tournaments').doc(id3).get().then(doc3 => {
         const tournament3 = doc3.data();
 
-        var html = riot.render(redraw, {tournament: tournament, tournament2: tournament2, tournament3: tournament3, editable: false, embed: true});
+        // var html = riot.render(redraw, {tournament: tournament, tournament2: tournament2, tournament3: tournament3, editable: false, embed: true});
+        var html = riot.render(redraw, {tournament: tournament, tournament3: tournament3, editable: false, embed: true});
         html = html.replace(/\r?\n/g, '<br>');
         html = html.replace(/<\/?bracket>/g, '');
         html = autoLinkText(html);
@@ -335,7 +339,7 @@ var redrawRugby = function() {
             gzip: true
           });
         })
-      })
+      // })
     })
   })
 }
