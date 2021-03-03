@@ -19,7 +19,7 @@ const redraw = require('./tags/custom/redraw_rugby_2.tag');
 const redrawIds = (ENV=='production') ? ['7KiYrvKJrZEIM3nPeng1', 'G5R94tIRbsnb200EXnO2'] : ['y5SAFTmuhobQzeerABvm', 'sCJIlCEJ5YacjmUt8WfR'];
 
 // 1回戦のみ出力対応（ラグビー）
-const drawRoundOnly = require('./tags/custom/draw_round_only.tag');
+const roundOnlyTag = require('./tags/custom/draw_round_only.tag');
 
 
 admin.initializeApp();
@@ -143,7 +143,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
     if(redrawIds.indexOf(id) >= 0) {
       redrawRugby();
     }
-    if(tournament.roundOnly > 0) {
+    if(tournament.roundOnly && tournament.roundOnly > 0) {
       drawRoundOnly(tournament.roundOnly);
     }
 
@@ -356,7 +356,7 @@ var drawRoundOnly = function(orgId, roundOnly) {
   admin.firestore().collection('tournaments').doc(orgId).get().then(doc => {
     const tournament = doc.data();
 
-    var html = riot.render(redraw, {tournament: tournament, editable: false, embed: true});
+    var html = riot.render(roundOnlyTag, {tournament: tournament, editable: false, embed: true});
     html = html.replace(/\r?\n/g, '<br>');
     html = html.replace(/<\/?bracket>/g, '');
     html = autoLinkText(html);
