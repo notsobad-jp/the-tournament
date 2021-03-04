@@ -2,7 +2,7 @@
   <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable, embed: embed, profileImages: embed && tournament.profileImages }" tabindex="0">
     <div class="block left">
       <!-- 1回戦のみ出力（hidden: roundIndex > 0） -->
-      <div class="round { final: isFinalRound(roundIndex), hidden: roundIndex > (tournament.roundOnly - 1) }" each={ round, roundIndex in tournament.results }>
+      <div class="round { final: roundIndex == (tournament.roundOnly - 1), hidden: roundIndex > (tournament.roundOnly - 1) }" each={ round, roundIndex in tournament.results }>
         <div class="match { matchClass(roundIndex, matchIndex) } { matchFlex(roundIndex, matchIndex) }" each={ match, matchIndex in round } data-round-index={ roundIndex } data-match-index={ matchIndex } tabindex={ match['bye'] && roundIndex!=0 ? false : 0 }>
           <div class="teamContainer { teamContainerPosition(roundIndex, matchIndex) }">
             <div class="team { teamClass(match, i) }" data-teamid={ teamIndex } each={ teamIndex, i in matchTeamIndexes(roundIndex, matchIndex) }>
