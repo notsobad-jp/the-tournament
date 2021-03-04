@@ -144,7 +144,7 @@ exports.createEmbedHTML = functions.firestore.document('tournaments/{id}').onWri
       redrawRugby();
     }
     if(tournament.roundOnly && tournament.roundOnly > 0) {
-      drawRoundOnly(tournament.roundOnly);
+      drawRoundOnly(id, tournament.roundOnly);
     }
 
     var cacheControl = tournament.cacheControl || 'public, max-age=300';
