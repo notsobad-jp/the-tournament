@@ -1,4 +1,4 @@
-<redraw>
+<redraw2>
   <div id="bracket" class="bracket { skipConsolation: !tournament.consolationRound, scoreLess: tournament.scoreLess, showBye: showBye, editable: editable, embed: embed, profileImages: embed && tournament.profileImages }" tabindex="0">
     <div class="block left">
       <!-- 再抽選前のround（roundにclass追加） -->
@@ -478,4 +478,4 @@
       }
     }
   </script>
-</redraw>
+</redraw2>
